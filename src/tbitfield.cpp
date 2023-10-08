@@ -89,6 +89,9 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
+	if (pMem != nullptr) {
+		delete[] pMem;
+	}
 	BitLen = bf.BitLen;
 	MemLen = bf.MemLen;
 	pMem = new TELEM[MemLen];
@@ -139,18 +142,19 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-	const TBitField *tmp = this;
-	const TBitField *max = (this->BitLen >= bf.BitLen) ? tmp : &bf;
-	const TBitField *min = (this->BitLen < bf.BitLen) ? tmp : &bf;
-	int i;
-	if (max == nullptr || min == nullptr) {
-		throw exception("what");
+	int maxBitLen;
+	int minMemLen;
+	if (this->BitLen > bf.BitLen) {
+		maxBitLen = this->BitLen;
+		minMemLen = bf.MemLen;
 	}
-	const int maxBitLen = max->BitLen;
-	const int minMemLen = min->MemLen;
+	else {
+		maxBitLen = bf.BitLen;
+		minMemLen = this->MemLen;
+	}
 	TBitField res(maxBitLen);
-	for (i = 0; i < minMemLen; i++) {
-		res.pMem[i] = max->pMem[i] & min->pMem[i];
+	for (int i = 0; i < minMemLen; i++) {
+		res.pMem[i] = this->pMem[i] & bf.pMem[i];
 	}
 	return res;
 }
