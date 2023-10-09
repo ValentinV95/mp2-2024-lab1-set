@@ -70,7 +70,7 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    return (this->BitField | s.BitField);
+    return (BitField | s.BitField);
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
@@ -101,14 +101,30 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    TBitField a(1);
-    istr >> a;
-    s = TBitField(a);
+    // пусть мн-во неотр. чисел <size; <0 - конец ввода элементов мн-ва
+    int size;
+    int buf;
+    istr >> size;
+    TSet res(size);
+    while (1) {
+        istr >> buf;
+        if (buf < 0) {
+            break;
+        }
+        res.InsElem(buf);
+    }
+    s = res;
     return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-    ostr << s.BitField;
+    int size = s.MaxPower;
+    ostr << size << endl;
+    for (int i = 0; i < s.MaxPower; i++) {
+        if (s.IsMember(i)) {
+            ostr << i << endl;
+        }
+    }
     return ostr;
 }
