@@ -9,7 +9,7 @@
 
 TSet::TSet(int mp) : BitField(mp)
 {
-    if (mp < 0) throw out_of_range("mp should be greater than");
+    if (mp <= 0) throw out_of_range("mp should be greater than");
     MaxPower = mp;
 }
 
@@ -66,13 +66,13 @@ TSet& TSet::operator=(const TSet& s) // присваивание
 
 int TSet::operator==(const TSet& s) const // сравнение
 {
-    if ((BitField == s.BitField) && (MaxPower==s.MaxPower)) return 1;
+    if (BitField == s.BitField) return 1;
     else return 0;
 }
 
 int TSet::operator!=(const TSet& s) const // сравнение
 {
-    if ((BitField == s.BitField) && (MaxPower == s.MaxPower)) return 0;
+    if (BitField == s.BitField) return 0;
     else return 1;
 }
 
@@ -127,25 +127,33 @@ TSet TSet::operator~(void) // дополнение
 
 // перегрузка ввода/вывода
 
-istream& operator>> (istream& in, TSet& bf) // ввод
+istream& operator>> (istream& in, TSet& s) // ввод
 {
-    for (int i = 0; i < bf.MaxPower; i++)
+    cout << "1st argument - count of elements";
+    int count;
+    in >> count;
+
+    if (count > s.MaxPower) throw out_of_range("count should be less than MaxPower");
+
+    for (int i = 0; i < count; i++)
     {
-        bool tmp;
+        int tmp;
 
         in >> tmp;
 
-        if (tmp) bf.InsElem(i);
+        if (tmp > s.MaxPower) throw out_of_range("count should be less than MaxPower");
+
+        s.InsElem(tmp);
     }
     return in;
 }
 
-ostream& operator<<(ostream& out, const TSet& bf) //вывод
+ostream& operator<<(ostream& out, const TSet& s) //вывод
 {
-    for (int i = 0; i < bf.MaxPower; i++)
-    {
-        if (bf.IsMember(i)) out << 1;
-        else out << 0;
+    for (int i = 0; i < s.MaxPower; i++)
+    { 
+        if (s.IsMember(i)) out << i;
+        out << " ";
     }
 
     out << "\n";
