@@ -141,10 +141,7 @@ TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 	else res = bf;
 
 	for (int i = 0; i < std::min(MemLen, bf.MemLen); i++)
-	{
-		res.pMem[i] |= this->pMem[i];
-		res.pMem[i] |= bf.pMem[i];
-	}
+		res.pMem[i] = pMem[i] | bf.pMem[i];
 
 	return res;
 }
