@@ -73,21 +73,21 @@ int TBitField::GetMemLen(void) const noexcept// получить длину (к-
 
 void TBitField::SetBit(const int n)// установить бит
 {
-	if (n >= BitLen)
+	if (n<=0 || n >= BitLen)
 		throw out_of_range("Bit position is out of the bitfield");
 	pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
 void TBitField::ClrBit(const int n)// очистить бит
 {
-	if (n >= BitLen)
+	if (n <= 0 || n >= BitLen)
 		throw out_of_range("Bit position is out of the bitfield");
 	pMem[GetMemIndex(n)] &= ~GetMemMask(n);
 }
 
 int TBitField::GetBit(const int n) const// получить значение бита
 {
-	if (n >= BitLen)
+	if (n <= 0 || n >= BitLen)
 		throw out_of_range("Bit position is out of the bitfield");
 	return static_cast <int>(static_cast <bool> (pMem[GetMemIndex(n)] & GetMemMask(n)));
 }
