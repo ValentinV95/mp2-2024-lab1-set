@@ -13,7 +13,9 @@ TBitField::TBitField(int len)
 
 	BitLen = len;
 
-	MemLen = (BitLen - 1) / (8 * sizeof(TELEM)) + 1;
+	MemLen = (BitLen - 1) / (8 * sizeof(TELEM));
+
+	if ((BitLen - 1) % (8 * sizeof(TELEM))) MemLen++;
 
 	pMem = new TELEM[MemLen]();
 }
@@ -50,9 +52,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 {
 	if ((n < 0) || (n >= BitLen)) throw out_of_range("n should be greater than zero and less than Bitlen");
 
-	const TELEM res = (1 << (n % (8 * sizeof(TELEM))));
-
-	return res;
+	return static_cast<const TELEM>(1 << (n % (8 * sizeof(TELEM))));
 }
 
 // доступ к битам битового поля
@@ -81,7 +81,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 
 	const TELEM mask = GetMemMask(n);
 
-	pMem[index] &= (~mask);
+	pMem[index] &= ~mask;
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
@@ -137,7 +137,7 @@ TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 {
 	TBitField res(std::max(BitLen, bf.BitLen));
 
-	if (BitLen > bf.BitLen) res = *this; 
+	if (BitLen > bf.BitLen) res = *this;
 	else res = bf;
 
 	for (int i = 0; i < std::min(MemLen, bf.MemLen); i++)
