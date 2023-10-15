@@ -144,6 +144,7 @@ istream& operator>> (istream& in, TSet& s) // ввод
         s.InsElem(tmp);
     }
 
+    return in;
 }
 
 ostream& operator<<(ostream& out, const TSet& s) //вывод
