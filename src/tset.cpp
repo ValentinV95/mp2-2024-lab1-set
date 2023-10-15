@@ -133,7 +133,7 @@ istream& operator>> (istream& in, TSet& s) // ввод
     int count;
     in >> count;
 
-    if (count > s.MaxPower) throw out_of_range("count should be less than MaxPower");
+    if (count >= s.MaxPower) throw out_of_range("count should be less than MaxPower");
 
     for (int i = 0; i < count; i++)
     {
@@ -141,7 +141,7 @@ istream& operator>> (istream& in, TSet& s) // ввод
 
         in >> tmp;
 
-        if (tmp > s.MaxPower) throw out_of_range("count should be less than MaxPower");
+        if (tmp >= s.MaxPower) throw out_of_range("count should be less than MaxPower");
 
         s.InsElem(tmp);
     }
@@ -151,10 +151,7 @@ istream& operator>> (istream& in, TSet& s) // ввод
 ostream& operator<<(ostream& out, const TSet& s) //вывод
 {
     for (int i = 0; i < s.MaxPower; i++)
-    { 
-        if (s.IsMember(i)) out << i;
-        out << " ";
-    }
+        if (s.IsMember(i)) out << i << " ";
 
     out << "\n";
 
