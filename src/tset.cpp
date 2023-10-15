@@ -91,22 +91,18 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 {
     if ((Elem < 0) || (Elem >= MaxPower))
         throw out_of_range("Error, element is out of range");
-    else {
-        TSet res(*this);
-        res.InsElem(Elem);
-        return res;
-    }
+    TSet res(*this);
+    res.InsElem(Elem);
+    return res;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
     if ((Elem < 0) || (Elem >= MaxPower)) 
         throw out_of_range("Error, element is out of range");
-    else {
-        TSet res(*this);
-        res.DelElem(Elem);
-        return res;
-    }
+    TSet res(*this);
+    res.DelElem(Elem);
+    return res;
 }
 
 TSet TSet::operator*(const TSet &s) // пересечение
@@ -129,10 +125,14 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 {
     int n;
     istr >> n;
+    if ((n <= 0) || (n > s.MaxPower)) 
+        throw out_of_range("Error");
     for (int i = 0; i < n; i++)
     {
         int element;
         istr >> element;
+        if ((element < 0) || (element >= s.MaxPower)) 
+            throw out_of_range("Error");
         s.InsElem(element);
     }
     return istr;
@@ -145,5 +145,6 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
         if (s.IsMember(i))
             ostr << i << ' ';
     }
+    ostr << "\n";
     return ostr;
 }
