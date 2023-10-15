@@ -23,11 +23,11 @@ int TSet::IsMember(const int Elem) const {
 };
 void TSet::InsElem(const int Elem) {
 	if ((Elem>=0)&&(Elem < MaxPower)) BitField.SetBit(Elem);
-	else throw out_of_range("Элемент дожен принадлежать унивёрсу множества");
+	else throw out_of_range("Element must belong to the universe of the set");
 };
 void TSet::DelElem(const int Elem) {
 	if ((Elem >= 0) && (Elem < MaxPower)) BitField.ClrBit(Elem);
-	else throw out_of_range("Элемент дожен принадлежать унивёрсу множества");
+	else throw out_of_range("Element must belong to the universe of the set");
 };
 TSet& TSet::operator=(const TSet& s) {
 	if (s != *this) {
@@ -72,8 +72,8 @@ istream& operator>>(istream& istr, TSet& s) {
 	istr >> tmp;
 	while ((tmp >= 0) && (tmp < s.MaxPower))
 	{
-	(s.BitField).SetBit(tmp);
-	istr >> tmp;
+		s.InsElem(tmp);
+		istr >> tmp;
 	}
 	return istr;
 };

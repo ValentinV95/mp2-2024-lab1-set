@@ -8,7 +8,7 @@ TBitField::TBitField(int len) {
 		pMem = new TELEM[MemLen];
 		memset(pMem, 0, MemLen* sizeof(TELEM));
 	}
-	else throw std::out_of_range("Размер битового поля должен быть положительным");
+	else throw std::out_of_range("Size must be pozitive");
 };
 TBitField::TBitField(const TBitField& bf) {
 	MemLen = bf.MemLen;
@@ -29,19 +29,19 @@ int TBitField::GetLength(void) const {
 	return BitLen;
 };
 void TBitField::SetBit(const int n) {
-	if (n < BitLen) pMem[GetMemIndex(n)] |= GetMemMask(n);
-	else throw std::out_of_range("Выход за границу битовогор поля");
+	if ((n>=0)&&(n < BitLen)) pMem[GetMemIndex(n)] |= GetMemMask(n);
+	else throw std::out_of_range("Index must be at least 0, and not exceed the size");
 };
 void TBitField::ClrBit(const int n) {
-	if (n < BitLen) pMem[GetMemIndex(n)] &= ~GetMemMask(n);
-	else throw std::out_of_range("Выход за границу битовогор поля");
+	if ((n >= 0) && (n < BitLen)) pMem[GetMemIndex(n)] &= ~GetMemMask(n);
+	else throw std::out_of_range("Index must be at least 0, and not exceed the size");
 };
 int TBitField::GetBit(const int n) const {
-	if (n < BitLen) {
+	if ((n >= 0) && (n < BitLen)) {
 		if (pMem[GetMemIndex(n)] & GetMemMask(n)) return 1;
 		else return 0;
 	} 
-	else throw std::out_of_range("Выход за границу битовогор поля");
+	else throw std::out_of_range("Index must be at least 0, and not exceed the size");
 };
 TBitField& TBitField:: operator=(const TBitField& bf) {
 	if (*this != bf) if (MemLen != bf.MemLen) {
@@ -103,9 +103,8 @@ istream& operator>>(istream& istr, TBitField& bf) {
 	int tmp;
 	for (int i = 0; i < bf.BitLen; i++) {
 		istr >> tmp;
-		if ((tmp != 1) && (tmp != 0)) throw std::out_of_range("Невозможно сохранить такое число");
-		if (tmp) bf.pMem[bf.GetMemIndex(i)] |= bf.GetMemMask(i);
-		else bf.pMem[bf.GetMemIndex(i)] &= ~bf.GetMemMask(i);
+		if (tmp) bf.SetBit(i);
+		else bf.ClrBit(i);
 	};
 	return istr;
 };
