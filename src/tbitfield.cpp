@@ -217,7 +217,9 @@ TBitField TBitField::operator&(const TBitField &bf) { // операция "и"
 TBitField TBitField::operator~(void) { // отрицание
     TBitField A(GetLength());
     for (int i = 0; i < BitLen; i++) {
-        A.pMem[i] = ~pMem[i];
+        if (GetBit(i) != 0){
+            A.SetBit(i);
+        }
     }
     return A;
 }
