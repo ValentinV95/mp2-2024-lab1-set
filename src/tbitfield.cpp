@@ -78,6 +78,13 @@ void TBitField::SetBit(const int n)// установить бит
 	pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
+void TBitField::SetElem(TELEM Elem, int ind)
+{
+	if (ind < 0 || ind >= MemLen)
+		throw out_of_range("Bit position is out of the bitfield");
+	pMem[ind] = Elem;
+}
+
 void TBitField::ClrBit(const int n)// очистить бит
 {
 	if (n < 0 || n >= BitLen)
@@ -243,13 +250,13 @@ TBitField TBitField::operator~(void)// отрицание
 {
 	TBitField tmp(BitLen);
 	TELEM* res = tmp.GetpMem();
-	for (int i = 0; i < MemLen; i++)
-		res[i] = ~pMem[i];
-	/*for (int i = 0; i < BitLen; i++)
+	//for (int i = 0; i < MemLen; i++)
+	//	tmp.SetElem(~res[i], i);
+	for (int i = (MemLen - 1)*BitsPerEl; i < BitLen; i++)
 		if (GetBit(i))
 			tmp.ClrBit(i);
 		else
-			tmp.SetBit(i);*/
+			tmp.SetBit(i);
 	return tmp;
 }
 
