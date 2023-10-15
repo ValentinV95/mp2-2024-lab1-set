@@ -127,7 +127,9 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    for (int i = 0; i < s.MaxPower; i++)
+    int n;
+    istr >> n;
+    for (int i = 0; i < n; i++)
     {
         int element;
         istr >> element;
