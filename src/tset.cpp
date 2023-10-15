@@ -88,16 +88,6 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 {
     if (Elem<0 || Elem >= MaxPower)
         throw out_of_range("Element is out of the universe");
-    //else if (Elem >= MaxPower)
-    //{
-    //    TELEM* tmp = new TELEM[(Elem + sizeof(TELEM) * 8) / (sizeof(TELEM) * 8)];
-    //    //memset(tmp + BitField.GetMemLen(), 0, (Elem + sizeof(TELEM) * 8) / (sizeof(TELEM) * 8) - BitField.GetMemLen());
-    //    TBitField res(Elem + 1);
-    //    memset(tmp, 0, (Elem + sizeof(TELEM) * 8) / (sizeof(TELEM) * 8));
-    //    memcpy(tmp, BitField.GetpMem(), BitField.GetMemLen());
-    //    res.SetBit(Elem);
-    //    return TSet(res);
-    //}
     else {
         TSet tmp(*this);
         tmp.InsElem(Elem);

@@ -22,13 +22,6 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 	BitLen = bf.GetLength();
 	MemLen = bf.GetMemLen();
 	pMem = new TELEM[MemLen];
-	/*for (int i = 0; i < BitLen; i++)
-	{
-		if (bf.GetBit(i))
-			SetBit(i);
-		else
-			ClrBit(i);
-	}*/
 	memcpy(pMem, bf.GetpMem(), MemLen * sizeof(TELEM));
 }
 TBitField::TBitField(TELEM* mem, int len)
@@ -116,13 +109,6 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 			BitLen = bf.GetLength();
 			pMem = p;
 		}
-	/*for (int i = 0; i < bf.GetLength(); i++)
-	{
-		if (bf.GetBit(i))
-			SetBit(i);
-		else
-			ClrBit(i);
-	}*/
 	memcpy(pMem, bf.GetpMem(), MemLen * sizeof(TELEM));
 	return *this;
 }
@@ -143,16 +129,6 @@ int TBitField::operator==(const TBitField &bf) const noexcept// сравнени
 
 int TBitField::operator!=(const TBitField &bf) const noexcept // сравнение
 {
-	/*int i;
-	if (BitLen != bf.GetLength())
-		return 1;
-	else
-		for (i = 0; i < bf.GetLength(); i++)
-		{
-			if (bf.GetBit(i) != GetBit(i))
-				return 1;
-		}
-	if (i == bf.GetBit(i)) return 0;*/
 	return !(*this == bf);
 }
 
@@ -177,22 +153,6 @@ TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 		}
 	}
 	TBitField res(tmp, max(BitLen, bf.GetLength()));
-	
-	//if (BitLen != bf.GetLength())											//реализация
-	//	throw out_of_range("operands have different size");					//если
-	//else {																//гарантируется,
-	//	TBitField tmp(BitLen);												//что
-	//	TELEM* res = tmp.GetpMem();											//обрабатываются
-	//	TELEM* p = bf.GetpMem();											//только
-	//	for (int i = 0; i < MemLen; i++)									//соразмерные
-	//		res[i] = pMem[i] | p[i];										//битовые
-	//	/*for (int i = 0; i < BitLen; i++)			///кусок
-	//		if (GetBit(i) | bf.GetBit(i))			///реализации
-	//			tmp.SetBit(i);						///
-	//		else									///"в лоб"
-	//			tmp.ClrBit(i);*/					///
-	//	return tmp;															//поля
-	//}
 	return res;
 }
 
@@ -217,35 +177,15 @@ TBitField TBitField::operator &(const TBitField& bf) // операция "и"
 		}
 	}
 	TBitField res(tmp, max(BitLen, bf.GetLength()));
-	//if (BitLen != bf.GetLength())											//реализация
-	//	throw out_of_range("operands have different size");					//если
-	//else {																//гарантируется,
-	//	TBitField tmp(BitLen);												//что
-	//	TELEM* res = tmp.GetpMem();											//обрабатываются
-	//	TELEM* p = bf.GetpMem();											//только
-	//	for (int i = 0; i < MemLen; i++)									//соразмерные
-	//		res[i] = pMem[i] & p[i];										//битовые
-	//	/*for (int i = 0; i < BitLen; i++)			///кусок
-	//		if (GetBit(i) & bf.GetBit(i))			///реализации
-	//			tmp.SetBit(i);						///
-	//		else									///"в лоб"
-	//			tmp.ClrBit(i);*/					///
-	//	return tmp;															//поля
-	//}
 	return res;
 }
 
 TBitField TBitField::operator~(void)// отрицание
 {
-	TBitField tmp(BitLen);
-	TELEM* res = tmp.GetpMem();
-	//for (int i = 0; i < MemLen; i++)
-	//	tmp.SetElem(~res[i], i);
-	for (int i = 0; i < BitLen; i++)
-		if (GetBit(i))
-			tmp.ClrBit(i);
-		else
-			tmp.SetBit(i);
+	TELEM* res = new TELEM[MemLen];
+	for (int i = 0; i < MemLen; i++)
+		res[i] = ~pMem[i];
+	TBitField tmp(res, BitLen);
 	return tmp;
 }
 
