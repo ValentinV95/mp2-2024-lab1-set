@@ -156,32 +156,32 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 TBitField TBitField::operator|(const TBitField &bf) { // операция "или"
     if (bf.GetLength() > BitLen) {
         TBitField A(bf.GetLength());
-        for (int i = 0; i< BitLen; i++){
+        for (int i = 0; i< MemLen; i++){
             A.pMem[i] = pMem[i];
         }
-        for(int i = 0; i< bf.BitLen; i++){
+        for(int i = 0; i< bf.MemLen; i++){
             A.pMem[i] |= bf.pMem[i];
+
         }
         return A;
     }
     else if (bf.GetLength() < BitLen) {
         TBitField A(GetLength());
-        for (int i = 0; i< bf.BitLen; i++){
+        for (int i = 0; i< bf.MemLen; i++){
             A.pMem[i] = bf.pMem[i];
         }
-        for(int i = 0; i< BitLen; i++){
+        for(int i = 0; i< MemLen; i++){
             A.pMem[i] |= pMem[i];
         }
         return A;
     }
     else {
         TBitField A(bf.GetLength());
-        for (int i = 0; i < (BitLen); i++) {
+        for (int i = 0; i < (MemLen); i++) {
             A.pMem[i] = pMem[i] | bf.pMem[i];
         }
         return A;
     }
-
 }
 
 TBitField TBitField::operator&(const TBitField &bf) { // операция "и"
