@@ -63,16 +63,12 @@ int TSet::operator==(const TSet &s) const // сравнение
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-    if (MaxPower != s.GetMaxPower())
-        return true;
-    return BitField != s.BitField;
+    return !TSet::operator==(s);
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    TSet tmp(max(MaxPower, s.MaxPower));
-    tmp.BitField = BitField | s.BitField;
-    return tmp;
+    return TSet(BitField | s.BitField);
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
@@ -81,7 +77,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
         throw std::out_of_range("element is out of set possible range");
 
     TSet tmp(*this);
-    tmp.BitField.SetBit(Elem);
+    tmp.InsElem(Elem);
     return tmp;
 }
 
@@ -91,22 +87,18 @@ TSet TSet::operator-(const int Elem) // разность с элементом
         throw std::out_of_range("element is out of set possible range");
 
     TSet tmp(*this);
-    tmp.BitField.ClrBit(Elem);
+    tmp.DelElem(Elem);
     return tmp;
 }
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-    TSet tmp(max(MaxPower, s.MaxPower));
-    tmp.BitField = BitField & s.BitField;
-    return tmp;
+    return TSet(BitField & s.BitField);
 }
 
 TSet TSet::operator~(void) // дополнение
 {
-    TSet tmp(MaxPower);
-    tmp.BitField = ~BitField;
-    return tmp;
+    return TSet(~BitField);
 }
 
 // перегрузка ввода/вывода
@@ -131,5 +123,5 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
             ostr << i << " ";
     }
     
-    return ostr << "\n";
+    return ostr;
 }

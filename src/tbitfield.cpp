@@ -10,7 +10,7 @@
 
 TBitField::TBitField(int len) : BitLen(len)
 {
-	if(len < 0)
+	if(len <= 0)
 		throw std::length_error("bad bitfield len");
 	MemLen = (BitLen / (8*sizeof(TELEM))) + 1;
 	pMem = new TELEM[MemLen];
@@ -155,7 +155,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	for (size_t i = 0; i < bf.MemLen; i++)
 	{
-		TELEM tmp = 0;
+		TELEM tmp = 0; // здесь вводится состояние памяти
 		istr >> tmp;
 		bf.pMem[i] = tmp;
 	}
@@ -168,5 +168,5 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 	for (size_t i = 0; i < bf.BitLen; i++)
 		ostr << bf.GetBit(i);
 
-	return ostr << "\n";
+	return ostr;
 }
