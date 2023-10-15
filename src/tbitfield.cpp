@@ -252,7 +252,7 @@ TBitField TBitField::operator~(void)// отрицание
 	TELEM* res = tmp.GetpMem();
 	//for (int i = 0; i < MemLen; i++)
 	//	tmp.SetElem(~res[i], i);
-	for (int i = (MemLen - 1)*BitsPerEl; i < BitLen; i++)
+	for (int i = 0; i < BitLen; i++)
 		if (GetBit(i))
 			tmp.ClrBit(i);
 		else
