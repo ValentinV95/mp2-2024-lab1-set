@@ -237,6 +237,7 @@ istream &operator>>(istream &istr, TBitField &bf) { // ввод
             bf.pMem[ind] | 1 << (n % (8 * sizeof(TELEM)));
         }
     }
+    return istr;
 }
 
 

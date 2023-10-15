@@ -183,60 +183,49 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-    try{
-        if (MaxPower < s.MaxPower){
-            TSet A(s.MaxPower);
-            for (int i = 0; i<MaxPower; i++){
-                if(IsMember(i)){
-                    A.InsElem(i);
-                }
+    if (MaxPower < s.MaxPower) {
+        TSet A(s.MaxPower);
+        for (int i = 0; i < MaxPower; i++) {
+            if (IsMember(i)) {
+                A.InsElem(i);
             }
-            for (int i = 0; i< s.MaxPower; i++){
-                if(!s.IsMember(i) && A.IsMember(i)){
-                    A.DelElem(i);
-                }
-            }
-            return A;
         }
-        else if (MaxPower > s.MaxPower){
-            TSet A(MaxPower);
-            for (int i = 0; i<s.MaxPower; i++){
-                if(s.IsMember(i)){
-                    A.InsElem(i);
-                }
+        for (int i = 0; i < s.MaxPower; i++) {
+            if (!s.IsMember(i) && A.IsMember(i)) {
+                A.DelElem(i);
             }
-            for (int i = 0; i< MaxPower; i++){
-                if(!IsMember(i) && A.IsMember(i)){
-                    A.DelElem(i);
-                }
-            }
-            return A;
         }
-        else{
-            TSet A(MaxPower);
-            for (int i = 0; i< MaxPower; i++){
-                if(IsMember(i)&&s.IsMember(i)){
-                    A.InsElem(i);
-                }
+        return A;
+    } else if (MaxPower > s.MaxPower) {
+        TSet A(MaxPower);
+        for (int i = 0; i < s.MaxPower; i++) {
+            if (s.IsMember(i)) {
+                A.InsElem(i);
             }
-            return A;
         }
-    }
-    catch(const char* error_message) {
-        cout << error_message<<endl;
+        for (int i = 0; i < MaxPower; i++) {
+            if (!IsMember(i) && A.IsMember(i)) {
+                A.DelElem(i);
+            }
+        }
+        return A;
+    } else {
+        TSet A(MaxPower);
+        for (int i = 0; i < MaxPower; i++) {
+            if (IsMember(i) && s.IsMember(i)) {
+                A.InsElem(i);
+            }
+        }
+        return A;
     }
 }
 
+
 TSet TSet::operator~(void) // дополнение
 {
-    try{
-        TSet A(MaxPower);
-        A.BitField =~BitField;
-        return A;
-    }
-    catch(const char* error_message) {
-        cout << error_message<<endl;
-    }
+    TSet A(MaxPower);
+    A.BitField = ~BitField;
+    return A;
 }
 
 // перегрузка ввода/вывода
@@ -255,6 +244,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
             s.BitField.SetBit(t);
         }
     }
+    return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
@@ -264,4 +254,5 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
             cout << i << " ";
         }
     }
+    return ostr;
 }
