@@ -10,13 +10,15 @@
 TBitField::TBitField(int len)
 {
 	if (len <= 0)
-		throw ("Negative lenght");
+		throw out_of_range("Negative lenght");
 	BitLen = len;
 	if (len % 8 == 0)
 		MemLen = len / (8 * sizeof(TELEM));
 	else
 		MemLen = len / (8 * sizeof(TELEM)) + 1;
-	pMem = new TELEM[MemLen]{ 0 };
+	pMem = new TELEM[MemLen];
+	for (int i = 0; i < MemLen; i++)
+		pMem[i] = 0;
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -59,7 +61,7 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 void TBitField::SetBit(const int n) // установить бит
 {
 	if ((n < 0) || (n >= BitLen))
-		throw ("Error, out of range");
+		throw out_of_range("Error, out of range");
 	const int i = GetMemIndex(n);
 	const int p = GetMemMask(n);
 	pMem[i] |= p;
@@ -68,7 +70,7 @@ void TBitField::SetBit(const int n) // установить бит
 void TBitField::ClrBit(const int n) // очистить бит
 {
 	if ((n < 0) || (n >= BitLen))
-		throw ("Error, out of range");
+		throw out_of_range("Error, out of range");
 	const int i = GetMemIndex(n);
 	const int p = GetMemMask(n);
 	pMem[i] &= ~p;
@@ -77,7 +79,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 int TBitField::GetBit(const int n) const // получить значение бита
 {
 	if ((n < 0) || (n >= BitLen))
-		throw ("Error, out of range");
+		throw out_of_range("Error, out of range");
 	const int i = GetMemIndex(n);
 	const int p = GetMemMask(n);
 	return (pMem[i] & p);
