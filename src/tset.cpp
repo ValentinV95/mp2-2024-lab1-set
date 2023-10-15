@@ -37,21 +37,21 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
     if ((Elem < 0) || (Elem >= MaxPower))
-        throw out_of_range("Error, element is out of range");
+        throw ("Error, element is out of range");
     return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
     if ((Elem < 0) || (Elem >= MaxPower))
-        throw out_of_range("Error, element is out of range");
+        throw ("Error, element is out of range");
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
     if ((Elem < 0) || (Elem >= MaxPower))
-        throw out_of_range("Error, element is out of range");
+        throw ("Error, element is out of range");
     BitField.ClrBit(Elem);
 }
 
@@ -90,7 +90,7 @@ TSet TSet::operator+(const TSet &s) // объединение
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
     if ((Elem < 0) || (Elem >= MaxPower))
-        throw out_of_range("Error, element is out of range");
+        throw ("Error, element is out of range");
     TSet res(*this);
     res.InsElem(Elem);
     return res;
@@ -99,7 +99,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
     if ((Elem < 0) || (Elem >= MaxPower)) 
-        throw out_of_range("Error, element is out of range");
+        throw ("Error, element is out of range");
     TSet res(*this);
     res.DelElem(Elem);
     return res;
@@ -126,13 +126,13 @@ istream &operator>>(istream &istr, TSet &s) // ввод
     int n;
     istr >> n;
     if ((n <= 0) || (n > s.MaxPower)) 
-        throw out_of_range("Error");
+        throw ("Error, out of range");
     for (int i = 0; i < n; i++)
     {
         int element;
         istr >> element;
         if ((element < 0) || (element >= s.MaxPower)) 
-            throw out_of_range("Error");
+            throw ("Error, out of range");
         s.InsElem(element);
     }
     return istr;
