@@ -114,49 +114,7 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    try{
-        if (MaxPower < s.MaxPower){
-            TSet A(s.MaxPower);
-            for (int i = 0; i<MaxPower; i++){
-                if(IsMember(i)){
-                    A.InsElem(i);
-                }
-            }
-            for (int i = 0; i< s.MaxPower; i++){
-                if(s.IsMember(i) && !A.IsMember(i)){
-                    A.InsElem(i);
-                }
-            }
-            return A;
-        }
-        else if (MaxPower > s.MaxPower){
-            TSet A(MaxPower);
-            for (int i = 0; i<s.MaxPower; i++){
-                if(s.IsMember(i)){
-                    A.InsElem(i);
-                }
-            }
-            for (int i = 0; i< MaxPower; i++){
-                if(IsMember(i) && !A.IsMember(i)){
-                    A.InsElem(i);
-                }
-            }
-            return A;
-        }
-        else{
-            TSet A(MaxPower);
-            for (int i = 0; i< MaxPower; i++){
-                if(IsMember(i)||s.IsMember(i)){
-                    A.InsElem(i);
-                }
-            }
-            return A;
-        }
-    }
-    catch(const char* error_message) {
-        cout << error_message<<endl;
-    }
-
+    return (BitField | s.BitField);
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
