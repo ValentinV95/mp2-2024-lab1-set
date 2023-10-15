@@ -180,6 +180,7 @@ istream& operator>> (istream& in, TBitField& bf) // ввод
 		bool tmp;
 		in >> tmp;
 		if (tmp) bf.SetBit(i);
+		else bf.ClrBit(i);
 	}
 	return in;
 }
