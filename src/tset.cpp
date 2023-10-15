@@ -129,13 +129,7 @@ TSet TSet::operator~(void) // дополнение
 
 istream& operator>> (istream& in, TSet& s) // ввод
 {
-    cout << "1st argument - count of elements";
-    int count;
-    in >> count;
-
-    if ((count > s.MaxPower) || (count <= 0)) throw out_of_range("count should be less or equal than MaxPower and greater than zero");
-
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < s.MaxPower; i++)
     {
         int tmp;
 
