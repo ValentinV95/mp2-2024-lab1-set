@@ -10,7 +10,7 @@
 TBitField::TBitField(int len)
 {
 	if (len <= 0)
-		throw out_of_range("Negative lenght");
+		throw ("Negative lenght");
 	BitLen = len;
 	if (len % 8 == 0)
 		MemLen = len / (8 * sizeof(TELEM));
@@ -57,25 +57,22 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 void TBitField::SetBit(const int n) // установить бит
 {
 	if ((n < 0) || (n > BitLen))
-		throw out_of_range("Error, out of range");
+		throw ("Error, out of range");
 	pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
 	if ((n < 0) || (n > BitLen))
-		throw out_of_range("Error, out of range");
+		throw ("Error, out of range");
 	pMem[GetMemIndex(n)] &= ~(GetMemMask(n));
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
 	if ((n < 0) || (n > BitLen))
-		throw out_of_range("Error, out of range");
-	if (pMem[GetMemIndex(n)] & GetMemMask(n))
-		return 1;
-	else
-		return 0;
+		throw ("Error, out of range");
+	return (pMem[GetMemIndex(n)] & GetMemMask(n))
 }
 
 // битовые операции
@@ -106,10 +103,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-	if (*this == bf)
-		return 0; 
-	else
-		return 1;
+	return !(*this == bf);
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
