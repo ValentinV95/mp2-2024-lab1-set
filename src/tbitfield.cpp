@@ -130,26 +130,15 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 int TBitField::operator==(const TBitField &bf) const noexcept// сравнение
 {
 	int i;
-	for (i = 0; i < min(MemLen,bf.GetMemLen()); i++)
-	{
-		if (pMem[i] != bf.GetpMem()[i])
-			return 0;
-	}
-	if (BitLen < bf.GetLength())
-	{
-		for (; i < bf.GetMemLen(); i++)
+	if (BitLen != bf.GetLength())
+		return 0;
+	else
+		for (i = 0; i < bf.GetMemLen(); i++)
 		{
-			if (bf.GetpMem()[i])
+			if (bf.GetpMem()[i] != pMem[i])
 				return 0;
 		}
-	}
-	else if(BitLen > bf.GetLength())
-		for (; i < bf.GetMemLen(); i++)
-		{
-			if (pMem[i])
-				return 0;
-		}
-	return 1;
+	if (i == bf.GetBit(i)) return 1;
 }
 
 int TBitField::operator!=(const TBitField &bf) const noexcept // сравнение
