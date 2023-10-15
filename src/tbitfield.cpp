@@ -160,7 +160,7 @@ TBitField TBitField::operator~(void) // отрицание
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	int element;
-	for (int i = 0; i < bf.BitLen(); i++)
+	for (int i = 0; i < bf.BitLen; i++)
 	{
 		istr >> element;
 		if (element) 
