@@ -140,11 +140,11 @@ istream &operator>>(istream &istr, TSet &s) // ввод
     int tmp;
     for (int i = 0; i < s.MaxPower; i++) {
         istr >> tmp;
-        if ((tmp >= 0) && (tmp <= s.MaxPower)) {
+        if ((tmp >= 0) && (tmp < s.MaxPower)) {
             s.InsElem(tmp);
         }
         else {
-            cout << "invalid elem, try again enter 0<elem<=MaxPower" << endl;
+            cout << "invalid elem, try again enter 0<=elem<MaxPower" << endl;
             i--;
         }
     }
