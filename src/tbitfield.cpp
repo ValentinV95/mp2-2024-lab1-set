@@ -94,6 +94,7 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 			TELEM* p = new TELEM[bf.GetMemLen()];
 			delete[] pMem;
 			pMem = p;
+			MemLen = bf.GetMemLen();
 		}
 	memcpy(pMem, bf.GetpMem(), MemLen * sizeof(TELEM));
 	BitLen = bf.GetLength();
