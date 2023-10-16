@@ -9,7 +9,6 @@
 
 TSet::TSet(int mp) : BitField(mp)
 {
-    if (mp <= 0) throw out_of_range("mp should be greater than");
     MaxPower = mp;
 }
 
@@ -66,14 +65,12 @@ TSet& TSet::operator=(const TSet& s) // присваивание
 
 int TSet::operator==(const TSet& s) const // сравнение
 {
-    if (BitField == s.BitField) return 1;
-    else return 0;
+    return (BitField == s.BitField);
 }
 
 int TSet::operator!=(const TSet& s) const // сравнение
 {
-    if (BitField == s.BitField) return 0;
-    else return 1;
+    return !(BitField == s.BitField);
 }
 
 TSet TSet::operator+ (const TSet& s) // объединение
