@@ -186,8 +186,8 @@ ostream& operator<<(ostream& out, const TBitField& bf) // вывод
 {
 	for (int i = 0; i < bf.BitLen; i++)
 	{
-		if (bf.GetBit(i)) out << 1;
-		else out << 0;
+		if (bf.GetBit(i)) out << 1 << " ";
+		else out << 0 << " ";
 	}
 
 	out << "\n";
