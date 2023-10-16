@@ -153,9 +153,6 @@ TBitField TBitField::operator&(const TBitField& bf) // операция "и"
 	for (int i = 0; i < std::min(MemLen, bf.MemLen); i++)
 		res.pMem[i] = pMem[i] & bf.pMem[i];
 
-	for (int i = std::min(MemLen, bf.MemLen); i < std::max(MemLen, bf.MemLen); i++)
-		res.pMem[i] = static_cast<TELEM>(0);
-
 	return res;
 }
 
