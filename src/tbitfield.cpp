@@ -89,14 +89,14 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 	if (*this == bf)
 		return *this;
 	else
-		if (BitLen != bf.GetLength())
+		if (MemLen != bf.GetMemLen())
 		{
-			TELEM* p = new TELEM[bf.GetLength()];
+			TELEM* p = new TELEM[bf.GetMemLen()];
 			delete[] pMem;
-			BitLen = bf.GetLength();
 			pMem = p;
 		}
 	memcpy(pMem, bf.GetpMem(), MemLen * sizeof(TELEM));
+	BitLen = bf.GetLength();
 	return *this;
 }
 
