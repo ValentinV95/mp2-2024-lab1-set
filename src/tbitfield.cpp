@@ -142,7 +142,7 @@ TBitField TBitField::operator &(const TBitField& bf) // операция "и"
 	TBitField res(max(BitLen, bf.BitLen));
 
 	for (int i = 0; i < min(MemLen, bf.GetMemLen()); i++)
-		res.GetpMem()[i] = pMem[i] | bf.GetpMem()[i];
+		res.GetpMem()[i] = pMem[i] & bf.GetpMem()[i];
 	return res;
 
 }
