@@ -121,18 +121,19 @@ int TBitField::operator!=(const TBitField &bf) const noexcept // сравнен�
 
 TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 {
+	TBitField res(max(BitLen, bf.GetLength()));
 	if (BitLen < bf.BitLen)
 	{
 		TBitField res(bf);
-		for (int i = 0; i < BitLen; i++)
-			res.GetpMem()[i] = pMem[i] | bf.GetpMem()[i];
+		for (int i = 0; i < MemLen; i++)
+			res.pMem[i] = pMem[i] | bf.pMem[i];
 		return res;
 	}
 	else
 	{
 		TBitField res(*this);
-		for (int i = 0; i < bf.BitLen; i++)
-			res.GetpMem()[i] = pMem[i] | bf.GetpMem()[i];
+		for (int i = 0; i < bf.GetMemLen(); i++)
+			res.pMem[i] = pMem[i] | bf.pMem[i];
 		return res;
 	}
 }
