@@ -97,13 +97,8 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-    if (Elem < 0)
+    if (Elem < 0 || Elem >= MaxPower)
         throw out_of_range("Element is out of the universe");
-    else if (Elem >= MaxPower)
-    {
-        TSet tmp(*this); //элемента точно нет в множестве!
-        return tmp;
-    }
     else {
         TSet tmp(*this);
         tmp.DelElem(Elem);
@@ -113,6 +108,8 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение                   
 {
+    if(MaxPower!=s.GetMaxPower())
+        throw invalid_argument("Inpossible to find intersection of sets with different size");
     TSet tmp(BitField & s.GetBitField());
     return tmp;
 }
@@ -125,16 +122,17 @@ TSet TSet::operator~(void) // дополнение
 
 // перегрузка ввода/вывода
 
-istream &operator>>(istream &istr, TSet &s) // ввод. Форма ввода - кол-во вводимых эл-в, затем - индексы элементовб принадлежащих множеству
+istream &operator>>(istream &istr, TSet &s) // ввод. Форма ввода - интексы элементов, принадлежащих множеству, по окончании ввода - Ctrl+Z, Enter
 {
-    int quan, tmp;
-    istr >> quan;
-    for (int i = 0; i < quan; i++)
+    int tmp;
+    while(!istr.eof())
     {
         istr >> tmp;
-        if (tmp >= s.GetMaxPower() || tmp < 0)
-            throw out_of_range("Element is out of the set");
-        s.InsElem(tmp);
+        if (istr) {
+            if (tmp >= s.GetMaxPower() || tmp < 0)
+                throw out_of_range("Element is out of the set");
+            s.InsElem(tmp);
+        }
     }
     return istr;
 }

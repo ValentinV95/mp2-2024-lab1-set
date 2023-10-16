@@ -28,15 +28,13 @@ private:
   TELEM GetMemMask (const int n) const; // битовая маска для бита n       (#О3)
 public:
   TBitField(int len);                //конструктор по умолчанию           (#О1)
-  TBitField(TELEM* mem, int len);  // конструктор перемещения
   TBitField(const TBitField &bf);    //конструктор копирования            (#П1)
-  ~TBitField();                      //                                    (#С)
+  ~TBitField();                      // ~                                  (#С)
 
   // доступ к битам
   int GetLength(void) const noexcept;     // получить длину (к-во битов)   (#О)
   int GetMemLen(void) const noexcept;	  // получить к-во эл-тов Мем
   void SetBit(const int n);       // установить бит                       (#О4)
-  void SetElem(TELEM Elem, int ind);
   void ClrBit(const int n);       // очистить бит                         (#П2)
   int  GetBit(const int n) const; // получить значение бита               (#Л1)
   TELEM* GetpMem(void) const noexcept;
