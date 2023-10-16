@@ -231,10 +231,11 @@ istream &operator>>(istream &istr, TBitField &bf) { // ввод
     cout << "Enter a quanity of elements";
     cin >> n;
     for (int i = 0; i < n; i++) {
-        cin >> t;
+        istr >> t;
         if (t > bf.GetLength()) {
-            cout << "Error";
-        } else {
+            throw "out of range";
+        }
+        else {
             ind = t / (8 * sizeof(TELEM));
             bf.pMem[ind] | 1 << (n % (8 * sizeof(TELEM)));
         }

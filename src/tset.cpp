@@ -53,7 +53,7 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    if (BitField.GetBit(Elem) != 0){
+    if (BitField.GetBit(Elem) != 0 && Elem >= 0 && Elem <= BitField.GetLength()){
         return 1;
     }
     return 0;
@@ -61,11 +61,13 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
+    if (Elem < 0 || Elem > BitField.GetLength()){throw "out of range";}
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
+    if (Elem < 0 || Elem > BitField.GetLength()){throw "out of range";}
     BitField.ClrBit(Elem);
 }
 
@@ -141,7 +143,8 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-    if (MaxPower < s.MaxPower) {
+    return (BitField & s.BitField);
+    /*if (MaxPower < s.MaxPower) {
         TSet A(s.MaxPower);
         for (int i = 0; i < MaxPower; i++) {
             if (IsMember(i)) {
@@ -175,7 +178,7 @@ TSet TSet::operator*(const TSet &s) // пересечение
             }
         }
         return A;
-    }
+    }*/
 }
 
 
@@ -194,12 +197,12 @@ istream &operator>>(istream &istr, TSet &s) // ввод
     cout << "Enter a quanity of elements";
     cin >> n;
     for (int i= 0; i< n; i++){
-        cin >> t;
+        istr >> t;
         if (t > s.MaxPower){
-            cout << "error";
+            throw "out of range";
         }
         else{
-            s.BitField.SetBit(t);
+            s.InsElem(i);
         }
     }
     return istr;
