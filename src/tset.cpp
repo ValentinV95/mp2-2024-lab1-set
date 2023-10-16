@@ -149,6 +149,13 @@ istream& operator>> (istream& in, TSet& s) // ввод
 
 ostream& operator<<(ostream& out, const TSet& s) //вывод
 {
+    int count = 0;
+
+    for (int i = 0; i < s.MaxPower; i++)
+        if (s.IsMember(i)) count++;
+
+    out << count << " ";
+
     for (int i = 0; i < s.MaxPower; i++)
         if (s.IsMember(i)) out << i << " ";
 
