@@ -108,8 +108,6 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение                   
 {
-    if(MaxPower!=s.GetMaxPower())
-        throw invalid_argument("Inpossible to find intersection of sets with different size");
     TSet tmp(BitField & s.GetBitField());
     return tmp;
 }
