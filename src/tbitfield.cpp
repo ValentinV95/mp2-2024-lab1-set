@@ -153,11 +153,11 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-	for (size_t i = 0; i < bf.MemLen; i++)
+	for (size_t i = 0; i < bf.BitLen; i++)
 	{
-		TELEM tmp = 0; // здесь вводится состояние памяти
+		bool tmp = 0;
 		istr >> tmp;
-		bf.pMem[i] = tmp;
+		bf.pMem[bf.GetMemIndex(i)] |= (tmp << (i & (8 * sizeof(TELEM) - 1)));
 	}
 
 	return istr;
@@ -166,7 +166,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
 	for (size_t i = 0; i < bf.BitLen; i++)
-		ostr << bf.GetBit(i);
+		ostr << bf.GetBit(i) << " ";
 
 	return ostr;
 }
