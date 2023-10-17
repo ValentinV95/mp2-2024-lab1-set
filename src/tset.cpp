@@ -60,7 +60,7 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 
 TSet& TSet::operator=(const TSet &s) // присваивание
 {
-    if (&bf == this) return *this;
+    if (&s == this) return *this;
     MaxPower = s.MaxPower;
     BitField = s.BitField;
     return *this;
