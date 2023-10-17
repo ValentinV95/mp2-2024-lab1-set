@@ -12,7 +12,7 @@ TBitField::TBitField(int len)
 	if (len <= 0)
 		throw out_of_range("Negative lenght");
 	BitLen = len;
-	if (len % (8 * sizeof(TELEM) == 0)
+	if (len % (8 * sizeof(TELEM)) == 0)
 		MemLen = len / (8 * sizeof(TELEM));
 	else
 		MemLen = len / (8 * sizeof(TELEM)) + 1;
