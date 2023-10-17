@@ -42,7 +42,7 @@ int TBitField::GetMemIndex(const int n) const// индекс Мем для би�
 
 TELEM TBitField::GetMemMask(const int n) const// битовая маска для бита n
 {
-	if ((n < 0) || (n >= BitLen))											//реализацияция
+	if ((n < 0) || (n >= BitLen))											//реализация
 		throw out_of_range("Bit position is out of the bitfield");
 	return 1 << (n % BitsPerEl);
 }
@@ -53,7 +53,7 @@ int TBitField::GetLength(void) const noexcept// получить длину (к-
 {
   return BitLen;
 }
-int TBitField::GetMemLen(void) const noexcept// получить длину (к-во битов)
+int TBitField::GetMemLen(void) const noexcept// получить длину (к-во элементов)
 {
 	return MemLen;
 }
