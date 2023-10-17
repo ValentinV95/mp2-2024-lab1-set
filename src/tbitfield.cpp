@@ -137,7 +137,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 		}
 	}
 	if (MemLen > bf.MemLen) {
-		for (int i = MemLen; i < bf.MemLen; i++) {
+		for (int i = bf.MemLen; i < MemLen; i++) {
 			res.pMem[i] = pMem[i];
 		}
 	}
@@ -158,7 +158,7 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 		}
 	}
 	if (MemLen > bf.MemLen) {
-		for (int i = MemLen; i < bf.MemLen; i++) {
+		for (int i = bf.MemLen; i < MemLen; i++) {
 			res.pMem[i] = 0;
 		}
 	}
