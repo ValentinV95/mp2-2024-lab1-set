@@ -145,7 +145,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
         int fl = 1;
 
         do {
-            cin >> t;
+            istr >> t;
             if (t >= s.GetMaxPower()) {
                 cout << "Invalid input. Try again" << endl;
 

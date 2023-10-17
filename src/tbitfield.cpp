@@ -187,7 +187,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 		int t;
 		int fl = 1;
 		do {
-			cin >> t;
+			istr >> t;
 			if ((t != 1) && (t != 0)) {
 				cout << "Invalid input. Try again" << endl;
 			}
