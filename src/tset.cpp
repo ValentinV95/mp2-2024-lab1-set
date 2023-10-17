@@ -107,8 +107,7 @@ TSet TSet::operator* (const TSet& s) {
 
 // дополнение
 TSet TSet::operator~ (void) {
-	TSet s(MaxPower);
-	s.BitField = ~BitField;
+	TSet s(~BitField);
 	return s;
 }
 
@@ -137,7 +136,7 @@ istream& operator>>(istream& istr, TSet& s) {
 //вывод
 ostream& operator<<(ostream& ostr, const TSet& s) {
 	for (int i = 0; i < s.MaxPower; i++) 
-		if ((s.BitField).GetBit(i)) 
-			ostr << (s.BitField).GetBit(i) * i << " ";
+		if (s.IsMember(i)) 
+			ostr << i << " ";
 	return ostr;
 };

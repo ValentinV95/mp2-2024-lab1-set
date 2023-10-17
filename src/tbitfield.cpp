@@ -23,7 +23,7 @@ TBitField::TBitField(const TBitField& bf) {
 	MemLen = bf.MemLen;
 	BitLen = bf.BitLen;
 	pMem = new TELEM[MemLen];
-	for (int i = 0; i < MemLen; i++) pMem[i] = bf.pMem[i];
+	memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
 }
 
 TBitField:: ~TBitField() {
@@ -74,15 +74,11 @@ int TBitField::GetBit(const int n) const {
 TBitField& TBitField:: operator=(const TBitField& bf) {
 	if (*this != bf) if (MemLen != bf.MemLen) {
 		delete[] pMem;
-		BitLen = bf.BitLen;
 		MemLen = bf.MemLen;
 		pMem = new TELEM[MemLen];
-		for (int i = 0; i < MemLen; i++) pMem[i] = bf.pMem[i];
-	}
-	else {
-		memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
-		BitLen = bf.BitLen;
-	}
+	};
+	memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
+	BitLen = bf.BitLen;
 	return *this;
 }
 
@@ -154,8 +150,7 @@ istream& operator>>(istream& istr, TBitField& bf) {
 // вывод
 ostream& operator<<(ostream& ostr, const TBitField& bf) {
 	for (int i = 0; i < bf.BitLen; i++) {
-		if (bf.GetBit(i)) ostr << 1;
-		else ostr << 0;
+		ostr << bf.GetBit(i);
 	};
 	return ostr;
 }
