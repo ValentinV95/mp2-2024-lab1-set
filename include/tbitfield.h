@@ -26,7 +26,6 @@ private:
   // методы реализации
   int   GetMemIndex(const int n) const; // индекс в pМем для бита n       (#О2)
   TELEM GetMemMask (const int n) const; // битовая маска для бита n       (#О3)
-  TELEM* GetpMem(void) const noexcept;
 public:
   TBitField(int len);                //конструктор по умолчанию           (#О1)
   TBitField(const TBitField &bf);    //конструктор копирования            (#П1)
@@ -38,7 +37,6 @@ public:
   void SetBit(const int n);       // установить бит                       (#О4)
   void ClrBit(const int n);       // очистить бит                         (#П2)
   int  GetBit(const int n) const; // получить значение бита               (#Л1)
-  
 
   // битовые операции
   int operator==(const TBitField &bf) const noexcept; // сравнение                 (#О5)

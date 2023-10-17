@@ -24,7 +24,6 @@ public:
   int GetMaxPower(void) const noexcept;     // максимальная мощность множества
   void InsElem(const int Elem);       // включить элемент в множество
   void DelElem(const int Elem);       // удалить элемент из множества
-  const TBitField& GetBitField(void) const;       // получить указатель на характеристический вектор множества
   int IsMember(const int Elem) const; // проверить наличие элемента в множестве
   // теоретико-множественные операции
   int operator== (const TSet &s) const; // сравнение

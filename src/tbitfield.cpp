@@ -22,7 +22,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 	BitLen = bf.GetLength();
 	MemLen = bf.GetMemLen();
 	pMem = new TELEM[MemLen];
-	memcpy(pMem, bf.GetpMem(), MemLen * sizeof(TELEM));
+	memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
 }
 
 TBitField::~TBitField()
@@ -42,7 +42,7 @@ int TBitField::GetMemIndex(const int n) const// индекс Мем для би�
 
 TELEM TBitField::GetMemMask(const int n) const// битовая маска для бита n
 {
-	if ((n < 0) || (n >= BitLen))											//реализация
+	if ((n < 0) || (n >= BitLen))											//реализацияция
 		throw out_of_range("Bit position is out of the bitfield");
 	return 1 << (n % BitsPerEl);
 }
@@ -53,7 +53,7 @@ int TBitField::GetLength(void) const noexcept// получить длину (к-
 {
   return BitLen;
 }
-int TBitField::GetMemLen(void) const noexcept// получить длину (к-во элементов)
+int TBitField::GetMemLen(void) const noexcept// получить длину (к-во битов)
 {
 	return MemLen;
 }
@@ -78,10 +78,6 @@ int TBitField::GetBit(const int n) const// получить значение б�
 		throw out_of_range("Bit position is out of the bitfield");
 	return static_cast <int>(static_cast <bool> (pMem[GetMemIndex(n)] & GetMemMask(n)));
 }
-TELEM* TBitField::GetpMem(void) const noexcept //получить указатель на память
-{
-	return pMem;
-}
 // битовые операции
 
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание 
@@ -96,7 +92,7 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 			pMem = p;
 			MemLen = bf.GetMemLen();
 		}
-	memcpy(pMem, bf.GetpMem(), MemLen * sizeof(TELEM));
+	memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
 	BitLen = bf.GetLength();
 	return *this;
 }
@@ -109,7 +105,7 @@ int TBitField::operator==(const TBitField &bf) const noexcept// сравнени
 	else
 		for (i = 0; i < bf.GetMemLen(); i++)
 		{
-			if (bf.GetpMem()[i] != pMem[i])
+			if (bf.pMem[i] != pMem[i])
 				return 0;
 		}
 	return 1;
@@ -144,7 +140,7 @@ TBitField TBitField::operator &(const TBitField& bf) // операция "и"
 	TBitField res(max(BitLen, bf.BitLen));
 
 	for (int i = 0; i < min(MemLen, bf.GetMemLen()); i++)
-		res.GetpMem()[i] = pMem[i] & bf.GetpMem()[i];
+		res.pMem[i] = pMem[i] & bf.pMem[i];
 	return res;
 
 }
@@ -153,11 +149,9 @@ TBitField TBitField::operator~(void)// отрицание
 {
 	TBitField tmp(BitLen);
 	for (int i = 0; i < MemLen - 1; i++)
-		tmp.GetpMem()[i] = ~pMem[i];
+		tmp.pMem[i] = ~pMem[i];
 	for (int i = (MemLen - 1)*BitsPerEl; i < BitLen; i++)
-		if (GetBit(i))
-			tmp.ClrBit(i);
-		else
+		if (!GetBit(i))
 			tmp.SetBit(i);
 	return tmp;
 }
@@ -170,8 +164,9 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	for (int i = 0; i < bf.GetLength(); i++)
 	{
 		istr >> t;
-		if (t) bf.SetBit(i);
-		else bf.ClrBit(i);
+		if (t == 1) bf.SetBit(i);
+		else if (t == 0) bf.ClrBit(i);
+		else throw out_of_range("Not suitable bit value");
 	}
 	return istr;
 }
