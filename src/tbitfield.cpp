@@ -72,13 +72,15 @@ int TBitField::GetBit(const int n) const {
 
 // присваивание
 TBitField& TBitField:: operator=(const TBitField& bf) {
-	if (*this != bf) if (MemLen != bf.MemLen) {
-		delete[] pMem;
-		MemLen = bf.MemLen;
-		pMem = new TELEM[MemLen];
+	if (*this != bf) {
+		if (MemLen != bf.MemLen) {
+			delete[] pMem;
+			MemLen = bf.MemLen;
+			pMem = new TELEM[MemLen];
+		};
+		memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
+		BitLen = bf.BitLen;
 	};
-	memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
-	BitLen = bf.BitLen;
 	return *this;
 }
 
