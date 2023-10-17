@@ -40,11 +40,15 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
+	if ((n >= BitLen) || (n < 0))
+		throw out_of_range("Bit should be between 0 and power of univers");
 	return n / (8 * sizeof(TELEM));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
+	if ((n >= BitLen) || (n < 0))
+		throw out_of_range("Bit should be between 0 and power of univers");
 	return 1 << (n % (8 * sizeof(TELEM)));
 }
 
@@ -87,13 +91,14 @@ TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 	if (*this == bf)
 		return *this;
 
-	if (BitLen != bf.BitLen)
+	if (MemLen != bf.MemLen)
 	{
+		TELEM* tmp = new TELEM[MemLen];
 		delete[] pMem;
-		BitLen = bf.BitLen;
 		MemLen = bf.MemLen;
-		pMem = new TELEM[MemLen];
+		pMem = tmp;
 	}
+	BitLen = bf.BitLen;
 
 	for (int ind = 0; ind < MemLen; ind++)
 		pMem[ind] = bf.pMem[ind];
@@ -157,6 +162,7 @@ TBitField TBitField::operator~(void) // отрицание
 	for (int i = (MemLen - 1)*8*sizeof(TELEM); i<BitLen; i++)
 		if (!(GetBit(i)))
 			res.SetBit(i);
+
 
 	return res;
 }
