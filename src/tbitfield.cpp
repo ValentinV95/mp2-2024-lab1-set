@@ -12,7 +12,7 @@ TBitField::TBitField(int len)
 	if (len <= 0)
 		throw out_of_range("Negative lenght");
 	BitLen = len;
-	if (len % 8 == 0)
+	if (len % (8 * sizeof(TELEM) == 0)
 		MemLen = len / (8 * sizeof(TELEM));
 	else
 		MemLen = len / (8 * sizeof(TELEM)) + 1;
@@ -39,11 +39,15 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
+	if ((n < 0) || (n > BitLen))
+			throw out_of_range("the bit doesn't belong to the bit field");
 	return n / (8 * sizeof(TELEM));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
+	if ((n < 0) || (n > BitLen))
+			throw out_of_range("the bit doesn't belong to the bit field");
 	return 1 << (n % (8 * sizeof(TELEM)));
 }
 
@@ -140,12 +144,14 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 TBitField TBitField::operator~(void) // отрицание
 {
 	TBitField res(BitLen);
-	for (int i = 0; i < BitLen; i++)
+	for (int i = 0; i < (MemLen - 1); i++)
+		res.pMem[i] = ~pMem[i];
+	for (int i = (MemLen - 1) * (8 * sizeof(TELEM)); i < BitLen; i++)
 		if (GetBit(i))
 			res.ClrBit(i);
 		else
 			res.SetBit(i);
-
+	
 	return res;
 }
 
@@ -168,11 +174,11 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
 	for (int i = 0; i < bf.BitLen; i++) {
-		if (bf.GetBit(i) == 0) {
-			ostr << '0';
+		if (bf.GetBit(i)) {
+			ostr << '1';
 		}
 		else {
-			ostr << '1';
+			ostr << '0';
 		}
 	}
 	return ostr;
