@@ -9,6 +9,8 @@
 
 TSet::TSet(int mp) : BitField(mp)
 {
+    if (mp <= 0)
+        throw logic_error("Length should be positive");
     MaxPower = mp;
 }
 
@@ -36,16 +38,22 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
+    if ((Elem >= MaxPower) || (Elem < 0))
+        throw out_of_range("Index should be between 0 and power of univers");
     return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
+    if ((Elem >= MaxPower) || (Elem < 0))
+        throw out_of_range("Index should be between 0 and power of univers");
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
+    if ((Elem >= MaxPower) || (Elem < 0))
+        throw out_of_range("Index should be between 0 and power of univers");
     BitField.ClrBit(Elem);
 }
 
@@ -70,13 +78,17 @@ int TSet::operator!=(const TSet& s) const // сравнение
 
 TSet TSet::operator+(const TSet& s) // объединение
 {
-    TBitField res(MaxPower);
+   // if (MaxPower != s.MaxPower)
+     //   throw logic_error("Universe should be the same");
+    TBitField res(std:: max(MaxPower,s.MaxPower));
     res = BitField | s.BitField;
     return TSet(res);
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
+    if ((Elem >= MaxPower) || (Elem < 0))
+        throw out_of_range("Index should be between 0 and power of univers");
     TBitField res(MaxPower);
     res.SetBit(Elem);
     return TSet(res);
@@ -84,6 +96,8 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
+    if ((Elem >= MaxPower) || (Elem < 0))
+        throw out_of_range("Index should be between 0 and power of univers");
     TBitField res(MaxPower);
     res.ClrBit(Elem);
     return TSet(res);
@@ -91,6 +105,8 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet& s) // пересечение
 {
+   // if (MaxPower != s.MaxPower)
+     //   throw logic_error("Universe should be the same");
     TBitField res(MaxPower);
     res = BitField & s.BitField;
     return TSet(res);
@@ -107,9 +123,10 @@ TSet TSet::operator~(void) // дополнение
 
 istream& operator>>(istream& istr, TSet& s) // ввод
 {
-   // cout << "Введите число элементов: ";
     int n;
     istr >> n;
+    if (n > s.GetMaxPower())
+        throw logic_error("Count of element should be less than power of Univers");
     for (int i = 0; i < n; i++)
     {
         int x;
@@ -121,6 +138,13 @@ istream& operator>>(istream& istr, TSet& s) // ввод
 
 ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
+    int n = 0;
+    for (int i = 0; i < s.GetMaxPower(); i++)
+    {
+        if (s.IsMember(i))
+            n++;
+    }
+    ostr << n << " ";
     for (int i = 0; i < s.GetMaxPower(); i++)
     {
         if (s.IsMember(i))
