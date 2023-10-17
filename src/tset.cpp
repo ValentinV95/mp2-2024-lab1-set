@@ -23,8 +23,7 @@ TSet::TSet(const TBitField &bf) : MaxPower(bf.GetLength()), BitField(bf)
 
 TSet::operator TBitField()
 {
-    TBitField bf(BitField);
-    return bf;
+    return BitField;
 }
 
 int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
@@ -60,7 +59,7 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 
 TSet& TSet::operator=(const TSet &s) // присваивание
 {
-    if (&s == this) return *this;
+    if (s == *this) return *this;
     MaxPower = s.MaxPower;
     BitField = s.BitField;
     return *this;
@@ -78,25 +77,14 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    int maxmp = std::max(MaxPower, s.MaxPower);
-    TSet tmp(maxmp);
-    for (int i = 0; i < MaxPower; i++) {
-        if (this->IsMember(i) != 0) {
-            tmp.InsElem(i);
-        }
-    }
-    for (int i = 0; i < s.MaxPower; i++) {
-        if (s.IsMember(i) != 0) {
-            tmp.InsElem(i);
-        }
-    }
+    TSet tmp(std::max(MaxPower, s.MaxPower));
+    tmp.BitField = BitField | s.BitField;
     return tmp;
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    TSet tmp(MaxPower);
-    tmp.BitField = BitField;
+    TSet tmp(BitField);
     tmp.InsElem(Elem);
     return tmp;
 }
@@ -110,28 +98,16 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-    int minmp = std::min(MaxPower, s.MaxPower);
-    int maxmp = std::max(MaxPower, s.MaxPower);
-    TSet tmp(maxmp);
-    for (int i = 0; i < minmp; i++) {
-        if ((this->IsMember(i) != 0) && (s.IsMember(i) != 0)) {
-            tmp.InsElem(i);
-        }
-    }
+    
+    TSet tmp(std::max(MaxPower, s.MaxPower));
+    tmp.BitField = BitField & s.BitField;
     return tmp;
 }
 
 TSet TSet::operator~(void) // дополнение
 {
     TSet tmp(MaxPower);
-    for (int i = 0; i < MaxPower; i++) {
-        if (this->IsMember(i) != 0) {
-            tmp.DelElem(i);
-        }
-        else {
-            tmp.InsElem(i);
-        }
-    }
+    tmp.BitField = ~BitField;
     return tmp;
 }
 
