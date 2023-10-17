@@ -162,7 +162,7 @@ TBitField TBitField::operator~(void) // отрицание
 		res.pMem[i] = ~pMem[i];
 
 	for (int i = (MemLen - 1) * sizeof(TELEM) * 8; i < BitLen; i++)
-		if (GetBit(i)) res.ClrBit(i); else res.SetBit(i);
+		if (!(GetBit(i))) res.SetBit(i);
 
 	return res;
 }
