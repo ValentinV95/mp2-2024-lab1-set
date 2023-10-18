@@ -10,7 +10,7 @@
 TBitField::TBitField(int len)
 {
 	if (len <= 0)
-		throw out_of_range("Uncorrect quanity of elements");
+		throw invalid_argument("Uncorrect quanity of elements");
 	BitLen = len;
 	MemLen = (BitLen + BitsPerEl - 1) >> shr;
 	pMem = new TELEM[MemLen];
