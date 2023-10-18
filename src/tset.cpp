@@ -26,8 +26,7 @@ TSet::TSet(const TBitField &bf) : BitField(bf)
 
 TSet::operator TBitField()
 {
-    TBitField tmp(BitField);
-    return tmp;
+    return BitField;
 }
 
 int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
@@ -37,24 +36,24 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    if ((Elem > MaxPower) || (Elem < 0)) {
-        throw exception("invalid elem");
+    if ((Elem >= MaxPower) || (Elem < 0)) {
+        throw out_of_range("invalid elem");
     }
     return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-    if ((Elem > MaxPower) || (Elem < 0)) {
-        throw exception("invalid elem");
+    if ((Elem >= MaxPower) || (Elem < 0)) {
+        throw out_of_range("invalid elem");
     }
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-    if ((Elem > MaxPower) || (Elem < 0)) {
-        throw exception("invalid elem");
+    if ((Elem >= MaxPower) || (Elem < 0)) {
+        throw out_of_range("invalid elem");
     }
     BitField.ClrBit(Elem);
 }
@@ -94,15 +93,13 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    TSet res(max(s.MaxPower, MaxPower));
-    res.BitField = BitField | s.BitField;
-    return res;
+    return (BitField | s.BitField);
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    if ((Elem > MaxPower) || (Elem < 0)) {
-        throw exception("invalid elem");
+    if ((Elem >= MaxPower) || (Elem < 0)) {
+        throw out_of_range("invalid elem");
     }
     TSet res(*this);
     res.InsElem(Elem);
@@ -111,8 +108,8 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-    if ((Elem > MaxPower) || (Elem < 0)) {
-        throw exception("invalid elem");
+    if ((Elem >= MaxPower) || (Elem < 0)) {
+        throw out_of_range("invalid elem");
     }
     TSet res(*this);
     res.DelElem(Elem);
@@ -121,16 +118,12 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-    TSet res(s);
-    res.BitField = BitField & s.BitField;
-    return res;
+    return (BitField & s.BitField);
 }
 
 TSet TSet::operator~(void) // дополнение
 {
-    TSet res(*this);
-    res.BitField = ~res.BitField;
-    return res;
+    return (~BitField);
 }
 
 // перегрузка ввода/вывода
@@ -144,8 +137,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
             s.InsElem(tmp);
         }
         else {
-            cout << "invalid elem, try again enter 0<=elem<MaxPower" << endl;
-            i--;
+            throw out_of_range("invalid elem");
         }
     }
     return istr;
