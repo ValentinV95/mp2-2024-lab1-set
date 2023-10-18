@@ -10,12 +10,9 @@
 TBitField::TBitField(int len)
 {
 	if (len <= 0)
-		throw logic_error("Length should be positive");
+		throw invalid_argument("Length should be positive");
 	BitLen = len;
-	if (len % 8 == 0)
-		MemLen = len / 8 / sizeof(TELEM);
-	else
-		MemLen = len / 8 / sizeof(TELEM) + 1;
+	MemLen = (BitLen + 8 *sizeof(TELEM)- 1)/(8 * sizeof(TELEM));
 	pMem = new TELEM[MemLen];
 	for (int i = 0; i < MemLen; i++)
 		pMem[i] = 0;
@@ -180,7 +177,7 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
 		else if (x == 0)
 			bf.ClrBit(i);
 		else
-			throw logic_error("Bit should be 1 or 0");
+			throw invalid_argument("Bit should be 1 or 0");
 	}
 	return istr;
 }
