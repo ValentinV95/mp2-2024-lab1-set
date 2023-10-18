@@ -10,7 +10,7 @@
 TSet::TSet(int mp) : BitField(mp)
 {
     if (mp <= 0)
-        throw logic_error("Length should be positive");
+        throw invalid_argument("Length should be positive");
     MaxPower = mp;
 }
 
@@ -126,7 +126,7 @@ istream& operator>>(istream& istr, TSet& s) // ввод
     int n;
     istr >> n;
     if (n > s.GetMaxPower())
-        throw logic_error("Count of element should be less than power of Univers");
+        throw invalid_argument("Count of element should be less than power of Univers");
     for (int i = 0; i < n; i++)
     {
         int x;
