@@ -35,14 +35,14 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const// индекс Мем для бита n
 {
-	if ((n < 0) || (n >= BitLen))											//реализация
+	if ((n < 0) || (n >= BitLen))
 			throw out_of_range("Bit position is out of the bitfield");
 	return n >>shr;
 }
 
 TELEM TBitField::GetMemMask(const int n) const// битовая маска для бита n
 {
-	if ((n < 0) || (n >= BitLen))											//реализацияция
+	if ((n < 0) || (n >= BitLen))
 		throw out_of_range("Bit position is out of the bitfield");
 	return 1 << (n % BitsPerEl);
 }
