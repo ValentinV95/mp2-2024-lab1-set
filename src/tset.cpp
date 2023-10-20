@@ -9,6 +9,7 @@
 
 TSet::TSet(int mp) : BitField(mp)
 {
+    if (mp <= 0) throw out_of_range("mp should be greater than");
     MaxPower = mp;
 }
 
