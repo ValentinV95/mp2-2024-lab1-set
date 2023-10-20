@@ -7,82 +7,157 @@
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(-1)
+TSet::TSet(int mp) : BitField(mp)
 {
+    if (mp <= 0) throw out_of_range("mp should be greater than");
+    MaxPower = mp;
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s) : BitField(-1)
+TSet::TSet(const TSet& s) : BitField(s.BitField)
 {
+    MaxPower = s.MaxPower;
 }
 
 // конструктор преобразования типа
-TSet::TSet(const TBitField &bf) : BitField(-1)
+TSet::TSet(const TBitField& bf) : BitField(bf)
 {
+    MaxPower = bf.GetLength();
 }
 
-TSet::operator TBitField()
+TSet::operator TBitField() // преобразование типа к битовому полю
 {
+    return BitField;
 }
 
 int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
 {
+     return MaxPower;
 }
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    return 0;
+    if ((Elem < 0) || (Elem >= MaxPower)) throw out_of_range("Elem should be greater than zero and less than Bitlen");
+    return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
+    if ((Elem < 0) || (Elem >= MaxPower)) throw out_of_range("Elem should be greater than zero and less than Bitlen");
+    BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
+    if ((Elem < 0) || (Elem >= MaxPower)) throw out_of_range("Elem should be greater than zero and less than Bitlen");
+    BitField.ClrBit(Elem);
 }
 
 // теоретико-множественные операции
 
-TSet& TSet::operator=(const TSet &s) // присваивание
+TSet& TSet::operator=(const TSet& s) // присваивание
 {
+    BitField = s.BitField;
+
+    MaxPower = s.MaxPower;
+
+    return *this;
 }
 
-int TSet::operator==(const TSet &s) const // сравнение
+int TSet::operator==(const TSet& s) const // сравнение
 {
-    return 0;
+    return (BitField == s.BitField);
 }
 
-int TSet::operator!=(const TSet &s) const // сравнение
+int TSet::operator!=(const TSet& s) const // сравнение
 {
+    return !(BitField == s.BitField);
 }
 
-TSet TSet::operator+(const TSet &s) // объединение
+TSet TSet::operator+ (const TSet& s) // объединение
 {
+    TSet res(std::max(MaxPower, s.MaxPower));
+
+    res.BitField = BitField | s.BitField;
+
+    return res;
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
+    if ((Elem < 0) || (Elem >= MaxPower)) throw out_of_range("Elem should be greater than zero and less than MaxPower");
+
+    TSet res(*this);
+
+    res.InsElem(Elem);
+
+    return res;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
+    if ((Elem < 0) || (Elem >= MaxPower)) throw out_of_range("Elem should be greater than zero and less than MaxPower");
+
+    TSet res(*this);
+
+    res.DelElem(Elem);
+
+    return res;
 }
 
-TSet TSet::operator*(const TSet &s) // пересечение
+TSet TSet::operator*(const TSet& s) // пересечение
 {
+    TSet res(s);
+
+    res.BitField = BitField & s.BitField;
+
+    return res;
 }
 
 TSet TSet::operator~(void) // дополнение
 {
+    TSet res(*this);
+
+    res.BitField = ~res.BitField;
+
+    return res;
 }
 
 // перегрузка ввода/вывода
 
-istream &operator>>(istream &istr, TSet &s) // ввод
+istream& operator>> (istream& in, TSet& s) // ввод
 {
+    int count;
+    in >> count;
+    if ((count > s.MaxPower) || (count <= 0)) throw out_of_range("count should be less or equal than MaxPower and greater than zero");
+
+    for (int i = 0; i < count; i++)
+    {
+        int tmp;
+
+        in >> tmp;
+
+        if ((tmp >= s.MaxPower) || (tmp < 0)) throw out_of_range("element should be less than MaxPower and greater or equal than zero");
+
+        s.InsElem(tmp);
+    }
+
+    return in;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
+ostream& operator<<(ostream& out, const TSet& s) //вывод
 {
+    int count = 0;
+
+    for (int i = 0; i < s.MaxPower; i++)
+        if (s.IsMember(i)) count++;
+
+    out << count << " ";
+
+    for (int i = 0; i < s.MaxPower; i++)
+        if (s.IsMember(i)) out << i << " ";
+
+    out << "\n";
+
+    return out;
 }
