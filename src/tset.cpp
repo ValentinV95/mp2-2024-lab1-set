@@ -1,6 +1,6 @@
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(-mp)
+TSet::TSet(int mp) : BitField(mp)
 {
     MaxPower = mp;
 }
@@ -48,7 +48,7 @@ void TSet::InsElem(const int Elem) // включение элемента мно
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-    if ((Elem > MaxPower) || (Elem < 0))
+    if ((Elem >= MaxPower) || (Elem < 0))
     {
         throw exception("uncorrect element");
     }
@@ -102,7 +102,7 @@ TSet TSet::operator+(const TSet& s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    if ((Elem > MaxPower) || (Elem < 0))
+    if ((Elem >= MaxPower) || (Elem < 0))
     {
         throw exception("uncorrect element");
     }
@@ -111,14 +111,14 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
     return res;
 }
 
-TSet TSet::operator-(const int elem) // разность с элементом
+TSet TSet::operator-(const int Elem) // разность с элементом
 {
-    if ((elem > MaxPower) || (elem < 0))
+    if ((Elem > MaxPower) || (Elem < 0))
     {
         throw exception("uncorrect element");
     }
     TSet res(*this);
-    res.DelElem(elem);
+    res.DelElem(Elem);
     return res;
 }
 
