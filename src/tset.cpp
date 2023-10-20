@@ -15,7 +15,7 @@ TSet::TSet(const TSet& s) : BitField(s.BitField)
 }
 
 // конструктор преобразования типа
-TSet::TSet(int mp) : BitField(bf)
+TSet::TSet(сonst TBitField &bf) : BitField(bf)
 {
     MaxPower = bf.GetLength();
 }
@@ -31,7 +31,7 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
     return MaxPower;
 }
 
-int TSet::IsMember(const int Elem) const // элемент множества?
+int TSet::IsMember(const int Elem) const // элемент множества
 {
     if ((Elem > MaxPower) || (Elem < 0))
     {
@@ -86,7 +86,7 @@ int TSet::operator==(const TSet& s) const // сравнение
 
 int TSet::operator!=(const TSet& s) const // сравнение
 {
-    if (s.BitField != bitField)
+    if (s.BitField != BitField)
     {
         return 1;
     }
@@ -98,7 +98,7 @@ int TSet::operator!=(const TSet& s) const // сравнение
 
 TSet TSet::operator+(const TSet& s) // объединение
 {
-    TSet res(max(s.MaxPower, MaxPower));
+    TSet res(std::max(s.MaxPower, MaxPower));
     res.BitField = BitField | s.BitField;
     return res;
 }
@@ -116,7 +116,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int elem) // разность с элементом
 {
-    if ((elem > maxPower) || (elem < 0))
+    if ((elem > MaxPower) || (elem < 0))
     {
         throw exception("uncorrect element");
     }
