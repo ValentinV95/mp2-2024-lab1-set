@@ -40,14 +40,14 @@ TBitField::~TBitField()
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
 	if ((n < 0) || (n > BitLen))
-			throw out_of_range("the bit doesn't belong to the bit field");
+			throw out_of_range("Error, the bit number is out of range");
 	return n / (8 * sizeof(TELEM));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
 	if ((n < 0) || (n > BitLen))
-			throw out_of_range("the bit doesn't belong to the bit field");
+			throw out_of_range("Error, the bit number is out of range");
 	return 1 << (n % (8 * sizeof(TELEM)));
 }
 
@@ -61,14 +61,14 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 void TBitField::SetBit(const int n) // установить бит
 {
 	if ((n < 0) || (n > BitLen))
-		throw out_of_range("Error, out of range");
+		throw out_of_range("Error, the bit number is out of range");
 	pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
 	if ((n < 0) || (n > BitLen))
-		throw out_of_range("Error, out of range");
+		throw out_of_range("Error, the bit number is out of range");
 	pMem[GetMemIndex(n)] &= ~(GetMemMask(n));
 }
 
@@ -85,10 +85,12 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
 	if (bf == *this)
 		return *this;
-	delete[] pMem;
 	BitLen = bf.BitLen;
-	MemLen = bf.MemLen;
-	pMem = new TELEM[MemLen];
+	if (MemLen != bf.MemLen) {
+		delete[] pMem;
+		MemLen = bf.MemLen;
+		pMem = new TELEM[MemLen];
+	}
 	for (int i = 0; i < MemLen; i++)
 		pMem[i] = bf.pMem[i];
 	return *this;
@@ -129,14 +131,8 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
 	TBitField res(std::max(BitLen, bf.BitLen));
 
-	const int maxlen = std::max(MemLen, bf.MemLen);
-	const int minlen = std::min(MemLen, bf.MemLen);
-
-	for (int i = 0; i < minlen; i++)
+	for (int i = 0; i < std::min(MemLen, bf.MemLen); i++)
 		res.pMem[i] = pMem[i] & bf.pMem[i];
-
-	for (int i = minlen; i < maxlen; i++)
-		res.pMem[i] = static_cast<TELEM>(0);
 
 	return res;
 }
