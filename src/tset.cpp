@@ -9,6 +9,8 @@
 
 TSet::TSet(int mp) : BitField(mp)
 {
+    if (mp <= 0)
+        throw invalid_argument("Error, the power has invalid values");
     MaxPower = mp;
 }
 
