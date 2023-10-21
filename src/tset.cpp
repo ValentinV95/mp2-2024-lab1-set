@@ -41,7 +41,7 @@ void TSet::InsElem(const int Elem) // включение элемента мно
 {
     if ((Elem > MaxPower) || (Elem < 0))
     {
-        throw exception("uncorrect element");
+        throw out_of_range("uncorrect element");
     }
     BitField.SetBit(Elem);
 }
@@ -50,7 +50,7 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 {
     if ((Elem >= MaxPower) || (Elem < 0))
     {
-        throw exception("uncorrect element");
+        throw out_of_range("uncorrect element");
     }
     BitField.ClrBit(Elem);
 }
@@ -104,7 +104,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 {
     if ((Elem >= MaxPower) || (Elem < 0))
     {
-        throw exception("uncorrect element");
+        throw out_of_range("uncorrect element");
     }
     TSet res(*this);
     res.InsElem(Elem);
@@ -115,7 +115,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 {
     if ((Elem > MaxPower) || (Elem < 0))
     {
-        throw exception("uncorrect element");
+        throw out_of_range("uncorrect element");
     }
     TSet res(*this);
     res.DelElem(Elem);
@@ -143,13 +143,13 @@ istream& operator>>(istream& istr, TSet& s) // ввод
     int n;
     istr >> n;
     if ((n <= 0) || (n > s.MaxPower))
-        throw exception("out of range");
+        throw out_of_range("out of range");
     for (int i = 0; i < n; i++)
     {
         int element;
         istr >> element;
         if ((element < 0) || (element >= s.MaxPower))
-            throw exception("out of range");
+            throw out_of_range("out of range");
         s.InsElem(element);
     }
     return istr;
