@@ -3,7 +3,7 @@
 TBitField::TBitField(int len)
 {
     if (len <= 0)
-        throw exception("uncorrect length");
+        throw out_of_range("uncorrect length");
     BitLen = len;
     if (len % 8 == 0)
         MemLen = len / (8 * sizeof(TELEM));
@@ -57,7 +57,7 @@ void TBitField::SetBit(const int n) // установить бит
 {
     if ((n < 0) || (n >= BitLen))
     {
-        throw exception("out of range");
+        throw out_of_range("out of range");
     }
     pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
