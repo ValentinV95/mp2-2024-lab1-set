@@ -4,7 +4,7 @@
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
 //
 // Битовое поле
-
+#include <algorithm>
 #include "tbitfield.h"
 
 TBitField::TBitField(int len)
@@ -143,6 +143,7 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 }
 TBitField TBitField::operator|(const TBitField &bf) { // операция "или"
     TBitField A(max(bf.GetLength(), GetLength()));
+    int minMemLen =  min(MemLen, bf.MemLen);
     if (bf.GetLength() > BitLen) {
         for (int i = 0; i< MemLen; i++){
             A.pMem[i] = pMem[i];
@@ -153,9 +154,10 @@ TBitField TBitField::operator|(const TBitField &bf) { // операция "ил�
             A.pMem[i] = bf.pMem[i];
         }
     }
-    for (int i = 0; i < min(MemLen, bf.MemLen); i++) {
+    for (int i = 0; i <minMemLen; i++) {
         A.pMem[i] = pMem[i] | bf.pMem[i];
     }
+    return A;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) { // операция "и"
@@ -171,8 +173,9 @@ TBitField TBitField::operator&(const TBitField &bf) { // операция "и"
         }
     }
     for (int i = 0; i < min(MemLen, bf.MemLen); i++) {
-        A.pMem[i] = pMem[i] | bf.pMem[i];
+        A.pMem[i] = pMem[i] & bf.pMem[i];
     }
+    return A;
 }
 
 TBitField TBitField::operator~(void) { // отрицание
