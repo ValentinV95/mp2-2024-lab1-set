@@ -63,7 +63,7 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-	if (n < 0 || n>BitLen) {
+	if (n < 0 || n>=BitLen) {
 		throw std::out_of_range("bit is out of range");
 	}
 
@@ -72,7 +72,7 @@ void TBitField::SetBit(const int n) // установить бит
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
-	if (n < 0 || n > BitLen) {
+	if (n < 0 || n >=BitLen) {
 		throw std::out_of_range("bit is out of range ");
 	}
 
