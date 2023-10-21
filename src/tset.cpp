@@ -1,12 +1,12 @@
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(mp)
+TSet::TSet(int mp) : BitField(-1)
 {
     MaxPower = mp;
 }
 
 // конструктор копирования
-TSet::TSet(const TSet& s) : BitField(s.BitField)
+TSet::TSet(const TSet& s) : BitField(-1)
 {
     MaxPower = s.MaxPower;
 }
