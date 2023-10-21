@@ -56,14 +56,12 @@ TSet& TSet::operator=(const TSet &s) // присваивание
 
 int TSet::operator==(const TSet &s) const // сравнение
 {
-    if (MaxPower != s.GetMaxPower())
-        return false;
     return BitField == s.BitField;
 }
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-    return !TSet::operator==(s);
+    return BitField != s.BitField;
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
@@ -105,7 +103,11 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    for (size_t i = 0; i < s.MaxPower; i++)
+    int size;
+    istr >> size;
+    if ((size < 0) || (size > s.MaxPower)) throw std::invalid_argument("entered size does not match MaxPower");
+
+    for (int i = 0; i < size; i++)
     {
         int tmp;
         istr >> tmp;
@@ -117,11 +119,14 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-    for (size_t i = 0; i < s.MaxPower; i++)
-    {
+    int size = 0;
+    for (int i = 0; i < s.MaxPower; i++)
+        if (s.IsMember(i)) size++;
+    ostr << size << " ";
+
+    for (int i = 0; i < s.MaxPower; i++)
         if (s.IsMember(i))
             ostr << i << " ";
-    }
     
     return ostr;
 }
