@@ -9,6 +9,8 @@
 
 TSet::TSet(int mp) : BitField(mp)
 {
+    if (mp <= 0)
+		throw invalid_argument("Uncorrect quanity of elements");
     MaxPower = mp;
 }
 
