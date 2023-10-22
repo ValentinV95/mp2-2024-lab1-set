@@ -1,4 +1,5 @@
 #include "tbitfield.h"
+#include <cstring>
 
 TBitField::TBitField(int len)
 {
