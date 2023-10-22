@@ -19,8 +19,7 @@ TSet::TSet(const TBitField &bf) : BitField(bf)
 
 TSet::operator TBitField()
 {
-    TBitField tmp(BitField);
-    return tmp;
+    return BitField;
 }
 
 int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
@@ -30,7 +29,7 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества
 {
-    if ((Elem > MaxPower) || (Elem < 0))
+    if ((Elem >= MaxPower) || (Elem < 0))
     {
         throw exception("uncorrect element");
     }
@@ -39,7 +38,7 @@ int TSet::IsMember(const int Elem) const // элемент множества
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-    if ((Elem > MaxPower) || (Elem < 0))
+    if ((Elem >= MaxPower) || (Elem < 0))
     {
         throw out_of_range("uncorrect element");
     }
@@ -70,27 +69,12 @@ TSet& TSet::operator=(const TSet& s) // присваивание
 
 int TSet::operator==(const TSet& s) const // сравнение
 {
-    if (s.BitField == BitField)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-
+    return s.BitField == BitField;
 }
 
 int TSet::operator!=(const TSet& s) const // сравнение
 {
-    if (s.BitField != BitField)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+     return !(s.BitField == BitField);
 }
 
 TSet TSet::operator+(const TSet& s) // объединение
@@ -113,7 +97,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-    if ((Elem > MaxPower) || (Elem < 0))
+    if ((Elem >= MaxPower) || (Elem < 0))
     {
         throw out_of_range("uncorrect element");
     }
