@@ -1,0 +1,4 @@
+﻿cl : командная строка  warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  tbitfield.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\bit(12): warning STL4038: The contents of <bit> are available only with C++20 or later.
+  bitfield.vcxproj -> A:\ПРОЕКТЫ\ИНФОРМАТЕША\Программирование ВУЗ\mp2-2023-lab1-set-master\mp2-2023-lab1-set-master\sln\vc10\Debug\bitfield.lib

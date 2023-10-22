@@ -1,0 +1,5 @@
+﻿  sample_prime_numbers.cpp
+A:\ПРОЕКТЫ\ИНФОРМАТЕША\Программирование ВУЗ\mp2-2023-lab1-set-master\mp2-2023-lab1-set-master\samples\sample_prime_numbers.cpp(59,9): warning C4101: m: неиспользованная локальная переменная
+A:\ПРОЕКТЫ\ИНФОРМАТЕША\Программирование ВУЗ\mp2-2023-lab1-set-master\mp2-2023-lab1-set-master\samples\sample_prime_numbers.cpp(59,12): warning C4101: k: неиспользованная локальная переменная
+A:\ПРОЕКТЫ\ИНФОРМАТЕША\Программирование ВУЗ\mp2-2023-lab1-set-master\mp2-2023-lab1-set-master\samples\sample_prime_numbers.cpp(59,15): warning C4101: count: неиспользованная локальная переменная
+  sample_prime_numbers.vcxproj -> A:\ПРОЕКТЫ\ИНФОРМАТЕША\Программирование ВУЗ\mp2-2023-lab1-set-master\mp2-2023-lab1-set-master\sln\vc10\Debug\sample_prime_numbers.exe
