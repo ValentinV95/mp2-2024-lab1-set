@@ -98,6 +98,10 @@ TSet TSet::operator+(const TSet& s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
+     if ((Elem >= MaxPower) || (Elem < 0))
+    {
+        throw out_of_range("uncorrect element");
+    }
     TSet tmp(BitField);
     tmp.InsElem(Elem);
     return tmp;
@@ -106,6 +110,10 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
+     if ((Elem >= MaxPower) || (Elem < 0))
+    {
+        throw out_of_range("uncorrect element");
+    }
     TSet tmp(BitField);
     tmp.DelElem(Elem);
     return tmp;
@@ -113,6 +121,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet& s) // пересечение
 {
+ 
     TSet tmp(s);
     tmp.BitField = BitField & s.BitField;
     return tmp;
