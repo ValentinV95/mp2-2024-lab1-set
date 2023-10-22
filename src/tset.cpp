@@ -110,7 +110,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
         throw out_of_range("uncorrect element");
     }
     TSet tmp(*this);
-    tmp.DelElem(*this;
+    tmp.DelElem(*this);
     return tmp;
 }
 
