@@ -4,7 +4,6 @@
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
 //
 // Множество - реализация через битовые поля
-#include <cstring>
 #include "tset.h"
 
 TSet::TSet(int mp) : BitField(mp)
