@@ -55,8 +55,10 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-	if (n >= BitLen)
-		throw out_of_range("bit n is out of range");
+	   if ((n < 0) || (n >= BitLen))
+    {
+        throw out_of_range("out of range");
+    }
 	pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
@@ -78,7 +80,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 {
-    if (this == &bf)
+    if (bf==*this)
         return *this;
    BitLen = bf.BitLen;
     if (MemLen != bf.MemLen)
