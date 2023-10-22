@@ -130,7 +130,7 @@ TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 		res=bf;
 	else
         res=*this;
-	for (int i = 0; i<std::min(MemLen, bf.Memlen) ;i++)
+	for (int i = 0; i< std::min(MemLen, bf.MemLen); i++)
         {
 			res.pMem[i] = pMem[i]|bf.pMem[i];
 		}
@@ -140,7 +140,7 @@ TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 TBitField TBitField::operator&(const TBitField& bf) // операция "и"
 {
      TBitField res(std::max(BitLen, bf.BitLen));
-    for (int i = 0; i<std::min(MemLen, bf.Memlen) ;i++)
+    for (int i = 0; i<std::min(MemLen, bf.MemLen) ;i++)
         {
 			res.pMem[i] = pMem[i] & bf.pMem[i];
 		}
