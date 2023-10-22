@@ -10,14 +10,14 @@
 TSet::TSet(int mp) : BitField(mp)
 {
     if (mp <= 0)
-		throw invalid_argument("Uncorrect quanity of elements");
+        throw out_of_range("Uncorrect quanity of elements");
     MaxPower = mp;
 }
 
 // конструктор копирования
 TSet::TSet(const TSet &s) : BitField(s.BitField)          
 {
-    MaxPower = s.GetMaxPower();
+    MaxPower = s.MaxPower;
 }
 
 // конструктор преобразования типа
@@ -62,7 +62,7 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 TSet& TSet::operator=(const TSet &s) // присваивание               
 {
     BitField = s.BitField;
-    MaxPower = s.GetMaxPower();
+    MaxPower = s.MaxPower;
     return (*this);
 }
 
@@ -125,7 +125,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод. Форма ввода -
     {
         istr >> tmp;
         if (istr) {
-            if (tmp >= s.GetMaxPower() || tmp < 0)
+            if (tmp >= s.MaxPower || tmp < 0)
                 throw out_of_range("Element is out of the set");
             s.InsElem(tmp);
         }
@@ -136,7 +136,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод. Форма ввода -
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
     int i=0;
-    for (int i = 0; i < s.GetMaxPower();i++)
+    for (int i = 0; i < s.MaxPower;i++)
     {
         if (s.IsMember(i))
             ostr << i << ' ';
