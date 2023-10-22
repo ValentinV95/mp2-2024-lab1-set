@@ -97,7 +97,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
     {
         throw out_of_range("uncorrect element");
     }
-    TSet tmp(BitField);
+     TSet tmp(*this);
     tmp.InsElem(Elem);
     return tmp;
 
