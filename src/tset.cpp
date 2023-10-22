@@ -75,16 +75,18 @@ int TSet::operator!= (const TSet& s) const {
 
 // объединение
 TSet TSet:: operator+ (const TSet& s) {
-	TSet S(max(s.MaxPower, MaxPower));
-	S.BitField = BitField | s.BitField;
+	TSet S(BitField | s.BitField);
 	return S;
 }
 
 // объединение с элементом
 TSet TSet::operator+ (const int Elem) {
+	if ((Elem >= 0) && (Elem < MaxPower)) {
 	TSet S(*this);
 	S.InsElem(Elem);
 	return S;
+	}
+	throw out_of_range("Element must belong to the universe of the set");
 }
 
 // разность с элементом
@@ -99,8 +101,7 @@ TSet TSet::operator- (const int Elem) {
 
 // пересечение
 TSet TSet::operator* (const TSet& s) {
-	TSet S(max(s.MaxPower, MaxPower));
-	S.BitField = BitField & s.BitField;
+	TSet S(BitField & s.BitField);
 	return S;
 }
 

@@ -139,7 +139,7 @@ TBitField TBitField:: operator~(void) {
 
 // ввод
 istream& operator>>(istream& istr, TBitField& bf) {
-	int tmp;
+	bool tmp;
 	for (int i = 0; i < bf.BitLen; i++) {
 		istr >> tmp;
 		if (tmp) bf.SetBit(i);
