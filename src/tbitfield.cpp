@@ -9,7 +9,6 @@ TBitField::TBitField(int len)
         MemLen = len / (8 * sizeof(TELEM));
     else
         MemLen = len / (8 * sizeof(TELEM)) + 1;
-    memset(pMem, 0, sizeof(TELEM) * MemLen);
     for (int i = 0; i < MemLen; i++)
     {
         pMem[i] = 0;
