@@ -98,8 +98,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
     if (Elem < 0 || Elem > BitField.GetLength()){throw out_of_range("Bit can't be <0 or >power of univers!");}
-    TSet A(MaxPower);
-    A = (*this);
+    TSet A(*this);
     A.DelElem(Elem);
     return A;
 }

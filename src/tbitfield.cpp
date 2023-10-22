@@ -26,6 +26,8 @@ TBitField::TBitField(int len)
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
 {
+    BitLen = bf.BitLen;
+    MemLen = bf.MemLen;
     pMem = new TELEM [MemLen];
     for (int i = 0; i < MemLen; i++){
         pMem[i] = bf.pMem[i];
@@ -64,9 +66,7 @@ void TBitField::SetBit(const int n) // установить бит
 {
     if ((n<0) || (n > BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
     else{
-        int ind = GetMemIndex(n);
-        const TELEM mask = GetMemMask(n);
-        pMem[ind]|= mask;
+        pMem[GetMemIndex(n)]|= GetMemMask(n);
     }
 
 }
@@ -85,10 +85,7 @@ int TBitField::GetBit(const int n) const // получить значение б
     if ((n<0) || (n > BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
     else{
         int ind = GetMemIndex(n);
-        if (((pMem[ind]) & (GetMemMask(n)))!=0){
-            return 1;
-        }
-        else return 0;
+        return (pMem[ind] >> (n & (8*sizeof(TELEM) - 1))) & 1;
     }
 }
 
@@ -192,7 +189,7 @@ TBitField TBitField::operator~(void) { // отрицание
 // ввод/вывод
 
 istream &operator>>(istream &istr, TBitField &bf) { // ввод
-    int t, ind;
+    int t;
     for (int i = 0; i < bf.GetLength(); i++) {
         istr >> t;
         if ((t<0) || (t > bf.GetLength())){throw out_of_range("Bit can't be <0 or >power of univers!");}
@@ -208,7 +205,6 @@ istream &operator>>(istream &istr, TBitField &bf) { // ввод
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) { // вывод
-    int ind, t;
     for (int i = 0; i < bf.GetLength(); i++) {
         ostr << bf.GetBit(i) << " ";
     }
