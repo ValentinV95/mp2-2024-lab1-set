@@ -35,8 +35,7 @@ int TSet::GetMaxPower(void) const {
 // элемент множества?
 int TSet::IsMember(const int Elem) const {
 	if ((Elem >= 0) && (Elem < MaxPower)) {
-		if (BitField.GetBit(Elem)) return 1;
-		return 0;
+		return (BitField.GetBit(Elem));
 	}
 	throw out_of_range("Element must belong to the universe of the set");
 }

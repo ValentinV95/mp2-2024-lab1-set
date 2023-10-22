@@ -32,12 +32,14 @@ TBitField:: ~TBitField() {
 
 // индекс Мем для бита n
 int TBitField::GetMemIndex(const int n) const {
-	return (n / (8 * sizeof(TELEM)));
+	if ((n >= 0) && (n < BitLen)) return (n / (8 * sizeof(TELEM)));
+	else throw std::out_of_range("Index must be at least 0, and not exceed the size");
 }
 
 // битовая маска для бита n
 TELEM TBitField::GetMemMask(const int n) const {
-	return 1 << (n % (8 * sizeof(TELEM)));
+	if ((n >= 0) && (n < BitLen)) return 1 << (n % (8 * sizeof(TELEM)));
+	else throw std::out_of_range("Index must be at least 0, and not exceed the size");
 }
 
 // доступ к битам битового поля
@@ -62,8 +64,7 @@ void TBitField::ClrBit(const int n) {
 // получить значение бита
 int TBitField::GetBit(const int n) const {
 	if ((n >= 0) && (n < BitLen)) {
-		if (pMem[GetMemIndex(n)] & GetMemMask(n)) return 1;
-		else return 0;
+		return (pMem[GetMemIndex(n)] & GetMemMask(n));
 	} 
 	else throw std::out_of_range("Index must be at least 0, and not exceed the size");
 }
