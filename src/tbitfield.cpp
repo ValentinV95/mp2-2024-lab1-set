@@ -13,7 +13,7 @@ TBitField::TBitField(int len)
 		BitLen = len;
 	}
 	else {
-		throw exception("can't be <=0.");
+		throw length_error("can't be <=0.");
 	}
 	MemLen = (BitLen - 1) / (8 * sizeof(TELEM)) + 1;
 	pMem = new TELEM[MemLen];
@@ -42,7 +42,7 @@ TBitField::~TBitField()
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
 	if (n < 0 || n >= BitLen) {
-		throw exception("out of range");
+		throw out_of_range("<0 || >=BitLen");
 	}
 	return n / (8 * sizeof(TELEM));
 }
@@ -50,7 +50,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
 	if (n < 0 || n >= BitLen) {
-		throw exception("out of range");
+		throw out_of_range("<0 || >=BitLen");
 	}
 	const TELEM res = (1 << (n % (8 * sizeof(TELEM))));
 	return res;
