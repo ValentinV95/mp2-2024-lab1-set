@@ -45,15 +45,19 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-    if (Elem >= MaxPower)
-        throw out_of_range("elem is out of universe");
+    if ((Elem >= MaxPower) || (Elem < 0))
+    {
+        throw out_of_range("uncorrect element");
+    }
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-    if (Elem >= MaxPower)
-        throw out_of_range("elem is out of universe");
+       if ((Elem >= MaxPower) || (Elem < 0))
+    {
+        throw out_of_range("uncorrect element");
+    }
     BitField.ClrBit(Elem);
 }
 
@@ -82,17 +86,9 @@ int TSet::operator!=(const TSet& s) const // сравнение
 
 TSet TSet::operator+(const TSet& s) // объединение
 {
-    if (MaxPower > s.MaxPower)
-    {
-
-        TSet tmp(MaxPower);
-        tmp = MaxPower|s.MaxPower;
-       
-    }
-    else
-    {
-        return MaxPower;
-    }
+   TSet tmp(std::max(s.MaxPower, MaxPower));
+    tmp.BitField = BitField | s.BitField;
+    return tmp;
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
@@ -114,7 +110,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
         throw out_of_range("uncorrect element");
     }
     TSet tmp(*this);
-    tmp.DelElem(Elem);
+    tmp.DelElem(*this;
     return tmp;
 }
 
