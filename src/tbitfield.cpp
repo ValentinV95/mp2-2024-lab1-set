@@ -160,6 +160,7 @@ TBitField TBitField::operator~(void) // отрицание
 			temp.ClrBit(i);
 		else
 			temp.SetBit(i);
+	    }
     return temp;
 }
 
