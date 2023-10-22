@@ -113,7 +113,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
     {
         throw out_of_range("uncorrect element");
     }
-    TSet tmp(BitField);
+    TSet tmp(*this);
     tmp.DelElem(Elem);
     return tmp;
 }
