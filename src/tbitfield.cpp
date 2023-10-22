@@ -1,5 +1,4 @@
 #include "tbitfield.h"
-#include <cstring>
 
 TBitField::TBitField(int len)
 {
@@ -22,7 +21,8 @@ TBitField::TBitField(const TBitField& bf) // конструктор копиро
     BitLen = bf.BitLen;
     MemLen = bf.MemLen;
     pMem = new TELEM[MemLen];
-    memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
+    for(int i = 0; i < MemLen; i++)
+	    pMem[i] = bf.pMem[i];
 }
 
 TBitField::~TBitField()
@@ -80,8 +80,17 @@ TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 {
     if (this == &bf)
         return *this;
-    TBitField tmp(bf);
-    swap(*this, tmp);
+   BitLen = bf.BitLen;
+    if (MemLen != bf.MemLen)
+    {
+        delete[] pMem;
+        MemLen = bf.MemLen;
+        pMem = new TELEM[MemLen];
+    }
+    for (int i = 0; i < MemLen; i++)
+    {
+        pMem[i] = bf.pMem[i];
+    }
     return *this;
 }
 
