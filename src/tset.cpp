@@ -106,12 +106,14 @@ istream &operator>>(istream &istr, TSet &s) // ввод
     int buf;
     istr >> size;
     TSet res(size);
-    while (1) {
+    int l = size;
+    while (l) {
         istr >> buf;
         if (buf < 0) {
             break;
         }
         res.InsElem(buf);
+        l--;
     }
     s = res;
     return istr;
