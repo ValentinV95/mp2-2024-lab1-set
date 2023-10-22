@@ -125,22 +125,26 @@ int TBitField::operator!=(const TBitField& bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 {
-    if (BitLen != bf.BitLen)
-        throw length_error("TBitField objects have different size");
-    TBitField tmp(*this);
-    for (int i = 0; i < bf.MemLen; i++)
-        tmp.pMem[i] |= bf.pMem[i];
-    return tmp;
+  TBitField res(std::max(BitLen, bf.BitLen));
+	if (BitLen < bf.BitLen) 
+		res=bf;
+	else
+        res=*this;
+	for (int i = 0; i<std::min(MemLen, bf.Memlen) ;i++)
+        {
+			res.pMem[i] = pMem[i]|bf.pMem[i];
+		}
+    return res;
 }
 
 TBitField TBitField::operator&(const TBitField& bf) // операция "и"
 {
-    if (BitLen != bf.BitLen)
-        throw length_error("TBitField objects have different size");
-    TBitField tmp(*this);
-    for (int i = 0; i < bf.MemLen; i++)
-        tmp.pMem[i] &= bf.pMem[i];
-    return tmp;
+     TBitField res(std::max(BitLen, bf.BitLen));
+    for (int i = 0; i<std::min(MemLen, bf.Memlen) ;i++)
+        {
+			res.pMem[i] = pMem[i] & bf.pMem[i];
+		}
+    return res;
 }
 
 TBitField TBitField::operator~(void) // отрицание
