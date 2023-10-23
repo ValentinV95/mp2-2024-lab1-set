@@ -40,14 +40,14 @@ TBitField::~TBitField()
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
 	if ((n < 0) || (n >= BitLen))
-			throw out_of_range("Error, the bit number is out of range");
+		throw out_of_range("Error, the bit number is out of range");
 	return n / (8 * sizeof(TELEM));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
 	if ((n < 0) || (n >= BitLen))
-			throw out_of_range("Error, the bit number is out of range");
+		throw out_of_range("Error, the bit number is out of range");
 	return 1 << (n % (8 * sizeof(TELEM)));
 }
 
