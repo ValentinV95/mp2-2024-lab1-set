@@ -41,7 +41,7 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    if (BitField.GetBit(Elem) != 0 && Elem >= 0 && Elem <= BitField.GetLength()){
+    if (BitField.GetBit(Elem) && Elem >= 0 && Elem <= BitField.GetLength()){
         return 1;
     }
     return 0;
@@ -157,14 +157,14 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 {
     int t,n;
     cout << "Enter a quanity of elements";
-    cin >> n;
+    istr >> n;
     for (int i= 0; i< n; i++){
         istr >> t;
         if (t > s.MaxPower){
             throw out_of_range("Bit can't be <0 or >power of univers!");
         }
         else{
-            s.InsElem(i);
+            s.InsElem(t);
         }
     }
     return istr;
