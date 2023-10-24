@@ -164,6 +164,9 @@ TBitField TBitField::operator~(void) // отрицание
 		if (GetBit(i) == 0) {
 			res.SetBit(i);
 		}
+		else {
+			res.ClrBit(i);
+		}
 	}
 	return res;
 }
