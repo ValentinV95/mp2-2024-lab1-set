@@ -1,4 +1,4 @@
-// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
+﻿// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
 //
 // tset.cpp - Copyright (c) Гергель В.П. 04.10.2001
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
@@ -7,82 +7,136 @@
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(-1)
+TSet::TSet(int mp): BitField(mp) 
 {
+	MaxPower = mp;
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s) : BitField(-1)
-{
+TSet::TSet(const TSet& s): BitField(s.BitField){
+	MaxPower = s.MaxPower;
 }
 
 // конструктор преобразования типа
-TSet::TSet(const TBitField &bf) : BitField(-1)
-{
+TSet::TSet(const TBitField& bf): BitField(bf){
+	MaxPower = bf.GetLength();
 }
 
-TSet::operator TBitField()
-{
+// преобразование типа к битовому полю
+TSet::operator TBitField() {
+	return BitField;
 }
 
-int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
-{
+// получить макс. к-во эл-тов
+int TSet::GetMaxPower(void) const {
+	return MaxPower;
 }
 
-int TSet::IsMember(const int Elem) const // элемент множества?
-{
-    return 0;
+// элемент множества?
+int TSet::IsMember(const int Elem) const {
+	if ((Elem >= 0) && (Elem < MaxPower)) {
+		return (BitField.GetBit(Elem));
+	}
+	throw out_of_range("Element must belong to the universe of the set");
 }
 
-void TSet::InsElem(const int Elem) // включение элемента множества
-{
+// включение элемента множества
+void TSet::InsElem(const int Elem) {
+	if ((Elem>=0)&&(Elem < MaxPower)) BitField.SetBit(Elem);
+	else throw out_of_range("Element must belong to the universe of the set");
 }
 
-void TSet::DelElem(const int Elem) // исключение элемента множества
-{
+// исключение элемента множества
+void TSet::DelElem(const int Elem) {
+	if ((Elem >= 0) && (Elem < MaxPower)) BitField.ClrBit(Elem);
+	else throw out_of_range("Element must belong to the universe of the set");
 }
 
 // теоретико-множественные операции
 
-TSet& TSet::operator=(const TSet &s) // присваивание
-{
+// присваивание
+TSet& TSet::operator=(const TSet& s) {
+	if (s != *this) {
+		BitField = s.BitField;
+		MaxPower = s.MaxPower;
+	}
+	return *this;
 }
 
-int TSet::operator==(const TSet &s) const // сравнение
-{
-    return 0;
+// сравнение
+int TSet::operator== (const TSet& s) const {
+	return BitField == s.BitField;
 }
 
-int TSet::operator!=(const TSet &s) const // сравнение
-{
+// сравнение
+int TSet::operator!= (const TSet& s) const {
+	return  BitField != s.BitField;
 }
 
-TSet TSet::operator+(const TSet &s) // объединение
-{
+// объединение
+TSet TSet:: operator+ (const TSet& s) {
+	TSet S(BitField | s.BitField);
+	return S;
 }
 
-TSet TSet::operator+(const int Elem) // объединение с элементом
-{
+// объединение с элементом
+TSet TSet::operator+ (const int Elem) {
+	if ((Elem >= 0) && (Elem < MaxPower)) {
+	TSet S(*this);
+	S.InsElem(Elem);
+	return S;
+	}
+	throw out_of_range("Element must belong to the universe of the set");
 }
 
-TSet TSet::operator-(const int Elem) // разность с элементом
-{
+// разность с элементом
+TSet TSet::operator- (const int Elem) {
+	if ((Elem >= 0) && (Elem < MaxPower)) {
+		TSet S(*this);
+		S.DelElem(Elem);
+		return S;
+	}
+	throw out_of_range("Element must belong to the universe of the set");
 }
 
-TSet TSet::operator*(const TSet &s) // пересечение
-{
+// пересечение
+TSet TSet::operator* (const TSet& s) {
+	TSet S(BitField & s.BitField);
+	return S;
 }
 
-TSet TSet::operator~(void) // дополнение
-{
+// дополнение
+TSet TSet::operator~ (void) {
+	TSet s(~BitField);
+	return s;
 }
 
 // перегрузка ввода/вывода
 
-istream &operator>>(istream &istr, TSet &s) // ввод
-{
+// ввод
+istream& operator>>(istream& istr, TSet& s) {
+	int count;
+	istr >> count;
+	if ((count >= 0) && (count < s.MaxPower)) {
+		int tmp = 0;
+		while (count>0)
+		{
+			istr >> tmp;
+			if ((tmp >= 0) && (tmp < s.MaxPower)) {
+				s.InsElem(tmp);
+				count--;
+			}
+			else throw out_of_range("Element must belong to the universe of the set");
+		}
+		return istr;
+	};
+	throw out_of_range("Count must must belong to the universe of the set");
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
-{
-}
+//вывод
+ostream& operator<<(ostream& ostr, const TSet& s) {
+	for (int i = 0; i < s.MaxPower; i++) 
+		if (s.IsMember(i)) 
+			ostr << i << " ";
+	return ostr;
+};
