@@ -130,8 +130,13 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    int tmp;
-    for (int i = 0; i < s.MaxPower; i++) {
+    int count;
+    istr >> count;
+    if (count > s.MaxPower || count <= 0) {
+        throw out_of_range("count should be >0 and <=maxpower");
+    }
+    for (int i = 0; i < count; i++) {
+        int tmp;
         istr >> tmp;
         if ((tmp >= 0) && (tmp < s.MaxPower)) {
             s.InsElem(tmp);
