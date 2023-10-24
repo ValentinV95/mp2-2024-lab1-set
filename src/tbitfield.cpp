@@ -73,9 +73,10 @@ int TBitField::GetBit(const int n) const {
 TBitField& TBitField:: operator=(const TBitField& bf) {
 	if (*this != bf) {
 		if (MemLen != bf.MemLen) {
-			delete[] pMem;
 			MemLen = bf.MemLen;
-			pMem = new TELEM[MemLen];
+			TELEM* tmp = new TELEM[MemLen];
+			delete[] pMem;
+			pMem = tmp;
 		};
 		memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
 		BitLen = bf.BitLen;
