@@ -156,7 +156,7 @@ TSet TSet::operator~(void) // дополнение
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
     int t,n;
-    cout << "Enter a quanity of elements";
+    istr << "Enter a quanity of elements";
     istr >> n;
     for (int i= 0; i< n; i++){
         istr >> t;
