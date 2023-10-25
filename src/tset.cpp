@@ -176,8 +176,8 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
         if (s.IsMember(i)){
             num_of_ins++;
         }
-        ostr << num_of_ins << " ";
     }
+    ostr << num_of_ins << " ";
     for (int i = 0; i< s.MaxPower; i++){
         if (s.IsMember(i)){
             ostr << i << " ";
