@@ -101,12 +101,8 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
         delete[]pMem;
         pMem = new TELEM[MemLen];
     }
-    for (int i = 0;i < BitLen;i++){
-        if (bf.GetBit(i)!=0){
-            SetBit(i);
-        }
-        else
-            ClrBit(i);
+    for (int i = 0;i < MemLen;i++){
+        pMem[i] = bf.pMem[i];
     }
     return *this;
 }
