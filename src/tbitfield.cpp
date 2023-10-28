@@ -42,14 +42,14 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-    if ((n<0) || (n > BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
+    if ((n<0) || (n >= BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
     int ind = n/(8*sizeof(TELEM));
     return ind;
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-    if ((n<0) || (n > BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
+    if ((n<0) || (n >= BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
     const TELEM mask = 1 << (n%(8*sizeof(TELEM)));
     return mask;
 }
@@ -63,7 +63,7 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-    if ((n<0) || (n > BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
+    if ((n<0) || (n >= BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
     else{
         pMem[GetMemIndex(n)]|= GetMemMask(n);
     }
@@ -72,7 +72,7 @@ void TBitField::SetBit(const int n) // установить бит
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
-    if ((n<0) || (n > BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
+    if ((n<0) || (n >= BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
     else{
         int ind = GetMemIndex(n);
         pMem[ind]&=~(GetMemMask(n));
@@ -81,7 +81,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-    if ((n<0) || (n > BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
+    if ((n<0) || (n >= BitLen)){throw out_of_range("Bit can't be <0 or >power of univers!");}
     else{
         int ind = GetMemIndex(n);
         return (pMem[ind] >> (n & (8*sizeof(TELEM) - 1))) & 1;
@@ -187,7 +187,7 @@ istream &operator>>(istream &istr, TBitField &bf) { // ввод
     int t;
     for (int i = 0; i < bf.GetLength(); i++) {
         istr >> t;
-        if ((t<0) || (t > bf.GetLength())){throw out_of_range("Bit can't be <0 or >power of univers!");}
+        if ((t<0) || (t >= bf.GetLength())){throw out_of_range("Bit can't be <0 or >power of univers!");}
         else {
             if (t == 1){
                 bf.SetBit(i);
