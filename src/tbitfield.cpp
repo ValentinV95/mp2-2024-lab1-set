@@ -184,6 +184,11 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream& operator>>(istream& istr, TBitField& bf) // ввод
 {
+	int buff_size;
+	istr >> buff_size;
+	if (buff_size <= 0) throw std::invalid_argument("bad bitfield len");
+
+	TBitField buff(buff_size);
 	for (int i = 0; i < bf.BitLen; i++)
 	{
 		bool tmp = 0;
@@ -192,11 +197,13 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
 		else
 			throw std::invalid_argument("invalid input in TBitField");
 	}
+	bf = buff;
 	return istr;
 }
 
 ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 {
+	ostr << bf.BitLen << " ";
 	for (int i = 0; i < bf.BitLen; i++)
 		ostr << bf.GetBit(i) << " ";
 
