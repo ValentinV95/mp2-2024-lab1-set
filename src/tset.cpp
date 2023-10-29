@@ -23,7 +23,7 @@ int TSet::GetMaxPower(void) const { return MaxPower; }
 // элемент множества ?
 int TSet::IsMember(const int Elem) const
 {
-    if (Elem < 0 || Elem >= BitField.GetLength())
+    if (Elem < 0 || Elem >= MaxPower)
         throw std::out_of_range("element is out of set possible range");
     return BitField.GetBit(Elem);
 }
@@ -31,14 +31,14 @@ int TSet::IsMember(const int Elem) const
 // включение элемента множества
 void TSet::InsElem(const int Elem) 
 {
-    if (Elem < 0 || Elem >= BitField.GetLength())
+    if (Elem < 0 || Elem >= MaxPower)
         throw std::out_of_range("element is out of set possible range");
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-    if (Elem < 0 || Elem >= BitField.GetLength())
+    if (Elem < 0 || Elem >= MaxPower)
         throw std::out_of_range("element is out of set possible range");
     BitField.ClrBit(Elem);
 }
@@ -71,7 +71,7 @@ TSet TSet::operator+(const TSet &s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    if (Elem < 0 || Elem >= BitField.GetLength())
+    if (Elem < 0 || Elem >= MaxPower)
         throw std::out_of_range("element is out of set possible range");
 
     TSet tmp(*this);
@@ -81,7 +81,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-    if (Elem < 0 || Elem >= BitField.GetLength())
+    if (Elem < 0 || Elem >= MaxPower)
         throw std::out_of_range("element is out of set possible range");
 
     TSet tmp(*this);
@@ -103,17 +103,23 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    int size;
+    int max_size, size;
+
+    istr >> max_size;
+    if (max_size <= 0) throw std::invalid_argument("entered set max size has invalid value");
     istr >> size;
-    if ((size < 0) || (size > s.MaxPower)) throw std::invalid_argument("entered set size has invalid value");
+    if ((size <= 0) || (size > max_size)) throw std::invalid_argument("entered set size has invalid value");
+
+    TSet buff(max_size);
 
     for (int i = 0; i < size; i++)
     {
         int tmp;
         istr >> tmp;
-        s.InsElem(tmp);
+        buff.InsElem(tmp);
     }
 
+    s = buff;
     return istr;
 }
 
@@ -122,7 +128,7 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
     int size = 0;
     for (int i = 0; i < s.MaxPower; i++)
         if (s.IsMember(i)) size++;
-    ostr << size << " ";
+    ostr << s.GetMaxPower() << " " << size << " ";
 
     for (int i = 0; i < s.MaxPower; i++)
         if (s.IsMember(i))

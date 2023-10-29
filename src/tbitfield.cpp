@@ -165,20 +165,28 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-	for (int i = 0; i < bf.BitLen; i++)
+	int buff_size;
+	istr >> buff_size;
+	if (buff_size <= 0) throw std::invalid_argument("bad bitfield len");
+
+	TBitField buff(buff_size);
+
+	for (int i = 0; i < buff_size; i++)
 	{
 		bool tmp = 0;
 		if (istr >> tmp)
-			bf.pMem[bf.GetMemIndex(i)] |= (tmp << (i & (8 * sizeof(TELEM) - 1)));
+			buff.pMem[bf.GetMemIndex(i)] |= (tmp << (i & (8 * sizeof(TELEM) - 1)));
 		else
-			throw std::invalid_argument("invalid input in TBitField");
+			throw std::invalid_argument("invalid input in bitfield");
 	}
 
+	bf = buff;
 	return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
+	ostr << bf.BitLen << " ";
 	for (int i = 0; i < bf.BitLen; i++)
 		ostr << bf.GetBit(i) << " ";
 
