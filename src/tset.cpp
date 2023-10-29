@@ -36,16 +36,22 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
+    if (Elem < 0 || Elem >= BitField.GetLength())
+        throw std::out_of_range("element is out of set possible range");
     return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
+    if (Elem < 0 || Elem >= BitField.GetLength())
+        throw std::out_of_range("element is out of set possible range");
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
+    if (Elem < 0 || Elem >= BitField.GetLength())
+        throw std::out_of_range("element is out of set possible range");
     BitField.ClrBit(Elem);
 }
 
@@ -76,6 +82,8 @@ TSet TSet::operator+(const TSet& s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
+    if (Elem < 0 || Elem >= BitField.GetLength())
+        throw std::out_of_range("element is out of set possible range");
     TSet res = *this;
     res.InsElem(Elem);
     return res;
@@ -83,6 +91,8 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
+    if (Elem < 0 || Elem >= BitField.GetLength())
+        throw std::out_of_range("element is out of set possible range");
     TSet res = *this;
     res.DelElem(Elem);
     return res;
@@ -127,5 +137,6 @@ ostream& operator<<(ostream& ostr, const TSet& s) // вывод
             ostr << i << endl;
         }
     }
+    ostr << -1 << endl;
     return ostr;
 }
