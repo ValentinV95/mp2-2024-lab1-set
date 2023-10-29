@@ -7,6 +7,7 @@
 
 #include "tset.h"
 
+
 TSet::TSet(int mp) : BitField(mp)
 {
     MaxPower = mp;
@@ -93,7 +94,7 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    return (BitField | s.BitField);
+    return TSet(BitField | s.BitField);
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
@@ -118,12 +119,12 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-    return (BitField & s.BitField);
+    return TSet(BitField & s.BitField);
 }
 
 TSet TSet::operator~(void) // дополнение
 {
-    return (~BitField);
+    return TSet(~BitField);
 }
 
 // перегрузка ввода/вывода
