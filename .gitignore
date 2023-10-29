@@ -1,3 +1,9 @@
+# build directory
+build/
+
+# samples directory
+samples/
+
 # Compiled Object files
 *.slo
 *.lo
