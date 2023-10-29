@@ -34,28 +34,19 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    if ((Elem >= MaxPower) || (Elem < 0))
-    {
-        throw exception("uncorrect element");
-    }
+   
     return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-    if ((Elem >= MaxPower) || (Elem < 0))
-    {
-        throw out_of_range("uncorrect element");
-    }
+
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-       if ((Elem >= MaxPower) || (Elem < 0))
-    {
-        throw out_of_range("uncorrect element");
-    }
+ 
     BitField.ClrBit(Elem);
 }
 
@@ -84,17 +75,12 @@ int TSet::operator!=(const TSet& s) const // сравнение
 
 TSet TSet::operator+(const TSet& s) // объединение
 {
-   TSet tmp(std::max(s.MaxPower, MaxPower));
-    tmp.BitField = BitField | s.BitField;
-    return tmp;
+  return (BitField | s.BitField);
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-     if ((Elem >= MaxPower) || (Elem < 0))
-    {
-        throw out_of_range("uncorrect element");
-    }
+   
      TSet tmp(*this);
     tmp.InsElem(Elem);
     return tmp;
@@ -103,10 +89,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-     if ((Elem >= MaxPower) || (Elem < 0))
-    {
-        throw out_of_range("uncorrect element");
-    }
+ 
     TSet tmp(*this);
     tmp.DelElem(Elem);
     return tmp;
@@ -114,17 +97,12 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet& s) // пересечение
 {
- 
-    TSet tmp(s);
-    tmp.BitField = BitField & s.BitField;
-    return tmp;
+    return (this-> BitField & s.BitField);
 }
 
 TSet TSet::operator~(void) // дополнение
 {
-    TSet tmp(*this);
-    tmp.BitField = ~tmp.BitField;
-    return tmp;
+    return (~(this-> BitField));
 }
 
 // перегрузка ввода/вывода
@@ -133,14 +111,10 @@ istream& operator>>(istream& istr, TSet& s) // ввод
 {
     int a;
     istr >> a;
-    if ((a <= 0) || (a > s.MaxPower))
-        throw out_of_range("out of range");
     for (int i = 0; i < a; i++)
     {
         int elem;
         istr >> elem;
-        if ((elem < 0) || (elem >= s.MaxPower))
-            throw out_of_range("out of range");
         s.InsElem(elem);
     }
     return istr;
