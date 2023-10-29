@@ -1,4 +1,4 @@
-// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
+﻿// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
 //
 // tbitfield.cpp - Copyright (c) Гергель В.П. 07.05.2001
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
@@ -6,6 +6,7 @@
 // Битовое поле
 
 #include "tbitfield.h"
+#include <cstring>
 
 TBitField::TBitField(int len)
 {
@@ -63,7 +64,7 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-	if (n < 0 || n>BitLen) {
+	if (n > **=**BitLen) {
 		throw std::out_of_range("bit is out of range");
 	}
 
@@ -72,7 +73,7 @@ void TBitField::SetBit(const int n) // установить бит
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
-	if (n < 0 || n > BitLen) {
+	if (n > **=**BitLen) {
 		throw std::out_of_range("bit is out of range ");
 	}
 
@@ -84,13 +85,15 @@ int TBitField::GetBit(const int n) const // получить значение б
 	if (n < 0 || n >= BitLen) {
 		throw std::out_of_range("bit is out of range");
 	}
-	return pMem[GetMemIndex(n)] & GetMemMask(n);
+	return (pMem[GetMemIndex(n)] >> (n & (8 * sizeof(TELEM) - 1))) & 1;
 }
 
 // битовые операции
 
 TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 {
+	if (this == &bf)
+		return *this;
 	BitLen = bf.BitLen;
 	if (MemLen != bf.MemLen) {
 		delete[] pMem;
@@ -119,8 +122,7 @@ int TBitField::operator==(const TBitField& bf) const // сравнение
 
 int TBitField::operator!=(const TBitField& bf) const // сравнение
 {
-	if ((*this == bf) == 0) return 1;
-	return 0;
+	return !(*this == bf);
 }
 
 TBitField TBitField::operator|(const TBitField& bf) // операция "или"
@@ -182,35 +184,21 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream& operator>>(istream& istr, TBitField& bf) // ввод
 {
-	for (int i = 0; i < bf.BitLen; i++) {
-		int t;
-		int fl = 1;
-		do {
-			cin >> t;
-			if ((t != 1) && (t != 0)) {
-				cout << "Invalid input. Try again" << endl;
-			}
-			else fl = 0;
-		} while (fl);
-		if (t == 1) {
-			bf.SetBit(i);
-		}
-		else {
-			bf.ClrBit(i);
-		}
+	for (int i = 0; i < bf.BitLen; i++)
+	{
+		bool tmp = 0;
+		if (istr >> tmp)
+			bf.pMem[bf.GetMemIndex(i)] |= (tmp << (i & (8 * sizeof(TELEM) - 1)));
+		else
+			throw std::invalid_argument("invalid input in TBitField");
 	}
 	return istr;
 }
 
 ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 {
-	for (int i = 0; i < bf.BitLen; i++) {
-		if (bf.GetBit(i) == 0) {
-			ostr << '0';
-		}
-		else {
-			ostr << '1';
-		}
-	}
+	for (int i = 0; i < bf.BitLen; i++)
+		ostr << bf.GetBit(i) << " ";
+
 	return ostr;
 }

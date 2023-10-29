@@ -1,4 +1,4 @@
-// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
+﻿// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
 //
 // tset.cpp - Copyright (c) Гергель В.П. 04.10.2001
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
@@ -53,6 +53,8 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 
 TSet& TSet::operator=(const TSet& s) // присваивание
 {
+    if (this == &s)
+        return *this;
     MaxPower = s.MaxPower;
     BitField = s.BitField;
     return *this;
@@ -60,13 +62,12 @@ TSet& TSet::operator=(const TSet& s) // присваивание
 
 int TSet::operator==(const TSet& s) const // сравнение
 {
-    return (BitField == s.BitField) ? 1 : 0;
+    return BitField == s.BitField;
 }
 
 int TSet::operator!=(const TSet& s) const // сравнение
 {
-    return (BitField == s.BitField) ? 0 : 1;
-}
+    return BitField != s.BitField;
 
 TSet TSet::operator+(const TSet& s) // объединение
 {
