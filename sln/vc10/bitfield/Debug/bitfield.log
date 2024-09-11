@@ -1,0 +1,17 @@
+﻿cl : командная строка  warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  tset.cpp
+  tbitfield.cpp
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(103,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(104,9): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(106,9): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(119,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(120,9): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(122,9): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(137,16): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(141,12): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(144,12): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(155,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(165,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(191,23): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода...
+  bitfield.vcxproj -> D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\sln\vc10\Debug\bitfield.lib
