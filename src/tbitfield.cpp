@@ -16,7 +16,7 @@ TBitField::TBitField(int len)
 		fill(pMem, pMem + MemLen, 0);
 	}
 	else {
-		throw exception(0);
+		throw exception("bit field lenght can't be below or equal to zero");
 	}
 }
 
@@ -24,6 +24,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 {
 	BitLen = bf.BitLen;
 	MemLen = bf.MemLen;
+	pMem = new TELEM[MemLen];
 	copy(bf.pMem, bf.pMem + bf.MemLen, pMem);
 }
 
@@ -52,9 +53,9 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 void TBitField::SetBit(const int n) // установить бит
 {
 	if (n >= BitLen) // Проверка на корректность входных данных
-		throw exception(0);
+		throw exception("bit position can't be lower than a bit field length");
 	if (n < 0)
-		throw exception(0);
+		throw exception("bit powition cam't be below zero");
 
 	pMem[GetMemIndex(n)] |= (GetMemMask(n));
 }
@@ -62,9 +63,9 @@ void TBitField::SetBit(const int n) // установить бит
 void TBitField::ClrBit(const int n) // очистить бит
 {
 	if (n >= BitLen) // Проверка на корректность входных данных
-		throw exception(0);
+		throw exception("bit position can't be lower than a bit field length");
 	if (n < 0)
-		throw exception(0);
+		throw exception("bit powition cam't be below zero");
 
 	pMem[GetMemIndex(n)] &= (~GetMemMask(n));
 }
@@ -72,11 +73,11 @@ void TBitField::ClrBit(const int n) // очистить бит
 int TBitField::GetBit(const int n) const // получить значение бита
 {
 	if (n >= BitLen) // Проверка на корректность входных данных
-		throw exception(0);
+		throw exception("bit position can't be lower than a bit field length");
 	if (n < 0)
-		throw exception(0);
+		throw exception("bit powition cam't be below zero");
 
-	return int(pMem[GetMemIndex(n)] & GetMemMask(n));
+	return int((pMem[GetMemIndex(n)] & GetMemMask(n)) != 0);
 }
 
 // битовые операции
