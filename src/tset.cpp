@@ -7,10 +7,13 @@
 
 #include "tset.h" // пусть нумерация множества начинается с нуля
 
-TSet::TSet(int mp) : BitField(mp), MaxPower(mp)
+TSet::TSet(int mp) : BitField(1)
 {
-    if (mp < 0) // все равно вызовется тот самый exception из bitfield
+    if (mp < 0)
         throw exception("set can't be created with max number below zero");
+
+    BitField = TBitField(mp);
+    MaxPower = mp;
 }
 
 // конструктор копирования
