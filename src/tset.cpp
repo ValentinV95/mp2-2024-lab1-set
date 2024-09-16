@@ -118,14 +118,12 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 {
     string input, tmp = "";
 
-    istr.ignore(numeric_limits<streamsize>::max(), '\n');
-    getline(istr, input);
+    getline(istr>>ws, input);
 
     for (size_t i = 0; i < input.length(); ++i) {
         if (input[i] == ' ') {
             if (tmp != "") {
-                //cout << TELEM(atoi(tmp.c_str())) << endl;
-                s.InsElem(static_cast<TELEM>(atoi(tmp.c_str())));
+                s.InsElem(static_cast<TELEM>(strtoull(tmp.c_str(), nullptr, 10)));
                 tmp = "";
             }
         }
@@ -133,7 +131,8 @@ istream &operator>>(istream &istr, TSet &s) // ввод
         else
             tmp += input[i];
     }
-    s.InsElem(static_cast<TELEM>(atoi(tmp.c_str())));
+    if (tmp != "")
+        s.InsElem(static_cast<TELEM>(strtoull(tmp.c_str(), nullptr, 10)));
 
     return istr;
 }
