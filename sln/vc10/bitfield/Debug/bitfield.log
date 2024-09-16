@@ -1,4 +1,16 @@
 ﻿cl : командная строка  warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
-  tset.cpp
-D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tset.cpp(129,26): warning C4018: <: несоответствие типов со знаком и без знака
+  tbitfield.cpp
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(98,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(101,9): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(103,9): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(114,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(117,9): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(119,9): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(132,16): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(136,12): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(139,12): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(150,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(160,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(181,21): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\src\tbitfield.cpp(200,23): warning C4018: <: несоответствие типов со знаком и без знака
   bitfield.vcxproj -> D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\sln\vc10\Debug\bitfield.lib

@@ -5,15 +5,13 @@
 //
 // Множество - реализация через битовые поля
 
-#include "tset.h" // пусть нумерация множества начинается с нуля
+#include "tset.h" 
+#include <string>
 
-TSet::TSet(int mp) : BitField(1)
+TSet::TSet(int mp) : BitField(mp), MaxPower(mp)
 {
-    if (mp < 0)
-        throw exception("set can't be created with max number below zero");
-
-    BitField = TBitField(mp);
-    MaxPower = mp;
+    //if (mp < 0) // non executable code
+    //    throw length_error("set can't be created with max number below zero");
 }
 
 // конструктор копирования
@@ -39,7 +37,7 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
     if (Elem < 0 || Elem >= MaxPower)
-        throw exception("element is out of universe");
+        throw out_of_range("element is out of universe");
 
     return BitField.GetBit(Elem);
 }
@@ -47,7 +45,7 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
     if (Elem < 0 || Elem >= MaxPower)
-        throw exception("element is out of universe");
+        throw out_of_range("element is out of universe");
 
     BitField.SetBit(Elem);
 }
@@ -55,7 +53,7 @@ void TSet::InsElem(const int Elem) // включение элемента мно
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
     if (Elem < 0 || Elem >= MaxPower)
-        throw exception("element is out of universe");
+        throw out_of_range("element is out of universe");
 
     BitField.ClrBit(Elem);
 }
@@ -71,12 +69,12 @@ TSet& TSet::operator=(const TSet &s) // присваивание
 
 int TSet::operator==(const TSet &s) const // сравнение
 {
-    return int((MaxPower == s.MaxPower) && (BitField == s.BitField)); // доступно сравнение множеств с разным универсом
+    return static_cast<int>((MaxPower == s.MaxPower) && (BitField == s.BitField));
 }
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-    return int((MaxPower != s.MaxPower) || (BitField != s.BitField)); // доступно сравнение множеств с разным универсом
+    return static_cast<int>((MaxPower != s.MaxPower) || (BitField != s.BitField));
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
@@ -87,7 +85,7 @@ TSet TSet::operator+(const TSet &s) // объединение
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
     if (Elem < 0 || Elem >= MaxPower)
-        throw exception("element is out of universe");
+        throw out_of_range("element is out of universe");
 
     TSet res = *this;
     res.BitField.SetBit(Elem);
@@ -97,7 +95,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
     if (Elem < 0 || Elem >= MaxPower)
-        throw exception("element is out of universe");
+        throw out_of_range("element is out of universe");
 
     TSet res = *this;
     res.BitField.ClrBit(Elem);
@@ -118,17 +116,35 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    int Elem;
-    istr >> Elem;
-    s.InsElem(Elem); // включить элемент в множество
+    string input, tmp = "";
+
+    istr.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(istr, input);
+
+    for (size_t i = 0; i < input.length(); ++i) {
+        if (input[i] == ' ') {
+            if (tmp != "") {
+                //cout << TELEM(atoi(tmp.c_str())) << endl;
+                s.InsElem(static_cast<TELEM>(atoi(tmp.c_str())));
+                tmp = "";
+            }
+        }
+
+        else
+            tmp += input[i];
+    }
+    s.InsElem(static_cast<TELEM>(atoi(tmp.c_str())));
+
     return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-    for (size_t i = 0; i < s.MaxPower; ++i)
+    string output = "";
+    for (size_t i = 0; i < s.GetMaxPower(); ++i)
         if (s.BitField.GetBit(i))
-            ostr << i << " ";
+            output += to_string(i) + " ";
+    ostr << output;
 
     return ostr;
 }
