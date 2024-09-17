@@ -1,4 +1,1 @@
-﻿cl : командная строка  warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
-  sample_prime_numbers.cpp
-sample_prime_numbers.obj : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/SAFESEH"
-  sample_prime_numbers.vcxproj -> D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\sln\vc10\Debug\sample_prime_numbers.exe
+﻿  sample_prime_numbers.vcxproj -> D:\Users\maksi\Desktop\dz_38\UNN\bitField\mp2-2024-lab1-set\sln\vc10\Debug\sample_prime_numbers.exe
