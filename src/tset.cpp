@@ -84,21 +84,15 @@ TSet TSet::operator+(const TSet &s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    if (Elem < 0 || Elem >= MaxPower)
-        throw out_of_range("element is out of universe");
-
     TSet res = *this;
-    res.BitField.SetBit(Elem);
+    res.InsElem(Elem);
     return res;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-    if (Elem < 0 || Elem >= MaxPower)
-        throw out_of_range("element is out of universe");
-
     TSet res = *this;
-    res.BitField.ClrBit(Elem);
+    res.DelElem(Elem);
     return res;
 }
 
