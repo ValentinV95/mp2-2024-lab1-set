@@ -1,0 +1,9 @@
+﻿cl : командная строка  warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  sample_prime_numbers.cpp
+D:\code\C++\project\mp2-2024-lab1-set\samples\sample_prime_numbers.cpp(26,17): warning C4244: аргумент: преобразование "__int64" в "int", возможна потеря данных
+D:\code\C++\project\mp2-2024-lab1-set\samples\sample_prime_numbers.cpp(29,14): warning C4244: аргумент: преобразование "__int64" в "const int", возможна потеря данных
+D:\code\C++\project\mp2-2024-lab1-set\samples\sample_prime_numbers.cpp(33,18): warning C4244: аргумент: преобразование "__int64" в "const int", возможна потеря данных
+D:\code\C++\project\mp2-2024-lab1-set\samples\sample_prime_numbers.cpp(35,22): warning C4244: аргумент: преобразование "__int64" в "const int", возможна потеря данных
+D:\code\C++\project\mp2-2024-lab1-set\samples\sample_prime_numbers.cpp(36,20): warning C4244: аргумент: преобразование "__int64" в "const int", возможна потеря данных
+D:\code\C++\project\mp2-2024-lab1-set\samples\sample_prime_numbers.cpp(43,18): warning C4244: аргумент: преобразование "__int64" в "const int", возможна потеря данных
+  sample_prime_numbers.vcxproj -> D:\code\C++\project\mp2-2024-lab1-set\sln\vc10\Debug\sample_prime_numbers.exe
