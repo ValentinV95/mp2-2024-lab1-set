@@ -3,25 +3,13 @@
   "WorkspaceRootPath": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\sln\\vc10\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{60932AFC-7808-48B7-B3BF-F2BC151C0065}|gtest\\gtest.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\gtest\\gtest-all.cc||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tset.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D0218F2-E502-414F-BA66-9E76B2785178}|sample_prime_numbers\\sample_prime_numbers.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tbitfield.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\CODE\\C\u002B\u002B\\PROJECT\\MP2-2024-LAB1-SET\\INCLUDE\\TBITFIELD.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tbitfield.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60932AFC-7808-48B7-B3BF-F2BC151C0065}|gtest\\gtest.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\gtest\\gtest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5D0218F2-E502-414F-BA66-9E76B2785178}|sample_prime_numbers\\sample_prime_numbers.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,95 +19,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "gtest.h",
-              "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\gtest\\gtest.h",
-              "RelativeDocumentMoniker": "..\\..\\gtest\\gtest.h",
-              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\gtest\\gtest.h",
-              "RelativeToolTip": "..\\..\\gtest\\gtest.h",
-              "ViewState": "AQIAAAYMAAAAAAAAAAAMwIQMAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-09-23T16:27:25.107Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "gtest-all.cc",
-              "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\gtest\\gtest-all.cc",
-              "RelativeDocumentMoniker": "..\\..\\gtest\\gtest-all.cc",
-              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\gtest\\gtest-all.cc",
-              "RelativeToolTip": "..\\..\\gtest\\gtest-all.cc",
-              "ViewState": "AQIAAEsJAAAAAAAAAAAlwHcJAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-23T16:03:46.067Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "tset.h",
-              "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tset.h",
-              "RelativeDocumentMoniker": "..\\..\\include\\tset.h",
-              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tset.h",
-              "RelativeToolTip": "..\\..\\include\\tset.h",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABIAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-09-21T16:49:21.15Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "tset.cpp",
-              "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tset.cpp",
-              "RelativeDocumentMoniker": "..\\..\\src\\tset.cpp",
-              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tset.cpp",
-              "RelativeToolTip": "..\\..\\src\\tset.cpp",
-              "ViewState": "AQIAADUAAAAAAAAAAAAswH8AAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-23T14:13:34.42Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "sample_prime_numbers.cpp",
               "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp",
               "RelativeDocumentMoniker": "..\\..\\samples\\sample_prime_numbers.cpp",
-              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp",
-              "RelativeToolTip": "..\\..\\samples\\sample_prime_numbers.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAZAAAA",
+              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp*",
+              "RelativeToolTip": "..\\..\\samples\\sample_prime_numbers.cpp*",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-21T16:49:36.288Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "tbitfield.h",
               "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tbitfield.h",
               "RelativeDocumentMoniker": "..\\..\\include\\tbitfield.h",
               "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tbitfield.h",
               "RelativeToolTip": "..\\..\\include\\tbitfield.h",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAACsAAABPAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAIAwwBQAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-09-21T16:49:17.832Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "tbitfield.cpp",
               "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tbitfield.cpp",
               "RelativeDocumentMoniker": "..\\..\\src\\tbitfield.cpp",
               "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tbitfield.cpp",
               "RelativeToolTip": "..\\..\\src\\tbitfield.cpp",
-              "ViewState": "AQIAAFAAAAAAAAAAAAAMwGkAAABBAAAA",
+              "ViewState": "AQIAAKIAAAAAAAAAAAAAAMEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-21T17:19:45.106Z",
               "EditorCaption": ""
