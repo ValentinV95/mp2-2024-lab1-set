@@ -110,7 +110,7 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    size_t size; cin >> s;          //Первое число - кол-во элементов, следующие - элементы
+    int size; istr >> size;          //Первое число - кол-во элементов, следующие - элементы
     int tmp;
     while (size--) {
         cin >> tmp;
@@ -131,6 +131,6 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод      //1-е чи
         }
     }
     out = to_string(size) + " " + out;
-    cout << out;
+    ostr << out;
     return ostr;
 }

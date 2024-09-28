@@ -7,6 +7,13 @@ TEST(TBitField, can_create_bitfield_with_positive_length)
   ASSERT_NO_THROW(TBitField bf(3));
 }
 
+//TEST(TBitField, my_str_check)
+//{
+//    TBitField a(10);
+//    cin >> a;
+//    cout << endl << a;
+//}
+
 TEST(TBitField, can_get_length)
 {
   TBitField bf(3);

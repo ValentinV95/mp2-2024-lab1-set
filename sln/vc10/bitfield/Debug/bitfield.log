@@ -1,11 +1,10 @@
 ﻿cl : командная строка  warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
   tbitfield.cpp
-C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(143,50): warning C4806: &: небезопасная операция: значение типа "bool", приведенное к типу "unsigned int", не может равняться данной константе
-C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(143,29): warning C4554: "&": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
-C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(170,50): warning C4806: &: небезопасная операция: значение типа "bool", приведенное к типу "unsigned int", не может равняться данной константе
-C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(170,29): warning C4554: "&": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
-C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(184,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(200,50): warning C4806: &: небезопасная операция: значение типа "bool", приведенное к типу "unsigned int", не может равняться данной константе
-C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(200,33): warning C4554: "&": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
-C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(219,28): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(145,50): warning C4806: &: небезопасная операция: значение типа "bool", приведенное к типу "unsigned int", не может равняться данной константе
+C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(145,29): warning C4554: "&": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
+C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(172,50): warning C4806: &: небезопасная операция: значение типа "bool", приведенное к типу "unsigned int", не может равняться данной константе
+C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(172,29): warning C4554: "&": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
+C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(186,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(202,50): warning C4806: &: небезопасная операция: значение типа "bool", приведенное к типу "unsigned int", не может равняться данной константе
+C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\src\tbitfield.cpp(202,33): warning C4554: "&": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
   bitfield.vcxproj -> C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\sln\vc10\Debug\bitfield.lib
