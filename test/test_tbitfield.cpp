@@ -11,7 +11,13 @@ TEST(TBitField, can_create_bitfield_with_positive_length)
 //{
 //    TBitField a(10);
 //    cin >> a;
-//    cout << endl << a;
+//    TBitField b = a;
+//    TBitField c(14);
+//    cin >> c;
+//    a = a & c;
+//    cout << a << endl;
+//    cout << (a | b) << endl;
+//    cout << endl << b;
 //}
 
 TEST(TBitField, can_get_length)

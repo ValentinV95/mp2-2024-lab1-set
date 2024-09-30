@@ -47,7 +47,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
 	exc_bit_pos(n);
-	return ((TELEM)1) << (n & (sizeof(TELEM) * 8 - 1));
+	return (TELEM{1}) << (n & (sizeof(TELEM) * 8 - 1));
 }
 
 // доступ к битам битового поля
@@ -141,10 +141,10 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 			new_field.pMem[i] = bf.pMem[i];
 		}
 	}
-	TELEM temp_mask = 0;
-	for (int i = 0; i < mBL_sz & (sizeof(TELEM) * 8 - 1); i++) {
-		temp_mask |= ((TELEM)1) << i;
-	}
+	const TELEM temp_mask = ((TELEM{ 1 } << (mBL_sz & (sizeof(TELEM) * 8 - 1))) - 1);
+	/*for (int i = 0; i < mBL_sz & (sizeof(TELEM) * 8 - 1); i++) {
+		temp_mask |= ((TELEM{1}) << i);
+	}*/
 	new_field.pMem[mML_sz - 1] &= temp_mask;
 	return new_field;
 }
@@ -159,20 +159,6 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 		new_field.pMem[i] = pMem[i] & bf.pMem[i];
 	}
 
-	if (pMem > bf.pMem)
-		for (int i = ML_sz; i < mML_sz; i++) {
-			new_field.pMem[i] = pMem[i];
-		}
-	else {
-		for (int i = ML_sz; i < mML_sz; i++) {
-			new_field.pMem[i] = bf.pMem[i];
-		}
-	}
-	TELEM temp_mask = 0;
-	for (int i = 0; i < mBL_sz & (sizeof(TELEM) * 8 - 1); i++) {
-		temp_mask |= ((TELEM)1) << i;
-	}
-	new_field.pMem[mML_sz - 1] &= temp_mask;
 	return new_field;
 }
 
@@ -182,10 +168,10 @@ TBitField TBitField::operator~(void) // отрицание
 	for (int i = 0; i < MemLen; i++) {
 		new_field.pMem[i] = ~pMem[i];
 	}
-	TELEM temp_mask = 0;
-	for (int i = 0; i < (BitLen & (sizeof(TELEM) * 8 - 1)); i++) {
+	const TELEM temp_mask = ((TELEM{ 1 } << (BitLen & (sizeof(TELEM) * 8 - 1))) - 1);
+	/*for (int i = 0; i < (BitLen & (sizeof(TELEM) * 8 - 1)); i++) {
 		temp_mask |= ((TELEM)1) << i;
-	}
+	}*/
 	new_field.pMem[MemLen - 1] &= temp_mask;
 	return new_field;
 }
@@ -194,12 +180,12 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-	string temp; istr >> temp;
+	string temp; istr >> temp;			//для проверки ввода/вывода для tbitfield и tset написаны тесты, их нужно раскомментировать
 	if (temp.size() != bf.BitLen) {
 		throw length_error("input string size != BitField size");
 	}
 	for (int i = 0; i < bf.MemLen-1; i++) {
-		for (int j = 0; j < bf.BitLen & (sizeof(TELEM) - 1); j++) {
+		for (int j = 0; j < (bf.BitLen & (sizeof(TELEM) - 1)); j++) {
 
 			if (temp[i*(sizeof(TELEM)*8) + j] == '1') {
 				bf.SetBit(i * (sizeof(TELEM) * 8) + j);
