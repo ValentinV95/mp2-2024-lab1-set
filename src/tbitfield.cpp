@@ -9,7 +9,7 @@
 
 TBitField::TBitField(int len)
 {
-	if (len >= 0)
+	if (len > 0)
 	{
 		BitLen = len;
 		MemLen = (len + sizeof(TELEM) * 8 - 1) / (sizeof(TELEM) * 8);
