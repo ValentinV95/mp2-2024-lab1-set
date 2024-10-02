@@ -144,7 +144,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 		}
 	}
 	TELEM d = ((TELEM)1 << (b % (sizeof(TELEM) * 8))) - (TELEM)1;
-	mas.pMem[b - 1] &= d;
+	mas.pMem[max(MemLen, bf.MemLen) - 1] &= d;
 	return mas;
 }
 
