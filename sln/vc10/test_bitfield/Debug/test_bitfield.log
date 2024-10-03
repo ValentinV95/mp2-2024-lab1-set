@@ -1,5 +1,5 @@
 ﻿cl : командная строка  warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
-  test_tset.cpp
+  test_tbitfield.cpp
 C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\gtest\gtest.h(9690,34): warning C4996: 'std::tr1': warning STL4002: The non-Standard std::tr1 namespace and TR1-only machinery are deprecated and will be REMOVED. You can define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING to suppress this warning.
 C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\gtest\gtest.h(9695,27): warning C4996: 'std::tr1': warning STL4002: The non-Standard std::tr1 namespace and TR1-only machinery are deprecated and will be REMOVED. You can define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING to suppress this warning.
 C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\gtest\gtest.h(9700,27): warning C4996: 'std::tr1': warning STL4002: The non-Standard std::tr1 namespace and TR1-only machinery are deprecated and will be REMOVED. You can define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING to suppress this warning.
@@ -30,5 +30,7 @@ C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\gtest\gtest.
 C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\gtest\gtest.h(15676,35): warning C4996: 'std::tr1': warning STL4002: The non-Standard std::tr1 namespace and TR1-only machinery are deprecated and will be REMOVED. You can define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING to suppress this warning.
 C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\gtest\gtest.h(15720,35): warning C4996: 'std::tr1': warning STL4002: The non-Standard std::tr1 namespace and TR1-only machinery are deprecated and will be REMOVED. You can define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING to suppress this warning.
 C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\gtest\gtest.h(10020,30): warning C4996: 'std::tr1': warning STL4002: The non-Standard std::tr1 namespace and TR1-only machinery are deprecated and will be REMOVED. You can define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING to suppress this warning.
-test_main.obj : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/SAFESEH"
+  Создание кода...
+  Пропуск... (изменения не обнаружены)
+  test_tset.cpp
   test_bitfield.vcxproj -> C:\Users\msi 146\OneDrive\Рабочий стол\mp2-2024-lab1-set\sln\vc10\Debug\test_bitfield.exe

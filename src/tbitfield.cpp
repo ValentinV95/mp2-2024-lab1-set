@@ -34,7 +34,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 TBitField::~TBitField()
 {
 	BitLen = 0;
-	delete pMem;
+	delete[] pMem;
 	MemLen = 0;
 }
 
@@ -90,7 +90,7 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 				TELEM* new_pMem = new TELEM[bf.MemLen];
 				exc_mem_ptr(new_pMem);
 				swap(new_pMem, pMem);
-				delete new_pMem;
+				delete[] new_pMem;
 			}
 		}
 
@@ -179,7 +179,8 @@ TBitField TBitField::operator~(void) // отрицание
 // ввод/вывод
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
-{
+{	
+	//ввод требует вводить строку длины BitLen
 	string temp; istr >> temp;			//для проверки ввода/вывода для tbitfield и tset написаны тесты, их нужно раскомментировать
 	if (temp.size() != bf.BitLen) {
 		throw length_error("input string size != BitField size");
