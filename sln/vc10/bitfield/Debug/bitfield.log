@@ -1,4 +1,7 @@
 ﻿cl : командная строка  warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
   tbitfield.cpp
-D:\code\C++\project\mp2-2024-lab1-set\src\tbitfield.cpp(148,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\code\C++\project\mp2-2024-lab1-set\src\tbitfield.cpp(149,20): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода...
+  Пропуск... (изменения не обнаружены)
+  tset.cpp
   bitfield.vcxproj -> D:\code\C++\project\mp2-2024-lab1-set\sln\vc10\Debug\bitfield.lib

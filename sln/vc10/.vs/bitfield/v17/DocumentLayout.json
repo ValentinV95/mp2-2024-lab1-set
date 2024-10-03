@@ -3,13 +3,16 @@
   "WorkspaceRootPath": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\sln\\vc10\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tbitfield.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\CODE\\C\u002B\u002B\\PROJECT\\MP2-2024-LAB1-SET\\INCLUDE\\TBITFIELD.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tbitfield.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5D0218F2-E502-414F-BA66-9E76B2785178}|sample_prime_numbers\\sample_prime_numbers.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tset.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tbitfield.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,43 +22,55 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "sample_prime_numbers.cpp",
-              "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp",
-              "RelativeDocumentMoniker": "..\\..\\samples\\sample_prime_numbers.cpp",
-              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp*",
-              "RelativeToolTip": "..\\..\\samples\\sample_prime_numbers.cpp*",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAABAAAA",
+              "Title": "tset.cpp",
+              "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tset.cpp",
+              "RelativeDocumentMoniker": "..\\..\\src\\tset.cpp",
+              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tset.cpp",
+              "RelativeToolTip": "..\\..\\src\\tset.cpp",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAAGQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-21T16:49:36.288Z"
+              "WhenOpened": "2024-10-03T16:52:34.465Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "tbitfield.h",
-              "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tbitfield.h",
-              "RelativeDocumentMoniker": "..\\..\\include\\tbitfield.h",
-              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tbitfield.h",
-              "RelativeToolTip": "..\\..\\include\\tbitfield.h",
-              "ViewState": "AQIAAAMAAAAAAAAAAIAwwBQAAAA4AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-09-21T16:49:17.832Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "tbitfield.cpp",
               "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tbitfield.cpp",
               "RelativeDocumentMoniker": "..\\..\\src\\tbitfield.cpp",
               "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\src\\tbitfield.cpp",
               "RelativeToolTip": "..\\..\\src\\tbitfield.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAKYAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-21T17:19:45.106Z",
+              "WhenOpened": "2024-09-21T17:19:45.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "sample_prime_numbers.cpp",
+              "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp",
+              "RelativeDocumentMoniker": "..\\..\\samples\\sample_prime_numbers.cpp",
+              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\samples\\sample_prime_numbers.cpp",
+              "RelativeToolTip": "..\\..\\samples\\sample_prime_numbers.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-21T16:49:36.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "tbitfield.h",
+              "DocumentMoniker": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tbitfield.h",
+              "RelativeDocumentMoniker": "..\\..\\include\\tbitfield.h",
+              "ToolTip": "D:\\code\\C\u002B\u002B\\project\\mp2-2024-lab1-set\\include\\tbitfield.h",
+              "RelativeToolTip": "..\\..\\include\\tbitfield.h",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAgwDQAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-21T16:49:17.832Z",
               "EditorCaption": ""
             }
           ]
