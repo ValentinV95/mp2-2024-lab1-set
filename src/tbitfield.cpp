@@ -48,7 +48,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 	if (n < 0 || n >= BitLen) {
 		throw out_of_range("out of range");
 	}
-	return ((TELEM)1) << (n%(sizeof(TELEM)*8));
+	return (TELEM{ 1 }) << (n % (sizeof(TELEM) * 8));
 }
 
 // доступ к битам битового поля
@@ -143,7 +143,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 			mas.pMem[i] = pMem[i];
 		}
 	}
-	TELEM d = ((TELEM) { 1 } << (b % (sizeof(TELEM) * 8))) - (TELEM) { 1 };
+	TELEM d = ((TELEM{ 1 }) << (b % (sizeof(TELEM) * 8))) - (TELEM { 1 });
 	mas.pMem[max(MemLen, bf.MemLen) - 1] &= d;
 	return mas;
 }
@@ -165,7 +165,7 @@ TBitField TBitField::operator~(void) // отрицание
 	for (int i = 0; i < MemLen; i++) {
 		mas.pMem[i] = ~pMem[i];
 	}
-	TELEM d = ((TELEM) { 1 } << (BitLen % (sizeof(TELEM) * 8))) - (TELEM) { 1 };
+	TELEM d = ((TELEM{ 1 }) << (BitLen % (sizeof(TELEM) * 8))) - (TELEM { 1 });
 	mas.pMem[MemLen - 1] &= d;
 	return mas;
 }
