@@ -101,7 +101,8 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-	for (int i = 0; i < min(MemLen, bf.MemLen); i++) {
+	const int mn_Ml = min(MemLen, bf.MemLen);
+	for (int i = 0; i < mn_Ml; i++) {
 		if (pMem[i] != bf.pMem[i]) return 0;
 	}
 	if (bf.MemLen > MemLen) {
@@ -119,7 +120,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-	return !(*this == bf);
+	return 1-(*this == bf);
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
@@ -141,11 +142,13 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 			new_field.pMem[i] = bf.pMem[i];
 		}
 	}
-	const TELEM temp_mask = ((TELEM{ 1 } << (mBL_sz & (sizeof(TELEM) * 8 - 1))) - 1);
-	/*for (int i = 0; i < mBL_sz & (sizeof(TELEM) * 8 - 1); i++) {
-		temp_mask |= ((TELEM{1}) << i);
-	}*/
-	new_field.pMem[mML_sz - 1] &= temp_mask;
+	if ((mBL_sz & (sizeof(TELEM) * 8 - 1)) != 0) {
+		const TELEM temp_mask = ((TELEM{ 1 } << (mBL_sz & (sizeof(TELEM) * 8 - 1))) - 1);
+		new_field.pMem[mML_sz - 1] &= temp_mask;
+		/*for (int i = 0; i < mBL_sz & (sizeof(TELEM) * 8 - 1); i++) {
+			temp_mask |= ((TELEM{1}) << i);
+		}*/
+	}
 	return new_field;
 }
 
@@ -153,7 +156,6 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
 	const int mBL_sz = max(BitLen, bf.BitLen);
 	const int ML_sz = min(MemLen, bf.MemLen);
-	const int mML_sz = max(MemLen, bf.MemLen);
 	TBitField new_field(mBL_sz);
 	for (int i = 0; i < ML_sz; i++) {
 		new_field.pMem[i] = pMem[i] & bf.pMem[i];
@@ -168,11 +170,14 @@ TBitField TBitField::operator~(void) // отрицание
 	for (int i = 0; i < MemLen; i++) {
 		new_field.pMem[i] = ~pMem[i];
 	}
-	const TELEM temp_mask = ((TELEM{ 1 } << (BitLen & (sizeof(TELEM) * 8 - 1))) - 1);
-	/*for (int i = 0; i < (BitLen & (sizeof(TELEM) * 8 - 1)); i++) {
-		temp_mask |= ((TELEM)1) << i;
-	}*/
-	new_field.pMem[MemLen - 1] &= temp_mask;
+
+	if ((BitLen & (sizeof(TELEM) * 8 - 1)) != 0) {
+		const TELEM temp_mask = ((TELEM{ 1 } << (BitLen & (sizeof(TELEM) * 8 - 1))) - 1);
+		new_field.pMem[MemLen - 1] &= temp_mask;
+		/*for (int i = 0; i < (BitLen & (sizeof(TELEM) * 8 - 1)); i++) {
+			temp_mask |= ((TELEM)1) << i;
+		}*/
+	}
 	return new_field;
 }
 
