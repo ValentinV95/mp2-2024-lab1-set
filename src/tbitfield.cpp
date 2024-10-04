@@ -176,6 +176,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	{
 		istr >> bit;
 		if (bit == '1') bf.SetBit(i);
+		else bf.ClrBit(i);
 	}
 	return istr;
 }
