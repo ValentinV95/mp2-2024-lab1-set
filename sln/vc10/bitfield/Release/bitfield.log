@@ -1,0 +1,4 @@
+﻿  tbitfield.cpp
+D:\code\C++\project\mp2-2024-lab1-set\src\tbitfield.cpp(148,20): warning C4018: <: несоответствие типов со знаком и без знака
+  tset.cpp
+  bitfield.vcxproj -> D:\code\C++\project\mp2-2024-lab1-set\sln\vc10\Release\bitfield.lib
