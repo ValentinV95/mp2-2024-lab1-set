@@ -107,12 +107,12 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 	}
 	if (bf.MemLen > MemLen) {
 		for (int i = MemLen; i < bf.MemLen; i++) {
-			if (bf.pMem[i] != 0) return 0;
+			if (bf.pMem[i] != TELEM{ 0 }) return 0;
 		}
 	}
 	else {
 		for (int i = bf.MemLen; i < MemLen; i++) {
-			if (pMem[i] != 0) return 0;
+			if (pMem[i] != TELEM{ 0 }) return 0;
 		}
 	}
 	return 1;
