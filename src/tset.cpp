@@ -38,7 +38,7 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
     if (Elem < 0 || Elem >= MaxPower) { // Проверка на корректность входных данных
-        throw out_of_range("invalid element")
+        throw out_of_range("invalid element");
     }
     else {
         return BitField.GetBit(Elem);
@@ -48,7 +48,7 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
     if (Elem < 0 || Elem >= MaxPower) { // Проверка на корректность входных данных
-        throw out_of_range("invalid element")
+        throw out_of_range("invalid element");
     }
     else {
         BitField.SetBit(Elem);
@@ -58,7 +58,7 @@ void TSet::InsElem(const int Elem) // включение элемента мно
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
     if (Elem < 0 || Elem >= MaxPower) { // Проверка на корректность входных данных
-        throw out_of_range("invalid element")
+        throw out_of_range("invalid element");
     }
     else {
         BitField.ClrBit(Elem);
@@ -92,7 +92,8 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    return TSet(s.BitField | BitField);
+    TSet res(BitField | s.BitField);
+    return res;
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
@@ -111,7 +112,8 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-    return TSet(s.BitField & BitField);
+    TSet res(BitField & s.BitField);
+    return res;
 }
 
 TSet TSet::operator~(void) // дополнение
@@ -130,5 +132,5 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
     ostr << s.BitField;
-    return ostr;
+    return ostr; 
 }
