@@ -1,0 +1,10 @@
+Target dependency graph (4 targets)
+Target 'test_set' in project 'set'
+➜ Explicit dependency on target 'set' in project 'set'
+➜ Explicit dependency on target 'gtest' in project 'set'
+➜ Explicit dependency on target 'ZERO_CHECK' in project 'set'
+Target 'gtest' in project 'set'
+➜ Explicit dependency on target 'ZERO_CHECK' in project 'set'
+Target 'set' in project 'set'
+➜ Explicit dependency on target 'ZERO_CHECK' in project 'set'
+Target 'ZERO_CHECK' in project 'set' (no dependencies)

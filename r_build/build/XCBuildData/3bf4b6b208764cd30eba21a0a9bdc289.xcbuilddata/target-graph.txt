@@ -1,0 +1,7 @@
+Target dependency graph (3 targets)
+Target 'sample_prime_numbers' in project 'set'
+➜ Explicit dependency on target 'set' in project 'set'
+➜ Explicit dependency on target 'ZERO_CHECK' in project 'set'
+Target 'set' in project 'set'
+➜ Explicit dependency on target 'ZERO_CHECK' in project 'set'
+Target 'ZERO_CHECK' in project 'set' (no dependencies)
