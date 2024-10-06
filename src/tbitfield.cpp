@@ -175,8 +175,9 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	{
 		if (s[i] == '0')
 			bf.ClrBit(i);
-		else
+		else if (s[i] == '1')
 			bf.SetBit(i);
+		else throw invalid_argument("Input arguments must be 0 or 1 without whitespaces");
 	}
 	for (; i < bf.BitLen; i++)
 		bf.ClrBit(i);
@@ -189,5 +190,6 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 	std::string s;
 	for (; i < bf.BitLen; i++)
 		s += std::to_string(bf.GetBit(i));
+	ostr << s;
 	return ostr;
 }
