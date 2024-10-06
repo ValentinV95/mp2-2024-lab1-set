@@ -180,7 +180,8 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	string str;
 	istr >> str;
-	int sz = str.size();
+	const int sz = str.size();
+
 	memset(bf.pMem, 0, bf.MemLen * sizeof(TELEM));
 	if (sz != bf.BitLen) {
 		throw out_of_range("different length");
@@ -189,11 +190,15 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 		if (str[i] == '1') {
 			bf.SetBit(i);
 		}
-		else {
+		else if (str[i] == '0') {
 			bf.ClrBit(i);
+		}
+		else {
+			throw exception("only ones or zeros!");
 		}
 	}
 	return istr;
+	
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
