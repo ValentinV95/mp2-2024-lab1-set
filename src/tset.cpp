@@ -146,10 +146,10 @@ ostream& operator<<(ostream &ostr, const TSet &Set) // вывод
     for (; i < Set.MaxPower; i++)
         if (Set.IsMember(i))
             s += to_string(i) + ' ';
-    if (s == "")
+    /*if (s == "")
         s = "Set Is Empty\n";
     else
-        s.erase(s.length() - 1);        //  Удаление последнего пробела
+        s.erase(s.length() - 1);        //  Удаление последнего пробела*/
     ostr << s;
     return ostr;
 }
