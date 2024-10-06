@@ -6,8 +6,7 @@
 // Множество - реализация через битовые поля
 
 #include "tset.h"
-//#include <string>
-#include <sstream>
+#include <string>
 
 TSet::TSet(int mp) : BitField(mp), MaxPower(mp)     //Проверка на размер уже встроена в BitField
 {
@@ -146,10 +145,6 @@ ostream& operator<<(ostream &ostr, const TSet &Set) // вывод
     for (; i < Set.MaxPower; i++)
         if (Set.IsMember(i))
             s += to_string(i) + ' ';
-    /*if (s == "")
-        s = "Set Is Empty\n";
-    else
-        s.erase(s.length() - 1);        //  Удаление последнего пробела*/
     ostr << s;
     return ostr;
 }

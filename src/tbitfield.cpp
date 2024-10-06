@@ -19,7 +19,7 @@ TBitField::TBitField(int len)
 	MemLen = BitLen / sz + bool(BitLen % sz);
 	pMem = new TELEM[MemLen];
 	chck_mem_fail(pMem);
-	memset(pMem, 0, MemLen * sizeof(TELEM));
+	fill(pMem, pMem + MemLen, 0);
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -28,7 +28,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 	MemLen = bf.MemLen;
 	pMem = new TELEM(MemLen);
 	chck_mem_fail(pMem);
-	memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
+	copy(bf.pMem, bf.pMem + bf.MemLen, pMem);
 }
 
 TBitField::~TBitField()
@@ -144,9 +144,9 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
 	int i = 0;
-	int const mnMemLen = min(MemLen, bf.MemLen);
-	TBitField Res(mnMemLen);		// У поля большей длины последние биты становятся незначимыми, значит их можно отбросить.
-	for (; i < mnMemLen; i++)		// Хотя пользователь может не ожидать такого поведения
+	int const mnMemLen = min(MemLen, bf.MemLen), mxMemLen = max(MemLen, bf.MemLen);
+	TBitField Res(mxMemLen);
+	for (; i < mnMemLen; i++)
 		Res.pMem[i] = pMem[i] & bf.pMem[i];
 	return Res;
 }
