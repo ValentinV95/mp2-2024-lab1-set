@@ -36,7 +36,7 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 {
     int foo;
     if (Elem < 0 || Elem >= MaxPower)
-        foo = 0;
+        throw out_of_range("Element is out of universe or negative");
     else foo = BitField.GetBit(Elem);
     return foo;
 }
@@ -122,7 +122,7 @@ istream &operator>>(istream &istr, TSet &Set) // ввод
     istr >> s;
     while (s[i] != '\0')
     {
-        if ('0' <= s[i] && s[i] <= '9')
+        if (('0' <= s[i]) && (s[i] <= '9'))
             tmpw += s[i];
         else if (s[i] == ' ' && tmpw!="")
         {
