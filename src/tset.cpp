@@ -115,6 +115,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 {
     int size; istr >> size;          //Первое число - кол-во элементов, следующие - элементы
     int tmp;
+    s.BitField = TBitField(s.BitField.GetLength());
     while (size--) {
         cin >> tmp;
         exc_el_pos_out(tmp,s);

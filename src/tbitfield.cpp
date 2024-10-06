@@ -35,6 +35,7 @@ TBitField::~TBitField()
 {
 	BitLen = 0;
 	delete[] pMem;
+	pMem = nullptr;
 	MemLen = 0;
 }
 
@@ -188,12 +189,13 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	//ввод требует вводить строку длины BitLen
 	string temp; istr >> temp;			//для проверки ввода/вывода для tbitfield и tset написаны тесты, их нужно раскомментировать
 	if (temp.size() != bf.BitLen) {
-		throw length_error("input string size != BitField size");
+		throw length_error("input string size != BitField size");	//Требую того же размера.
 	}
+	memset(bf.pMem, 0, sizeof(TELEM) * bf.MemLen);
 	for (int i = 0; i < bf.MemLen-1; i++) {
 		for (int j = 0; j < (bf.BitLen & (sizeof(TELEM) - 1)); j++) {
 
-			if (temp[i*(sizeof(TELEM)*8) + j] == '1') {
+			if (temp.at(i*(sizeof(TELEM)*8) + j) == '1') {
 				bf.SetBit(i * (sizeof(TELEM) * 8) + j);
 			}
 			else {
