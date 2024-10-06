@@ -7,7 +7,7 @@
 
 #include "tbitfield.h"
 #include <string>
-#define sz					( 8 * sizeof(TELEM) )	//	размер TELEM в битах
+#define sz					( sizeof(TELEM) << 3 )	//	размер TELEM в битах
 #define chck_crct_len(l)	if(len<=0) {throw length_error("Invalid length. Positive numbers only accepted");}	//	Проверка на кооректность ввода длины
 #define chck_mem_fail(p)	if (!p) {throw exception("Unsuccessful memory allocation");}	//	Проверка выделения памяти
 #define chck_rng(n)			if (n<0 || n>=BitLen) {throw out_of_range("Invailid bit number. Stay inbounds from 0 to Bitfield_length - 1");}	//	Проверка ОДЗ номеров битов
@@ -87,7 +87,7 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 		}
 		MemLen = bf.MemLen;
 		BitLen = bf.BitLen;
-		memcpy(pMem, bf.pMem, MemLen * sizeof(TELEM));
+		copy(bf.pMem, bf.pMem + bf.MemLen, pMem);
 	}
 	return *this;
 }
@@ -107,7 +107,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 			j = !(pMem[i]);
 			i++;
 		}
-	else
+	else if (j)
 		while (i < bf.MemLen)
 		{
 			j = !(bf.pMem[i]);
@@ -125,7 +125,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
 	int i = 0;
 	int const mnMemLen = min(MemLen, bf.MemLen);
-	TBitField Res(max(BitLen,bf.BitLen));
+	TBitField Res(max(BitLen, bf.BitLen));
 	for (; i < mnMemLen; i++)
 		Res.pMem[i] = pMem[i] | bf.pMem[i];
 	if (MemLen >= bf.MemLen)
@@ -145,7 +145,7 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
 	int i = 0;
 	int const mnMemLen = min(MemLen, bf.MemLen);
-	TBitField Res(max(MemLen, bf.MemLen));
+	TBitField Res(max(BitLen, bf.BitLen));
 	for (; i < mnMemLen; i++)
 		Res.pMem[i] = pMem[i] & bf.pMem[i];
 	return Res;
@@ -153,12 +153,12 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 {
-	TBitField Res(*this);
-	for (int i = 0; i < MemLen; i++)
+	TBitField Res(BitLen);
+	for (int i = 0; i < Res.MemLen; i++)
 	{
-		Res.pMem[i] = ~Res.pMem[i];
+		Res.pMem[i] = ~pMem[i];
 	}
-	Res.pMem[MemLen - 1] &= (TELEM((1llu << (BitLen % sz)) - 1llu));
+	Res.pMem[Res.MemLen - 1] &= ((TELEM(1) << (Res.BitLen % sz)) - 1llu);
 	return Res;
 }
 
