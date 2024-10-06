@@ -135,7 +135,8 @@ istream &operator>>(istream &istr, TSet &s) // ввод
     for (int i = 0; i < n; i++) {
         int x;
         istr >> x;
-        s.BitField.SetBit(x);
+        //s.BitField.SetBit(x);
+        s.InsElem(x);
     }
     return istr;
 }
