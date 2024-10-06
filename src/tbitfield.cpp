@@ -37,7 +37,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 TBitField::~TBitField()
 {
 	delete[] pMem;
-	BitLen = MemLen = 0;
+	//BitLen = MemLen = 0;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
@@ -210,8 +210,11 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 			if (input[i] == '1') {
 				bf.SetBit(i);
 			}
-			else {
+			else if (input[i] == '1'){
 				bf.ClrBit(i);
+			}
+			else {
+				throw input_error("input value its only 0 or 1")
 			}
 		}
 		//return istr
