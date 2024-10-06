@@ -125,12 +125,37 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    istr >> s.BitField;
+    int n;
+    istr >> n;
+
+    for (int i = 0; i < s.MaxPower; i++) {
+        s.BitField.ClrBit(i);
+    }
+
+    for (int i = 0; i < n; i++) {
+        int x;
+        istr >> x;
+        s.BitField.SetBit(x);
+    }
     return istr;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
+ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
-    ostr << s.BitField;
+    int n = 0;
+
+    for (int i = 0; i < s.MaxPower; i++) {
+        if (s.IsMember(i)) {
+            n++;
+        }
+    }
+
+    ostr << n << endl;
+
+    for (int i = 0; i < s.MaxPower; i++) {
+        if (s.IsMember(i)) {
+            ostr << i << " ";
+        }
+    }
     return ostr; 
 }
