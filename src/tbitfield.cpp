@@ -214,7 +214,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 				bf.ClrBit(i);
 			}
 			else {
-				throw input_error("input value its only 0 or 1")
+				throw logic_error("input value its only 0 or 1");
 			}
 		}
 		//return istr
