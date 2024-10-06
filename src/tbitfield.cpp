@@ -210,7 +210,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 			if (input[i] == '1') {
 				bf.SetBit(i);
 			}
-			else if (input[i] == '1'){
+			else if (input[i] == '0'){
 				bf.ClrBit(i);
 			}
 			else {
