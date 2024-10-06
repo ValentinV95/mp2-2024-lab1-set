@@ -100,7 +100,7 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-	int minML = min(MemLen, bf.MemLen);
+	int const minML = min(MemLen, bf.MemLen);
 	for (int i = 0; i < minML; i++) {
 		if (pMem[i] != bf.pMem[i])
 			return 0;
@@ -127,8 +127,8 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-	int maxBL = max(BitLen, bf.BitLen);
-	int minML = min(MemLen, bf.MemLen);
+	const int maxBL = max(BitLen, bf.BitLen);
+	const int minML = min(MemLen, bf.MemLen);
 	TBitField mas(maxBL);
 	for (int i = 0; i < minML; i++) {
 		mas.pMem[i] = pMem[i] | bf.pMem[i];
@@ -144,7 +144,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 		}
 	}
 	if ((maxBL % (sizeof(TELEM) * 8)) != 0) {
-		TELEM mask = ((TELEM{ 1 }) << (maxBL % (sizeof(TELEM) * 8))) - (TELEM{ 1 });
+		const TELEM mask = ((TELEM{ 1 }) << (maxBL % (sizeof(TELEM) * 8))) - (TELEM{ 1 });
 		mas.pMem[max(MemLen, bf.MemLen) - 1] &= mask;
 	}
 	return mas;
@@ -152,8 +152,8 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-	int maxBL = max(BitLen, bf.BitLen);
-	int minML = min(MemLen, bf.MemLen);
+	const int maxBL = max(BitLen, bf.BitLen);
+	const int minML = min(MemLen, bf.MemLen);
 	TBitField mas(maxBL);
 	for (int i = 0; i < minML; i++) {
 		mas.pMem[i] = pMem[i] & bf.pMem[i];
@@ -168,7 +168,7 @@ TBitField TBitField::operator~(void) // отрицание
 		mas.pMem[i] = ~pMem[i];
 	}
 	if ((BitLen % (sizeof(TELEM) * 8)) != 0) {
-		TELEM mask = ((TELEM{ 1 }) << (BitLen % (sizeof(TELEM) * 8))) - (TELEM{ 1 });
+		const TELEM mask = ((TELEM{ 1 }) << (BitLen % (sizeof(TELEM) * 8))) - (TELEM{ 1 });
 		mas.pMem[MemLen - 1] &= mask;
 	}
 	return mas;
@@ -181,6 +181,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	string str;
 	istr >> str;
 	int sz = str.size();
+	memset(bf.pMem, 0, bf.MemLen * sizeof(TELEM));
 	if (sz != bf.BitLen) {
 		throw out_of_range("different length");
 	}

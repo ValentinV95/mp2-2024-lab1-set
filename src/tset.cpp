@@ -131,6 +131,9 @@ istream &operator>>(istream &istr, TSet &s) // ввод
     int sz;
     istr >> sz;
     int Elem;
+    for (int i = 0; i < s.MaxPower; i++) {
+        s.DelElem(i);
+    }
     for (int i = 0; i < sz; i++) {
         istr >> Elem;
         s.InsElem(Elem);
