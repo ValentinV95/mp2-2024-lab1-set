@@ -208,8 +208,11 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 		if (temp[i] == '1') {
 			bf.SetBit(i);
 		}
-		else {
+		else if(temp[i] == '0') {
 			bf.ClrBit(i);
+		}
+		else {
+			throw exception("only bit type (0 or 1)!");
 		}
 	}
 	return istr;
