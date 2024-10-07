@@ -98,7 +98,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 	int const mnMemLen = min(MemLen, bf.MemLen);	//	Можно сравнивать поля разной длины
 	while (j && (i < mnMemLen))				//	Сравнение общих частей
 	{
-		j = !(pMem[i] ^ bf.pMem[i]);
+		j = (pMem[i] == bf.pMem[i]);
 		i++;
 	}
 	if (j)			//	Если поля различной длины, проверяется что оставшиеся эл-менты большего поля – нули
@@ -113,8 +113,8 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 			j = !(bf.pMem[i]);
 			i++;
 		}
-		return j;
 	}
+	return j;
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
