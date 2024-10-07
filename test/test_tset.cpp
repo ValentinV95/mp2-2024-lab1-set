@@ -9,6 +9,14 @@ TEST(TSet, can_get_max_power_set)
 
   EXPECT_EQ(size, set.GetMaxPower());
 }
+//TEST(TSet, my_str_check_s)
+//{
+//    TSet A(100);
+//    TSet B(100);
+//    cin >> A;
+//    cin >> B;
+//    cout << A*B << endl << A+B << endl << ~A << endl << A - 9 << endl;
+//}
 
 TEST(TSet, can_insert_non_existing_element)
 {

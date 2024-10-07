@@ -7,6 +7,24 @@ TEST(TBitField, can_create_bitfield_with_positive_length)
   ASSERT_NO_THROW(TBitField bf(3));
 }
 
+//TEST(TBitField, my_str_check)
+//{
+//    cout << "bitfield a size 10: ";
+//    TBitField a(10);
+//    cin >> a;
+//    TBitField b = a;
+//    TBitField c(14);
+//    cout << "bitfield c size 14: ";
+//    cin >> c;
+//    a = a & c;
+//    cout << a << endl;
+//    cout << (a | b) << endl;
+//    cout << endl << b;
+//    cout << endl << (a & a & b) << endl;;
+//    cout << "bitfield a size 14 and bitfield a size 14 through space again: ";
+//    cin >> a >> a;cout << a << endl;
+//}
+
 TEST(TBitField, can_get_length)
 {
   TBitField bf(3);
