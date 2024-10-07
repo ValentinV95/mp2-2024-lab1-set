@@ -164,7 +164,9 @@ TBitField TBitField::operator~(void) // отрицание
 	//                ^^^
 	//                tail
 
-	res.pMem[MemLen - 1] &= ~((~static_cast<TELEM>(0)) << (BitLen & ((sizeof(TELEM) << 3) - 1)));
+	int shift = (BitLen) & ((sizeof(TELEM) << 3) - 1);
+	if (shift != 0)
+		res.pMem[MemLen - 1] &= ~((~static_cast<TELEM>(0)) << shift);
 
 	return res;
 }
