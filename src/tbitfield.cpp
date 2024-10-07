@@ -182,7 +182,6 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	istr >> str;
 	const int sz = str.size();
 
-	memset(bf.pMem, 0, bf.MemLen * sizeof(TELEM));
 	if (sz != bf.BitLen) {
 		throw out_of_range("different length");
 	}
