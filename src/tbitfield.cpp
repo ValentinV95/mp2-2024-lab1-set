@@ -7,11 +7,30 @@
 
 #include "tbitfield.h"
 
-TBitField::TBitField(int len)
+#include <string>
+
+/*TBitField::TBitField(int len)
 {
+	if (len < 0)
+	{
+		throw out_of_range("incorrect length when creating a bitfield");
+	}
 	BitLen = len;
 	MemLen = len / sizeof(TELEM) + 1;
 	pMem = new TELEM[MemLen];
+	if (pMem == nullptr) throw domain_error("domain_error");
+	for (int i = 0; i < MemLen; i++) pMem[i] = 0;
+}*/
+
+TBitField::TBitField(int len)
+{
+	if (len < 0) {
+		throw out_of_range("Negative length");
+	}
+	BitLen = len;
+	MemLen = BitLen / (sizeof(TELEM) * 8) + (BitLen % (sizeof(TELEM) * 8) != 0);
+	pMem = new TELEM[MemLen];
+	memset(pMem, 0, MemLen * sizeof(TELEM));
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -28,8 +47,8 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
-	BitLen = 0;
 	delete pMem;
+	BitLen = 0;
 	MemLen = 0;
 }
 
@@ -40,6 +59,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
+	if ((n < 0) || (n >= BitLen)) throw out_of_range("incorrect index in the mask");
 	TELEM m(1);
 	int n1 = n % (sizeof(TELEM) * 8);
 	for (int i = 1; i < n1; ++i)
@@ -58,16 +78,29 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-	pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] | GetMemMask(n);
+	if ((n >= 0) && (n < BitLen))
+	{
+		pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] | GetMemMask(n);
+
+	}
+	else throw out_of_range("incorrect index set");
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
+	if ((n < 0) || (n >= BitLen))
+	{
+		throw out_of_range("incorrect index cleared");
+	}
 	pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] & ~GetMemMask(n);
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
+	if ((n < 0) || (n >= BitLen))
+	{
+		throw out_of_range("incorrect index got");
+	}
 	int i = pMem[GetMemIndex(n)] & GetMemMask(n);
 	return i;
 }
