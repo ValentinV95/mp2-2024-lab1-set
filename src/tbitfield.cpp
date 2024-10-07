@@ -88,10 +88,9 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 			else {
 				MemLen = bf.MemLen;
 				BitLen = bf.BitLen;
-				TELEM* new_pMem = new TELEM[bf.MemLen];
-				exc_mem_ptr(new_pMem);
-				swap(new_pMem, pMem);
-				delete[] new_pMem;
+				delete[] pMem;
+				pMem = new TELEM[MemLen];
+				exc_mem_ptr(pMem);
 			}
 		}
 
@@ -161,7 +160,6 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 	for (int i = 0; i < ML_sz; i++) {
 		new_field.pMem[i] = pMem[i] & bf.pMem[i];
 	}
-
 	return new_field;
 }
 
@@ -191,15 +189,18 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	if (temp.size() != bf.BitLen) {
 		throw length_error("input string size != BitField size");	//Требую того же размера.
 	}
-	memset(bf.pMem, 0, sizeof(TELEM) * bf.MemLen);
+	
 	for (int i = 0; i < bf.MemLen-1; i++) {
 		for (int j = 0; j < (bf.BitLen & (sizeof(TELEM) - 1)); j++) {
 
 			if (temp.at(i*(sizeof(TELEM)*8) + j) == '1') {
 				bf.SetBit(i * (sizeof(TELEM) * 8) + j);
 			}
-			else {
+			else if(temp.at(i * (sizeof(TELEM) * 8) + j) == '0'){
 				bf.ClrBit(i * (sizeof(TELEM) * 8) + j);
+			}
+			else {
+				throw exception("only bit type (0 or 1)!");
 			}
 
 		}
