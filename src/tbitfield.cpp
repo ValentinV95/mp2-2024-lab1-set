@@ -158,7 +158,7 @@ TBitField TBitField::operator~(void) // отрицание
 	{
 		Res.pMem[i] = ~pMem[i];
 	}
-	Res.pMem[Res.MemLen - 1] &= ((TELEM(1) << (Res.BitLen % sz)) - 1llu);
+	Res.pMem[Res.MemLen - 1] &= (GetMemMask(BitLen - 1) << 1) - TELEM(1);
 	return Res;
 }
 
