@@ -16,7 +16,7 @@ TBitField::TBitField(int len)
 {
 	chck_crct_len(len);
 	BitLen = len;
-	MemLen = BitLen / sz + bool(BitLen % sz);
+	MemLen = (BitLen+ sz -1) / sz;
 	pMem = new TELEM[MemLen];
 	chck_mem_fail(pMem);
 	fill(pMem, pMem + MemLen, 0);
@@ -101,19 +101,20 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 		j = !(pMem[i] ^ bf.pMem[i]);
 		i++;
 	}
-	if (j && (MemLen >= bf.MemLen))			//	Если поля различной длины, проверяется что оставшиеся эл-менты большего поля – нули
+	if (j)			//	Если поля различной длины, проверяется что оставшиеся эл-менты большего поля – нули
+	{
 		while (i < MemLen)
 		{
 			j = !(pMem[i]);
 			i++;
 		}
-	else if (j)
 		while (i < bf.MemLen)
 		{
 			j = !(bf.pMem[i]);
 			i++;
 		}
-	return j;
+		return j;
+	}
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
@@ -128,16 +129,14 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 	TBitField Res(max(BitLen, bf.BitLen));
 	for (; i < mnMemLen; i++)
 		Res.pMem[i] = pMem[i] | bf.pMem[i];
-	if (MemLen >= bf.MemLen)
-		for (; i < MemLen; i++)
-		{
-			Res.pMem[i] = pMem[i];
-		}
-	else
-		for (; i < bf.MemLen; i++)
-		{
-			Res.pMem[i] = pMem[i];
-		}
+	for (; i < MemLen; i++)
+	{
+		Res.pMem[i] = pMem[i];
+	}
+	for (; i < bf.MemLen; i++)
+	{
+		Res.pMem[i] = bf.pMem[i];
+	}
 	return Res;
 }
 
