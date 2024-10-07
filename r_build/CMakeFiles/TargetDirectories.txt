@@ -1,6 +1,0 @@
-/Users/rasulbabadaev/Desktop/mp2-2024-lab1-set/r_build/CMakeFiles/ALL_BUILD.dir
-/Users/rasulbabadaev/Desktop/mp2-2024-lab1-set/r_build/CMakeFiles/ZERO_CHECK.dir
-/Users/rasulbabadaev/Desktop/mp2-2024-lab1-set/r_build/src/CMakeFiles/set.dir
-/Users/rasulbabadaev/Desktop/mp2-2024-lab1-set/r_build/samples/CMakeFiles/sample_prime_numbers.dir
-/Users/rasulbabadaev/Desktop/mp2-2024-lab1-set/r_build/gtest/CMakeFiles/gtest.dir
-/Users/rasulbabadaev/Desktop/mp2-2024-lab1-set/r_build/test/CMakeFiles/test_set.dir
