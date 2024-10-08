@@ -33,7 +33,11 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    return BitField.GetBit(Elem);
+    if (Elem > 0 || Elem < MaxPower)
+    {
+        return BitField.GetBit(Elem);
+    }
+    throw out_of_range("Element out of range")
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
@@ -111,7 +115,6 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-    ostr << " { ";
     for (int i = 0; i < s.GetMaxPower(); i++)
     {
         if (s.IsMember(i))
@@ -119,6 +122,5 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
             ostr << i << " ";
         }
     }
-    ostr << " } ";
     return ostr;
 }
