@@ -37,7 +37,7 @@ int TSet::IsMember(const int Elem) const // элемент множества?
     {
         return BitField.GetBit(Elem);
     }
-    throw out_of_range("Element out of range")
+    throw out_of_range("Element out of range");
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
