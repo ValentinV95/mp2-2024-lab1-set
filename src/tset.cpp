@@ -8,6 +8,8 @@
 #include "tset.h"
 #include <string>
 
+#define universe_except throw out_of_range("Invalid element number. Element out of universe.");
+
 TSet::TSet(int mp) : BitField(mp)
 {
     MaxPower = mp;
@@ -41,28 +43,28 @@ int TSet::IsMember(const int Elem) const // элемент множества?
         return BitField.GetBit(Elem);
     }
     catch (exception const& e) {
-        throw out_of_range("Element is out of universe or negative");
+        universe_except;
     }
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-    try { BitField.SetBit(Elem); }
-    catch (exception const& e)
-    {
-        throw out_of_range("Element is out of universe or negative");
+    try {
+        BitField.SetBit(Elem);
     }
-    return;
+    catch (exception const& e) {
+        universe_except;
+    }
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-    try { BitField.ClrBit(Elem); }
-    catch (exception const& e)
-    {
-        throw out_of_range("Element is out of universe or negative");
+    try { 
+        BitField.ClrBit(Elem); 
     }
-    return;
+    catch (exception const& e) {
+        universe_except;
+    }
 }
 
 // теоретико-множественные операции
@@ -109,7 +111,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet& s) // пересечение
 {
-    return (BitField & s.BitField);
+    return TSet(BitField & s.BitField);
 }
 
 TSet TSet::operator~(void) // дополнение
@@ -119,9 +121,24 @@ TSet TSet::operator~(void) // дополнение
 
 // перегрузка ввода/вывода
 
-istream& operator>>(istream& istr, TSet& s) // ввод
+istream& operator>>(istream& istr, TSet& Set) // ввод
 {
-    istr >> s.BitField;
+    std::string buff = "", s;
+    istr >> s;
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (('0' <= s[i]) && (s[i] <= '9'))
+            buff += s[i];
+        else if (s[i] == ' ')
+        {
+            Set.InsElem(stoll(buff));
+            buff = "";
+        }
+        else {
+            throw invalid_argument("Input must be a figure.");
+        }
+    }
+    if (buff != "")
+        Set.InsElem(stoll(buff));
     return istr;
 }
 
@@ -135,4 +152,3 @@ ostream& operator<<(ostream& ostr, const TSet& s) // вывод
     ostr << elements;
     return ostr;
 }
-
