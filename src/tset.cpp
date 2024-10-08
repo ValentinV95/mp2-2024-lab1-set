@@ -7,8 +7,7 @@
 
 #include "tset.h"
 #include <string>
-
-#define universe_except throw out_of_range("Invalid element number. Element out of universe.");
+    
 
 TSet::TSet(int mp) : BitField(mp)
 {
@@ -43,7 +42,7 @@ int TSet::IsMember(const int Elem) const // элемент множества?
         return BitField.GetBit(Elem);
     }
     catch (exception const& e) {
-        universe_except;
+        throw out_of_range("Invalid element number. Element out of universe.");
     }
 }
 
@@ -53,7 +52,7 @@ void TSet::InsElem(const int Elem) // включение элемента мно
         BitField.SetBit(Elem);
     }
     catch (exception const& e) {
-        universe_except;
+        throw out_of_range("Invalid element number. Element out of universe.");
     }
 }
 
@@ -63,7 +62,7 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
         BitField.ClrBit(Elem); 
     }
     catch (exception const& e) {
-        universe_except;
+        throw out_of_range("Invalid element number. Element out of universe.");
     }
 }
 
