@@ -37,17 +37,32 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    return BitField.GetBit(Elem);
+    try {
+        return BitField.GetBit(Elem);
+    }
+    catch (exception const& e) {
+        throw out_of_range("Element is out of universe or negative");
+    }
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-    BitField.SetBit(Elem);
+    try { BitField.SetBit(Elem); }
+    catch (exception const& e)
+    {
+        throw out_of_range("Element is out of universe or negative");
+    }
+    return;
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-    BitField.ClrBit(Elem);
+    try { BitField.ClrBit(Elem); }
+    catch (exception const& e)
+    {
+        throw out_of_range("Element is out of universe or negative");
+    }
+    return;
 }
 
 // теоретико-множественные операции
@@ -120,3 +135,4 @@ ostream& operator<<(ostream& ostr, const TSet& s) // вывод
     ostr << elements;
     return ostr;
 }
+
