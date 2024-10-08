@@ -7,14 +7,17 @@
 
 #include "tbitfield.h"
 
-#define len_except(l)	if (len<=0) {throw length_error("Bitfield length cannot be negative");}
-#define range_except(n)			if (n<0 || n>=BitLen) {throw out_of_range("Bit index out of range");}
+void range_except(int n, int size) {
+	if (n < 0 || n >= size)
+		throw out_of_range("Bit index out of range");
+}
 
 const int digit = 8 * sizeof(TELEM);
 
 TBitField::TBitField(int len)
 {
-	len_except(len);
+	if (len <= 0)
+		throw length_error("Bitfield length cannot be negative");
 	BitLen = len;
 	MemLen = (BitLen + digit - 1) / digit;
 	pMem = new TELEM[MemLen];
@@ -53,19 +56,19 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-	range_except(n);
+	range_except(n, BitLen);
 	pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
-	range_except(n);
+	range_except(n, BitLen);
 	pMem[GetMemIndex(n)] &= ~GetMemMask(n);
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-	range_except(n);
+	range_except(n, BitLen);
 	return bool(pMem[GetMemIndex(n)] & GetMemMask(n));
 }
 
@@ -164,4 +167,3 @@ ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 	}
 	return ostr;
 }
-
