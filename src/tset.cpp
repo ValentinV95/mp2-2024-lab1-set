@@ -126,7 +126,7 @@ istream &operator>>(istream &istr, TSet &Set) // ввод
             tmpw += s[i];
         else if (s[i] == ' ' && tmpw!="")
         {
-            Tmp.InsElem(std::stoi(tmpw));
+            Tmp.InsElem(std::stoull(tmpw));
             tmpw = "";
         }
         else throw invalid_argument("Input arguments must be integers deliminated by whitespaces");
