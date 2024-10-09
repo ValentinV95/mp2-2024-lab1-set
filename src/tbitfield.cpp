@@ -90,15 +90,15 @@ TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 
 int TBitField::operator==(const TBitField& bf) const // сравнение
 {
-	for (int i = 0; i < min(MemLen, bf.MemLen); i++) 
+	for (size_t i = 0; i < min(MemLen, bf.MemLen); i++) 
 		if (pMem[i] != bf.pMem[i])
 			return 0;
 
-	for (int i = min(MemLen, bf.MemLen); i < MemLen; i++)
+	for (size_t i = min(MemLen, bf.MemLen); i < MemLen; i++)
 		if (pMem[i] != 0)
 			return 0;
 
-	for (int i = min(MemLen, bf.MemLen); i < bf.MemLen; i++)
+	for (size_t i = min(MemLen, bf.MemLen); i < bf.MemLen; i++)
 		if (bf.pMem[i] != 0)
 			return 0;
 
@@ -114,13 +114,13 @@ TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 {
 	TBitField uni(max(BitLen, bf.BitLen));
 
-	for (int i = 0; i < min(MemLen, bf.MemLen); i++)
+	for (size_t i = 0; i < min(MemLen, bf.MemLen); i++)
 		uni.pMem[i] = pMem[i] | bf.pMem[i];
 
-	for (int i = min(MemLen, bf.MemLen); i < MemLen; i++)
+	for (size_t i = min(MemLen, bf.MemLen); i < MemLen; i++)
 		uni.pMem[i] = pMem[i];
 
-	for (int i = min(MemLen, bf.MemLen); i < bf.MemLen; i++)
+	for (size_t i = min(MemLen, bf.MemLen); i < bf.MemLen; i++)
 		uni.pMem[i] = bf.pMem[i];
 
 	return uni;
@@ -129,7 +129,7 @@ TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 TBitField TBitField::operator&(const TBitField& bf) // операция "и"
 {
 	TBitField inter(max(BitLen, bf.BitLen));
-	for (int i = 0; i < min(MemLen, bf.MemLen); i++)
+	for (size_t i = 0; i < min(MemLen, bf.MemLen); i++)
 		inter.pMem[i] = pMem[i] & bf.pMem[i];
 	return inter;
 }
@@ -137,7 +137,7 @@ TBitField TBitField::operator&(const TBitField& bf) // операция "и"
 TBitField TBitField::operator~(void) // отрицание
 {
 	TBitField nega(BitLen);
-	for (int i = 0; i < MemLen; i++)
+	for (size_t i = 0; i < MemLen; i++)
 		nega.pMem[i] = ~pMem[i];
 	nega.pMem[MemLen - 1] &= (GetMemMask(BitLen - 1) << 1) - TELEM(1);
 	return nega;
@@ -149,7 +149,7 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
 {
 	std::string s;
 	istr >> s;
-	for (int i = 0; i < bf.BitLen; i++) {
+	for (size_t i = 0; i < bf.BitLen; i++) {
 		if (s[i] == '1')
 			bf.SetBit(i);
 		else if (s[i] == '0')
@@ -162,7 +162,7 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
 
 ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 {
-	for (int it = 0; it < bf.BitLen; it++) {
+	for (size_t it = 0; it < bf.BitLen; it++) {
 		ostr << bf.GetBit(it);
 	}
 	return ostr;
