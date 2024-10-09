@@ -124,12 +124,12 @@ istream& operator>>(istream& istr, TSet& Set) // ввод
 {
     std::string buff = "", s;
     istr >> s;
-    for (int i = 0; s[i] != '\0'; i++) {
+    for (size_t i = 0; s[i] != '\0'; i++) {
         if (('0' <= s[i]) && (s[i] <= '9'))
             buff += s[i];
         else if (s[i] == ' ')
         {
-            Set.InsElem(stoll(buff));
+            Set.InsElem(stoull(buff));
             buff = "";
         }
         else {
@@ -137,14 +137,14 @@ istream& operator>>(istream& istr, TSet& Set) // ввод
         }
     }
     if (buff != "")
-        Set.InsElem(stoll(buff));
+        Set.InsElem(stoull(buff));
     return istr;
 }
 
 ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
     std::string elements = "";
-    for (int i = 0; i < s.MaxPower; i++) {
+    for (size_t i = 0; i < s.MaxPower; i++) {
         if (s.IsMember(i))
             elements += to_string(i) + ' ';
     }
