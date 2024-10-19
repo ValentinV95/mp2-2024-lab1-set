@@ -29,19 +29,16 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    //if (Elem >= MaxPower || Elem<0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
     return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-    //if (Elem >= MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-    //if (Elem>=MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
     BitField.ClrBit(Elem);
 }
 
@@ -64,8 +61,7 @@ int TSet::operator==(const TSet& s) const // сравнение
 
 int TSet::operator!=(const TSet& s) const // сравнение
 {
-    //if (MaxPower != s.MaxPower) return 1;
-    //return (s.BitField != BitField);
+   
     return !(*this == s);
 }
 
@@ -78,7 +74,7 @@ TSet TSet::operator+(const TSet& s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    if (Elem >= MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
+    if (Elem >= MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); 
     TSet Result(*this);
     Result.BitField.SetBit(Elem);
     return Result;
@@ -86,7 +82,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-    if (Elem >= MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
+    if (Elem >= MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); 
     TSet Result(*this);
     Result.BitField.ClrBit(Elem);
     return Result;
