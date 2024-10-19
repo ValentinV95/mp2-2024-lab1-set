@@ -6,94 +6,115 @@
 // Множество - реализация через битовые поля
 
 #include "tset.h"
+using namespace std;
 
-TSet::TSet(int mp) : BitField(-1)
-{
-}
+
+TSet::TSet(int mp) : BitField(mp), MaxPower(mp) {}
 
 // конструктор копирования
-TSet::TSet(const TSet &s) : BitField(-1)
-{
-}
+TSet::TSet(const TSet& s) : BitField(s.BitField), MaxPower(s.GetMaxPower()) {}
 
 // конструктор преобразования типа
-TSet::TSet(const TBitField &bf) : BitField(-1)
-{
-}
+TSet::TSet(const TBitField& bf) : BitField(bf), MaxPower(bf.GetLength()) {}
 
 TSet::operator TBitField()
 {
-    return *this;
+    return BitField;
 }
 
 int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
 {
-    return 0;
+    return MaxPower;
 }
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    return 0;
+    //if (Elem >= MaxPower || Elem<0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
+    return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
+    //if (Elem >= MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
+    BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
+    //if (Elem>=MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
+    BitField.ClrBit(Elem);
 }
 
 // теоретико-множественные операции
 
-TSet& TSet::operator=(const TSet &s) // присваивание
+TSet& TSet::operator=(const TSet& s) // присваивание
 {
+    if (this != &s) {
+        MaxPower = s.MaxPower;
+        BitField = s.BitField;
+    }
     return *this;
 }
 
-int TSet::operator==(const TSet &s) const // сравнение
+int TSet::operator==(const TSet& s) const // сравнение
 {
-    return 0;
+    if (MaxPower != s.MaxPower) return 0;
+    return (s.BitField == BitField);
 }
 
-int TSet::operator!=(const TSet &s) const // сравнение
+int TSet::operator!=(const TSet& s) const // сравнение
 {
-    return 0;
+    //if (MaxPower != s.MaxPower) return 1;
+    //return (s.BitField != BitField);
+    return !(*this == s);
 }
 
-TSet TSet::operator+(const TSet &s) // объединение
+TSet TSet::operator+(const TSet& s) // объединение
 {
-    return *this;
+    TSet Result(BitField | s.BitField);
+
+    return Result;
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    return *this;
+    if (Elem >= MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
+    TSet Result(*this);
+    Result.BitField.SetBit(Elem);
+    return Result;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-    return *this;
+    if (Elem >= MaxPower || Elem < 0) throw std::underflow_error("underflow_error"); //обработка ошибки, если кол-во эл-ов не положительное //элементы: от 0 до MaxPower-1
+    TSet Result(*this);
+    Result.BitField.ClrBit(Elem);
+    return Result;
 }
 
-TSet TSet::operator*(const TSet &s) // пересечение
+TSet TSet::operator*(const TSet& s) // пересечение
 {
-    return *this;
+    TSet Result(BitField & s.BitField);
+    return Result;
 }
 
 TSet TSet::operator~(void) // дополнение
 {
-    return *this;
+    TSet Result(~BitField);
+    return Result;
 }
 
 // перегрузка ввода/вывода
 
-istream &operator>>(istream &istr, TSet &s) // ввод
+istream& operator>>(istream& istr, TSet& s) // ввод
 {
+    istr >> s.BitField;
+
     return istr;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
+ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
+    ostr << s.BitField;
     return ostr;
 }
