@@ -26,7 +26,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 {
 	BitLen = bf.BitLen;		//   В строке 50 tbitfield.h написано: бит.поле - набор битов с номерами от 0 до BitLen. Но похоже под BitLen подразумеватся длина поля, тогда последний бит должен быть под номером BitLen - 1?
 	MemLen = bf.MemLen;
-	pMem = new TELEM(MemLen);
+	pMem = new TELEM[MemLen];
 	chck_mem_fail(pMem);
 	copy(bf.pMem, bf.pMem + bf.MemLen, pMem);
 }
@@ -81,7 +81,7 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 	{
 		if (MemLen != bf.MemLen)
 		{
-			TELEM* tmp = new TELEM(bf.MemLen);
+			TELEM* tmp = new TELEM[bf.MemLen];
 			delete[] pMem;
 			pMem = tmp;
 			chck_mem_fail(pMem);
