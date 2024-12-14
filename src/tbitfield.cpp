@@ -104,12 +104,12 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 	}
 	if (j)			//	Если поля различной длины, проверяется что оставшиеся эл-менты большего поля – нули
 	{
-		while (i < MemLen)
+		while (i < MemLen && j)
 		{
 			j = !(pMem[i]);
 			i++;
 		}
-		while (i < bf.MemLen)
+		while (i < bf.MemLen && j)
 		{
 			j = !(bf.pMem[i]);
 			i++;
